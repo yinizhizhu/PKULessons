@@ -1,0 +1,101 @@
+8 8
+.@##...#
+#....#.#
+#.#.##..
+..#.###.
+#.#...#.
+..###.#.
+...#.*..
+.#...###
+6 5
+.*.#.
+.#...
+..##.
+.....
+.#...
+....@
+9 6
+.#..#. 
+.#.*.# 
+.####. 
+..#... 
+..#... 
+..#... 
+..#... 
+#.@.## 
+.#..#. 
+0 0
+
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int dir[4][2] = {
+	1, 0,	//right
+	-1, 0,	//left
+	0, 1,	//up
+	0, -1	//down
+};
+
+struct point {
+	int x, y;
+	point(int a, int b) : x(a), y(b) {}
+};
+
+bool check(point start, point len) {
+	if (start.x >= 0 && start.x < len.x)
+		if (start.y >= 0 && start.y < len.y)
+			return true;
+	return false;
+}
+
+int bfs(point start, point len, vector<vector<char> >& container) {
+	int ans = 0, n;
+	queue<point> store;
+	store.push(start);
+	while (!store.empty()) {
+		ans++;
+		for (n = store.size(); n; n--) {
+			start = store.front();
+			for (int i = 0; i < 4; i++) {
+				point next(start.x + dir[i][0], start.y + dir[i][1]);
+				if (check(next, len)) {
+					if (container[next.x][next.y] == '*')
+						return ans;
+					else if (container[next.x][next.y] == '.') {
+						container[next.x][next.y] = '#';
+						store.push(next);
+					}
+				}
+			}
+			store.pop();
+		}
+	}
+	return -1;
+}
+
+int main() {
+	int i, j, m, n;
+	cin >> m >> n;
+	while (m || n) {
+		point len(m, n);
+		point start(0, 0);
+		vector<vector<char> > container;
+		container.resize(m);
+		for (i = 0; i < m; i++) {
+			container[i].resize(n);
+			for (j = 0; j < n; j++) {
+				cin >> container[i][j];
+				if (container[i][j] == '@') {
+					start.x = i;
+					start.y = j;
+				}
+			}
+		}
+		cout << bfs(start, len, container) << endl;
+		cin >> m >> n;
+	}
+	return 0;
+}

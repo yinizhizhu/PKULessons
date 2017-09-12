@@ -1,0 +1,68 @@
+5 5
+1 2 20
+2 3 30
+3 4 20
+4 5 20
+1 5 100
+4 5
+1 2 20
+2 3 30
+3 4 20
+4 5 20
+5 5
+1 2 20
+2 3 30
+3 4 20
+4 5 31
+1 5 100
+
+#include <iostream>
+#include <vector>
+
+#define MAXNUM 1001
+#define INT_LEE 2147483647
+
+using namespace std;
+
+bool vis[MAXNUM];
+int dist[MAXNUM];
+int container[MAXNUM][MAXNUM];
+
+int Dijkstra(int v0, int n) {
+	int i, j;
+	for (i = 1; i <= n; i++) {
+		dist[i] = container[v0][i];
+		vis[i] = true;
+	}
+	dist[v0] = 0;
+	vis[v0] = false;
+	for (i = 2; i <= n; i++) {
+		int tmp = INT_LEE, u = v0;
+		for (j = 1; j <= n; j++)
+			if (vis[j] && dist[j]<tmp) {
+				u = j;
+				tmp = dist[j];
+			}
+		vis[u] = false;
+		for (j = 1; j <= n; j++)
+			if (vis[j] && container[u][j] < INT_LEE && tmp + container[u][j] < dist[j])
+				dist[j] = tmp + container[u][j];
+	}
+	return dist[1];
+}
+
+int main() {
+	int a, b, len, t, n;
+	while (cin >> t >> n) {
+		for (a = 1; a <= n; a++)
+			for (b = 1; b <= n; b++)
+				container[a][b] = INT_LEE;
+		for (; t; t--) {
+			cin >> a >> b >> len;
+			if (container[a][b] > len)
+				container[a][b] = container[b][a] = len;
+		}
+		cout << Dijkstra(n, n) << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,46 @@
+2 1
+#.
+.#
+4 4
+...#
+..#.
+.#..
+#...
+-1 -1
+#include <iostream>
+
+using namespace std;
+
+int ans;
+bool column[9];
+char container[9][9];
+
+void dfs(int row, int k, int n) {
+	if (k == 0 || row > n) {
+		if (k == 0)
+			ans++;
+		return;
+	}
+	dfs(row + 1, k, n);
+	for (int i = 1; i <= n; i++)
+		if (container[row][i] == '#' && column[i]) {
+			column[i] = false;
+			dfs(row + 1, k - 1, n);
+			column[i] = true;
+		}
+}
+
+int main() {
+	int n, k;
+	while (cin >> n >> k && (n != -1 && k != -1)) {
+		for (int i = 1; i <= n; i++)
+			for (int j = 1; j <= n; j++)
+				cin >> container[i][j];
+		for (int i = 1; i <= n; i++)
+			column[i] = true;
+		ans = 0;
+		dfs(1, k, n);
+		cout << ans << endl;
+	}
+	return 0;
+}

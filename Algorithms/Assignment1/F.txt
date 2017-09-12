@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+
+using namespace std;
+
+void output(int n) {
+	if (n == 0)
+		cout << "0";
+	else if (n == 1)
+		cout << "2(0)";
+	else if (n == 2)
+		cout << "2";
+	else {
+		int i;
+		stack<int> container;
+		for (i = 0; n; i++, n >>= 1) {
+			if (n & 1)
+				container.push(i);
+		}
+		i = container.top();
+		if (i != 1) {
+			cout << "2(";
+			output(i);
+			cout << ")";
+		}
+		else
+			cout << "2";
+		container.pop();
+		while (!container.empty()) {
+			cout << "+";
+			i = container.top();
+			if (i != 1) {
+				cout << "2(";
+				output(i);
+				cout << ")";
+			}
+			else
+				cout << "2";
+			container.pop();
+		}
+	}
+}
+
+int main() {
+	int n;
+	while (cin >> n) {
+		output(n);
+		cout << endl;
+	}
+	return 0;
+}

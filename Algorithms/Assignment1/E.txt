@@ -1,0 +1,197 @@
+2
+5 5
+0 1 2
+1 -1 -1
+2 3 4
+3 -1 -1
+4 -1 -1
+2 0
+1 1 2
+2 0
+1 3 4
+2 2
+3 2
+0 1 2
+1 -1 -1
+2 -1 -1
+1 1 2
+2 0
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+typedef struct node {
+	int val;
+	node *left, *right, *pre;
+	node(int v, node* p) {
+		val = v;
+		left = right = NULL;
+		pre = p;
+	}
+} *PNODE;
+
+void free(PNODE root) {
+	if (root) {
+		free(root->left);
+		free(root->right);
+		delete root;
+	}
+}
+
+void travel(PNODE root) {
+	while (root->left)
+		root = root->left;
+	cout << root->val << endl;
+}
+
+PNODE getP(PNODE root, int x) {
+	queue<PNODE> container;
+	if (root) {
+		int n;
+		PNODE ans = NULL;
+		container.push(root);
+		while (!container.empty()) {
+			n = container.size();
+			for (; n; n--) {
+				ans = container.front();
+				if (ans->val == x)
+					return ans;
+				if (ans->left)
+					container.push(ans->left);
+				if (ans->right)
+					container.push(ans->right);
+				container.pop();
+			}
+		}
+	}
+	return NULL;
+}
+
+void swap(PNODE x, PNODE y) {
+	PNODE preX = x->pre, preY = y->pre;
+	if (preX->left == x) {
+		if (preY->left == y) {
+			preX->left = y;
+			preY->left = x;
+		}
+		else { // preY->right
+			preX->left = y;
+			preY->right = x;
+		}
+	}
+	else { //preX->right
+		if (preY->left == y) {
+			preX->right = y;
+			preY->left = x;
+		}
+		else { // preY->right
+			preX->right = y;
+			preY->right = x;
+		}
+	}
+	y->pre = preX;
+	x->pre = preY;
+}
+
+
+int main() {
+	int j;
+	int t, n, m;
+	int r, rl, rr;
+	int type, x, y;
+	PNODE tmp = NULL, preX = NULL, preY = NULL;
+	cin >> t;
+	while (t--) {
+		cin >> n >> m;
+		cin >> r >> rl >> rr;
+		PNODE root = new node(r, NULL);
+		if (rl != -1)
+			root->left = new node(rl, root);
+		if (rr != -1)
+			root->right = new node(rr, root);
+		for (j = 1; j < n; j++) {
+			cin >> r >> rl >> rr;
+			tmp = getP(root, r);
+			if (rl != -1)
+				tmp->left = new node(rl, tmp);
+			if (rr != -1)
+				tmp->right = new node(rr, tmp);
+		}
+		for (j = 0; j < m; j++) {
+			cin >> type;
+			if (type == 1) {
+				cin >> x >> y;
+				preX = getP(root, x);
+				preY = getP(root, y);
+				swap(preX, preY);
+			}
+			else {
+				cin >> x;
+				preX = getP(root, x);
+				travel(preX);
+			}
+		}
+		free(root);
+	}
+	return 0;
+}
+
+#include<iostream>  
+#include<cstring>  
+#include<string>  
+
+using namespace std;
+
+int n, m;
+int t[444][2];
+
+void print(int x) {
+	if (t[x][0] == -1) {
+		cout << x << endl;;
+		return;
+	}
+	print(t[x][0]);
+}
+
+int index1, index2;
+void fun(int x, int a, int b) {
+	if (x == -1)return;
+	if (t[x][0] == a)
+		index1 = x*2 + 0;
+	if (t[x][1] == a)
+		index1 = x*2 + 1;
+	if (t[x][0] == b)
+		index2 = x*2 + 0;
+	if (t[x][1] == b)
+		index2 = x*2 + 1;
+	fun(t[x][0], a, b);
+	fun(t[x][1], a, b);
+}
+
+int main() {
+	int tt, i;
+	int x, y, z;
+	cin >> tt;
+	while (tt--) {
+		cin >> n >> m;
+		for (i = 1; i <= n; i++) {
+			cin >> x >> y >> z;
+			t[x][0] = y;
+			t[x][1] = z;
+		}
+		for (i = 1; i <= m; i++) {
+			cin >> x;
+			if (x == 1) {
+				cin >> y >> z;
+				fun(0, y, z);
+				swap(t[index1 / 2][index1%2], t[index2 / 2][index2%2]);
+			}
+			else {
+				cin >> y;
+				print(y);
+			}
+		}
+	}
+	return 0;
+}
