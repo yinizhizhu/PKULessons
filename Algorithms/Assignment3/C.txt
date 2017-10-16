@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+
+using namespace std;
+
+long getM(int h, int s, vector<int>& c_i, vector<int>& y_i) {
+	int c = c_i[h], y = y_i[h], i;
+	long ans = c*y, tmp;
+	for (i = h - 1; i >= 0; i--)
+		if (c - c_i[i] > s) {
+			tmp = c_i[i] * y + y*s*(h - i);
+			if (tmp < ans)
+				ans = tmp;
+		}
+	return ans;
+}
+
+int main() {
+	int c, y;
+	int i, n, s;
+	vector<int> c_i, y_i;
+	scanf("%d %d", &n, &s);
+	for (i = 0; i < n; i++) {
+		scanf("%d %d", &c, &y);
+		c_i.push_back(c);
+		y_i.push_back(y);
+	}
+	long ans = 0;
+	for (i = 0; i < n; i++)
+		ans += getM(i, s, c_i, y_i);
+	printf("%ld\n", ans);
+	return 0;
+}

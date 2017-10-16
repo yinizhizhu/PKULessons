@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+
+using namespace std;
+
+#define N 1000
+#define M 100000
+
+bool butterfly[N];//0 - type A, 1 - type B
+bool visit[N];
+int judge[M][3];
+
+void bfs(int s, vector<vector<int> >& graph) {
+	if (!visit[s]) {
+		bool tag = butterfly[s];
+		visit[s] = true;
+		int i, n = graph[s].size();
+		for (i = 0; i < n; i += 2)
+			butterfly[graph[s][i]] = (graph[s][i + 1] == 1 ? !tag : tag);
+		for (i = 0; i < n; i += 2)
+			bfs(graph[s][i], graph);
+		graph[s].clear();
+	}
+}
+
+void label(int n, vector<vector<int> >& graph) {
+	for (int i = 0; i < n; i++) {
+		if (!visit[i])
+			bfs(i, graph);
+	}
+}
+
+void check(int m) {
+	int a, b, i;
+	for (i = 0; i < m; i++) {
+		a = judge[i][0];
+		b = judge[i][1];
+		if (judge[i][2]) {//different
+			if (butterfly[a] == butterfly[b]) {
+				printf("NO\n");
+				return;
+			}
+		}
+		else {
+			if (butterfly[a] != butterfly[b]) {
+				printf("NO\n");
+				return;
+			}
+		}
+	}
+	printf("YES\n");
+}
+
+int main() {
+	int a, b, tag;
+	int i, m, n;
+	for (i = 0; i < N; i++) visit[i] = true;
+	vector<vector<int> > graph;
+	for (; scanf("%d %d", &n, &m) != EOF; ) {
+		graph.resize(n);
+		for (i = 0; i<m; i++) {
+			scanf("%d %d %d", &a, &b, &tag);
+			visit[a] = visit[b] = false;
+			judge[i][0] = a;
+			judge[i][1] = b;
+			judge[i][2] = tag;
+			graph[a].push_back(b);
+			graph[a].push_back(tag);
+		}
+		label(n, graph);
+		check(m);
+	}
+	return 0;
+}

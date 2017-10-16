@@ -1,0 +1,126 @@
+1
+8
+I 4
+I 3
+I 5
+Q
+D
+I 10
+I 2
+Q
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <functional>
+#include <stdio.h>
+
+using namespace std;
+
+class dmedian {
+public:
+	int l_n, r_n;
+	priority_queue<int> left;
+	priority_queue<int, vector<int>, greater<int> > right;
+public:
+	dmedian();
+	void	insert(int n);
+	int		median();
+	void	del();
+};
+
+dmedian::dmedian() { }
+
+void dmedian::insert(int n) {
+	l_n = left.size(), r_n = right.size();
+	if (l_n == r_n) {
+		if (l_n == 0) {
+			left.push(n);
+			return;
+		}
+		if (r_n == 0) {
+			if (n < left.top()) {
+				right.push(left.top());
+				left.pop();
+				left.push(n);
+			}
+			else
+				right.push(n);
+			return;
+		}
+		if (n > right.top())
+			right.push(n);
+		else
+			left.push(n);
+	}
+	else if (l_n < r_n) {
+		if (n <= right.top())
+			left.push(n);
+		else {
+			left.push(right.top());
+			right.pop();
+			right.push(n);
+		}
+	}
+	else {
+		if (n >= left.top())
+			right.push(n);
+		else {
+			right.push(left.top());
+			left.pop();
+			left.push(n);
+		}
+	}
+}
+
+int dmedian::median() {
+	l_n = left.size(), r_n = right.size();
+	if (l_n < r_n)
+		return right.top();
+	if (l_n > r_n)
+		return left.top();
+	if (right.top() < left.top())
+		return right.top();
+	return left.top();
+}
+
+void dmedian::del() {
+	l_n = left.size(), r_n = right.size();
+	if (l_n < r_n) {
+		right.pop();
+		return;
+	}
+	if (l_n > r_n) {
+		left.pop();
+		return;
+	}
+	if (right.top() < left.top()) {
+		right.pop();
+		return;
+	}
+	left.pop();
+}
+
+int main() {
+	char op;
+	int t, n, x;
+	scanf("%d", &t);
+	for (; t; t--) {
+		scanf("%d", &n);
+		getchar();
+		dmedian tmp;
+		for (; n; n--) {
+			scanf("%c", &op);
+			if (op == 'I') {
+				scanf("%d", &x);
+				tmp.insert(x);
+			}
+			else if (op == 'D')
+				tmp.del();
+			else
+				printf("%d\n", tmp.median());
+			getchar();
+		}
+	}
+	return 0;
+}
