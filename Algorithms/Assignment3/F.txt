@@ -1,0 +1,97 @@
+3 2 1
+1 2
+2 2 2
+1 3
+4 2
+2 1 1
+1 3
+3 3 5
+3 4
+5 3
+2 5
+6 2
+1 6
+3 3 5
+2 1
+3 2
+4 3
+5 4
+6 5
+0 0 0
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#define N 100001
+#define INT_MAX 2147483647
+
+using namespace std;
+
+int head[N][2];
+
+void topology(int& ans, int step, int cur, int n1, vector<vector<int> >& edge) {
+	int i, len = edge[cur].size(), tmp;
+	if (len == 0) {
+		if (step > ans)
+			ans = step;
+		return;
+	}
+	for (i = 0; i < len; i++) {
+		tmp = edge[cur][i];
+		if ((cur <= n1 && tmp <= n1) || (cur > n1&&tmp > n1))
+			topology(ans, step, tmp, n1, edge);
+		else
+			topology(ans, step + 1, tmp, n1, edge);
+	}
+}
+
+int check(int n1, vector<int>& start) {
+	int tag1 = 0, tag2 = 0, i = start.size() - 1;
+	for (; i>=0; i--) {
+		if (start[i] <= n1) tag1 = 1;
+		else tag2 = 1;
+	}
+	if (tag1 && tag2) return 1;
+	return 0;
+}
+
+void minChange(int n, int n1, vector<vector<int> >& edge) {
+	int i, max_ = 0, tmp;
+	vector<int> ans;
+	vector<int> start;
+	for (i = 1; i < n; i++) {
+		if ((head[i][0] > 0 && head[i][1] == 0) || (head[i][0] == 0 && head[i][1] == 0))
+			ans.push_back(i);
+	}
+	for (i = ans.size() - 1; i >= 0; i--) {
+		tmp = 1;
+		topology(tmp, 1, ans[i], n1, edge);
+		if (tmp > max_) {
+			start.clear();
+			max_ = tmp;
+			start.push_back(ans[i]);
+		}
+		else if (tmp == max_)
+			start.push_back(ans[i]);
+	}
+	printf("%d\n", check(n1, start) + max_ + 1);
+}
+
+int main() {
+	int i, x, y;
+	int n, n1, n2, d;
+	for (; scanf("%d %d %d", &n1, &n2, &d) && n1;) {
+		n = n1 + n2 + 1;
+		vector<vector<int> > edge;
+		edge.resize(n);
+		for (i = 1; i < n; i++)
+			head[i][0] = head[i][1] = 0;
+		for (i = 0; i < d; i++) {
+			scanf("%d %d", &x, &y);
+			head[y][0]++;
+			head[x][1]++;
+			edge[y].push_back(x);
+		}
+		minChange(n, n1, edge);
+	}
+	return 0;
+}

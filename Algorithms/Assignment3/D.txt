@@ -46,8 +46,6 @@
 2 5 2
 3 5 1
 
-
-
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -120,6 +118,115 @@ int main() {
 		for (i = 0; i < m; i++) {
 			scanf("%d %d %d", &a, &b, &c);
 			store.push_back(line(a, b, c));
+		}
+		sort(store.begin(), store.end(), cmp);
+		kruskal(0, n - 1, 0, store);
+		if (counter == 1)
+			printf("%d\n", minC);
+		else
+			printf("Not Unique!\n");
+	}
+	return 0;
+}
+
+
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <vector>
+#include <stdio.h>
+
+using namespace std;
+
+#define N 101
+#define INT_MAX 2147483647
+
+typedef unordered_map<int, int> map_;
+typedef unordered_map<int, int>::iterator iter;
+
+int minC, counter;
+int uions[N];
+
+struct line {
+	int a, b, c;
+	line(int x, int y, int z) { a = x; b = y; c = z; }
+};
+
+bool cmp(line& a, line& b) { return a.c < b.c; }
+
+void uion(int a, int b) { uions[b] = a; }
+
+int findRoot(int i) {
+	int pre = uions[i];
+	if (pre == -1) return i;
+	for (; uions[pre] != -1;)
+		pre = uions[pre];
+	uions[i] = pre;
+	return pre;
+}
+
+void kruskal(int c, int n, int i, vector<line>& store) {
+	if (n == 0) {
+		if (c < minC) {
+			counter = 1;
+			minC = c;
+		}
+		else if (c == minC)
+			counter++;
+		return;
+	}
+	if (store.size() - i >= n) {
+		int tmp = store[i].c, a_r, b_r;
+		for (; i < store.size() && store[i].c == tmp; i++) {
+			a_r = findRoot(store[i].a);
+			b_r = findRoot(store[i].b);
+			if (a_r != b_r) {
+				uion(a_r, b_r);
+				kruskal(store[i].c + c, n - 1, i + 1, store);
+				if (b_r == store[i].b) b_r = -1;
+				uions[store[i].b] = b_r;
+				if (a_r == store[i].a) a_r = -1;
+				uions[store[i].a] = a_r;
+			}
+		}
+	}
+}
+
+int main() {
+	int tmp;
+	int a, b, c;
+	int i, t, n, m;
+	scanf("%d", &t);
+	for (; t; t--) {
+		minC = INT_MAX;
+		counter = 0;
+		scanf("%d %d", &n, &m);
+		for (i = 1; i <= n; i++)
+			uions[i] = -1;
+		vector<line> store;
+		map_ check;	//<a*1000+b, index>
+		for (i = 0; i < m; i++) {
+			scanf("%d %d %d", &a, &b, &c);
+			if (a < b)
+				tmp = a * 1000 + b;
+			else if (a > b)
+				tmp = b * 1000 + a;
+			iter it = check.find(tmp);
+			if (it == check.end()) {
+				check[tmp] = store.size();
+				if (a < b)
+					store.push_back(line(a, b, c));
+				else if (a > b)
+					store.push_back(line(b, a, c));
+			}
+			else {
+				tmp = it->second;
+				if (c < store[tmp].c)
+					store[tmp].c = c;
+			}
 		}
 		sort(store.begin(), store.end(), cmp);
 		kruskal(0, n - 1, 0, store);

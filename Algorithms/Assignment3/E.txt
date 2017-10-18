@@ -1,0 +1,35 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <stdio.h>
+
+using namespace std;
+
+#define N 203
+#define INT_MAX 2147483647
+
+float cost[N][N];
+
+struct node {
+	int x, y;
+	node(int a, int b) : x(a), y(b) {}
+};
+
+int main() {
+	int x, y, i;
+	vector<int> n_stops;
+	vector<node> stops;	//0 - home, 1 - school
+	scanf("%d %d", &x, &y);
+	stops.push_back(node(x, y));
+	scanf("%d %d", &x, &y);
+	stops.push_back(node(x, y));
+	for (i = 0; scanf("%d %d", &x, &y) != EOF; i++) {
+		if (x == -1 || y == -1) {
+			n_stops.push_back(i);
+			i = 0;
+			continue;
+		}
+		stops.push_back(node(x, y));
+	}
+	return 0;
+}
