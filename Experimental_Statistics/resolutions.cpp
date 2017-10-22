@@ -19,6 +19,16 @@ bool cmp(one& a, one& b) {
 	return a.second > b.second;
 }
 
+bool cmpTotal(one& a, one& b) {
+	if (a.second == b.second) {
+		int tmpA = a.first, tmpB = b.first;
+		if (tmpA / BASIC_ == tmpB / BASIC_)
+			return tmpA % BASIC_ > tmpB % BASIC_;
+		return tmpA / BASIC_ > tmpB / BASIC_;
+	}
+	return a.second > b.second;
+}
+
 typedef unordered_map<int, int> part;
 typedef part::iterator iter;
 
@@ -457,6 +467,7 @@ bool insertPart(part& ct) {
 }
 
 part counterJpeg;
+part totalJpeg;
 ////////////////////////////////////////////////////////////////  
 void LoadJpegFile(int& counter, part& store, ofstream& output, char *JpegFileName) {
 	FILE*		hfjpg;
@@ -495,21 +506,27 @@ void LoadJpegFile(int& counter, part& store, ofstream& output, char *JpegFileNam
 	bi.biWidth = (LONG)(ImgWidth);
 	bi.biHeight = (LONG)(ImgHeight);
 	step = bi.biWidth * BASIC_ + bi.biHeight;
-	insertPart(counterJpeg);
-	if (!insertPart(store))
+	insertPart(counterJpeg);			//insert counterJpeg
+	if (!insertPart(store))				//insert store
 		counter++;
+	if (bi.biWidth < bi.biHeight)
+		step = bi.biWidth + BASIC_ * bi.biHeight;
+	insertPart(totalJpeg);				//insert totalJpeg
 	output << JpegFileName << ": " << bi.biWidth << " * " << bi.biHeight << "\n";
 	free(hJpegBuf);
 	free(hImgData);
 }
 
-void getEach(part& ct, ofstream& output) {
+void getEach(part& ct, ofstream& output, int tag) {
 	vector<one> total;
 	iter stepIter = ct.begin();
 	for (; stepIter != ct.end(); stepIter++)
 		total.push_back(one(stepIter->first, stepIter->second));
 	ct.clear();
-	sort(total.begin(), total.end(), cmp);
+	if (tag)
+		sort(total.begin(), total.end(), cmp);
+	else
+		sort(total.begin(), total.end(), cmpTotal);
 	output << "\n";
 	int i, n = total.size();
 	for (i = 0; i < n; i++) {
@@ -557,7 +574,7 @@ void labelme() {
 				else
 					break;
 			}
-			getEach(store, output);
+			getEach(store, output, 1);
 			if (counter > 1)
 				cout << subFile << ": " << counter << "\n";
 			output << "The total type is: " << counter << "\n\n";
@@ -566,9 +583,13 @@ void labelme() {
 		else
 			break;
 	}
-	getEach(counterJpeg, output);
+	getEach(counterJpeg, output, 1);
 	inputR.close();
 	output.close();
+	cout << "0.0" << "\n";
+	ofstream output1("labelmeTotal.txt");
+	getEach(totalJpeg, output1, 0);
+	output1.close();
 }
 
 int main() {
