@@ -143,13 +143,6 @@ typedef CHAR *LPSTR, *PSTR;
 #define FUNC_FILE_ERROR 2  
 #define FUNC_FORMAT_ERROR 3  
 
-//////////////////////////////////////////////////  
-//Jpeg functions  
-void LoadJpegFile(char *BmpFileName);
-void showerror(int funcret);
-int  InitTag();
-void InitTable();
-//////////////////////////////////////////////////  
 //global variable declaration  
 BITMAPFILEHEADER   bf;
 BITMAPINFOHEADER   bi;
@@ -193,54 +186,6 @@ short    restart;
 static  long iclip[1024];
 static  long *iclp;
 
-part counterJpeg;
-////////////////////////////////////////////////////////////////  
-void LoadJpegFile(ofstream& output, char *JpegFileName) {
-	FILE*		hfjpg;
-	DWORD		JpegBufSize;
-	void *      hJpegBuf;
-	int			funcret;
-
-	fopen_s(&hfjpg, JpegFileName, "rb");
-
-	//get jpg file length  
-	fseek(hfjpg, 0L, SEEK_END);
-	JpegBufSize = ftell(hfjpg);
-	//rewind to the beginning of the file  
-	fseek(hfjpg, 0L, SEEK_SET);
-
-	if ((hJpegBuf = malloc(JpegBufSize)) == NULL) {
-		fclose(hfjpg);
-		showerror(FUNC_MEMORY_ERROR);
-		return;
-	}
-	lpJpegBuf = (unsigned char  *)hJpegBuf;
-	fread((unsigned char  *)hJpegBuf, sizeof(char), JpegBufSize, hfjpg);
-	fclose(hfjpg);
-
-	InitTable();
-
-	if ((funcret = InitTag()) != FUNC_OK) {
-		free(hJpegBuf);
-		showerror(funcret);
-		return;
-	}
-	memset((char *)&bf, 0, sizeof(BITMAPFILEHEADER));
-	memset((char *)&bi, 0, sizeof(BITMAPINFOHEADER));
-
-	bi.biSize = (DWORD)sizeof(BITMAPINFOHEADER);
-	bi.biWidth = (LONG)(ImgWidth);
-	bi.biHeight = (LONG)(ImgHeight);
-	step = bi.biWidth * BASIC_ + bi.biHeight;
-	iter stepIter = counterJpeg.find(step);
-	if (stepIter == counterJpeg.end())
-		counterJpeg[step] = 1;
-	else
-		stepIter->second++;
-	output << JpegFileName << ": " << bi.biWidth << " * " << bi.biHeight << "\n";
-	free(hJpegBuf);
-	free(hImgData);
-}
 
 void showerror(int funcret) {
 	switch (funcret) {
@@ -501,6 +446,78 @@ void InitTable() {
 	ycoef = ucoef = vcoef = 0;
 }
 
+bool insertPart(part& ct) {
+	iter stepIter = ct.find(step);
+	if (stepIter == ct.end()) {
+		ct[step] = 1;
+		return false;
+	}
+	stepIter->second++;
+	return true;
+}
+
+part counterJpeg;
+////////////////////////////////////////////////////////////////  
+void LoadJpegFile(int& counter, part& store, ofstream& output, char *JpegFileName) {
+	FILE*		hfjpg;
+	DWORD		JpegBufSize;
+	void *      hJpegBuf;
+	int			funcret;
+
+	fopen_s(&hfjpg, JpegFileName, "rb");
+
+	//get jpg file length  
+	fseek(hfjpg, 0L, SEEK_END);
+	JpegBufSize = ftell(hfjpg);
+	//rewind to the beginning of the file  
+	fseek(hfjpg, 0L, SEEK_SET);
+
+	if ((hJpegBuf = malloc(JpegBufSize)) == NULL) {
+		fclose(hfjpg);
+		showerror(FUNC_MEMORY_ERROR);
+		return;
+	}
+	lpJpegBuf = (unsigned char  *)hJpegBuf;
+	fread((unsigned char  *)hJpegBuf, sizeof(char), JpegBufSize, hfjpg);
+	fclose(hfjpg);
+
+	InitTable();
+
+	if ((funcret = InitTag()) != FUNC_OK) {
+		free(hJpegBuf);
+		showerror(funcret);
+		return;
+	}
+	memset((char *)&bf, 0, sizeof(BITMAPFILEHEADER));
+	memset((char *)&bi, 0, sizeof(BITMAPINFOHEADER));
+
+	bi.biSize = (DWORD)sizeof(BITMAPINFOHEADER);
+	bi.biWidth = (LONG)(ImgWidth);
+	bi.biHeight = (LONG)(ImgHeight);
+	step = bi.biWidth * BASIC_ + bi.biHeight;
+	insertPart(counterJpeg);
+	if (!insertPart(store))
+		counter++;
+	output << JpegFileName << ": " << bi.biWidth << " * " << bi.biHeight << "\n";
+	free(hJpegBuf);
+	free(hImgData);
+}
+
+void getEach(part& ct, ofstream& output) {
+	vector<one> total;
+	iter stepIter = ct.begin();
+	for (; stepIter != ct.end(); stepIter++)
+		total.push_back(one(stepIter->first, stepIter->second));
+	ct.clear();
+	sort(total.begin(), total.end(), cmp);
+	output << "\n";
+	int i, n = total.size();
+	for (i = 0; i < n; i++) {
+		step = total[i].first;
+		output << step / BASIC_ << " * " << step%BASIC_ << ": " << total[i].second << "\n";
+	}
+}
+
 void labelme() {
 	char root[] = "C:\\Users\\codinglee\\Desktop\\Semester\\Databases\\LabelMe\\";
 	char index[] = "zzz.txt";
@@ -524,8 +541,10 @@ void labelme() {
 			strcat(subIndex, gap);
 			strcat(subIndex, index);
 			//cout << subIndex << "\n";
+			int counter = 0;
 			ifstream input(subIndex);
-			//output << subIndex << "\n";
+			output << subIndex << "\n";
+			part store;
 			for (;;) {
 				char file[N], pic[N];
 				strcpy(file, subFile);
@@ -533,28 +552,21 @@ void labelme() {
 				if (strlen(pic)) {
 					//cout << pic << "\n";
 					strcat(file, pic);
-					LoadJpegFile(output, file);
+					LoadJpegFile(counter, store, output, file);
 				}
 				else
 					break;
 			}
+			getEach(store, output);
+			if (counter > 1)
+				cout << subFile << ": " << counter << "\n";
+			output << "The total type is: " << counter << "\n\n";
 			input.close();
 		}
 		else
 			break;
 	}
-	vector<one> total;
-	iter stepIter = counterJpeg.begin();
-	for (; stepIter != counterJpeg.end(); stepIter++)
-		total.push_back(one(stepIter->first, stepIter->second));
-	counterJpeg.clear();
-	sort(total.begin(), total.end(), cmp);
-	output << "\n\n\n\n";
-	int i, n = total.size();
-	for (i = 0; i < n; i++) {
-		step = total[i].first;
-		output << step / BASIC_ << " * " << step%BASIC_ << ": " << total[i].second << "\n";
-	}
+	getEach(counterJpeg, output);
 	inputR.close();
 	output.close();
 }

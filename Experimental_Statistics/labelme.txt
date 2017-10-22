@@ -1,3 +1,4 @@
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p1010572.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p1010573.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p1010574.jpg: 2048 * 1536
@@ -72,6 +73,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p9
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p9160569.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p9160570.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\barcelona_static_street\p9160571.jpg: 2048 * 1536
+
+2048 * 1536: 74
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p1010640.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p1010641.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p1010642.jpg: 2048 * 1536
@@ -112,6 +118,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p9120
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p9120506.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p9120507.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\madrid_static_street\p9120508.jpg: 2048 * 1536
+
+2048 * 1536: 40
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0283.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0284.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0285.jpg: 2592 * 1944
@@ -234,6 +245,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_ci
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0593.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0594.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2005\img_0595.jpg: 2592 * 1944
+
+2592 * 1944: 122
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\dsc04120.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\dsc04121.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\dsc04122.jpg: 960 * 1280
@@ -349,6 +365,16 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_ci
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\img_0685.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\img_0687.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_barcelona_street_city_outdoor_2_2005\img_0689.jpg: 1600 * 1200
+
+3504 * 2336: 41
+2592 * 1944: 39
+1280 * 960: 16
+960 * 1280: 12
+2336 * 3504: 4
+1600 * 1200: 3
+The total type is: 6
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9135.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9136.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9148.jpg: 2048 * 1536
@@ -371,6 +397,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_ou
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9387.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9389.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_coast_palafrugel_outdoor_spain\IMG_9393.jpg: 2048 * 1536
+
+2048 * 1536: 19
+2592 * 1944: 3
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\0020.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\0021.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\0023.jpg: 2048 * 1536
@@ -443,6 +475,16 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\dsc03662.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\dsc03682.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_formentera_outdoor_landscape_coast\dsc03684.jpg: 1280 * 960
+
+1280 * 960: 38
+2048 * 1536: 26
+1536 * 2048: 5
+960 * 1280: 1
+640 * 480: 1
+1278 * 960: 1
+The total type is: 6
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0737.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0738.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0739.jpg: 1600 * 1200
@@ -554,6 +596,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_augu
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0920.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0921.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_madrid_outdoor_august_2005\img_0922.jpg: 1600 * 1200
+
+1600 * 1200: 96
+2592 * 1944: 15
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\8_3.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\barrido_manual_carrito_1.jpg: 1024 * 768
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\beach_laredo.jpg: 560 * 420
@@ -561,6 +609,17 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\laredo14.jpg: 250 * 136
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\r4_1.jpg: 323 * 431
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_city_laredo_spain\street_laredo_6.jpg: 375 * 500
+
+1600 * 1200: 1
+560 * 420: 1
+1024 * 768: 1
+323 * 431: 1
+250 * 136: 1
+502 * 334: 1
+375 * 500: 1
+The total type is: 7
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8326.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8327.jpg: 1536 * 2048
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8329.jpg: 1536 * 2048
@@ -611,6 +670,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_sp
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8536.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8538.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_mallorca_spain\IMG_8539.jpg: 2048 * 1536
+
+2048 * 1536: 43
+1536 * 2048: 7
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0509.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0511.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0512.jpg: 2048 * 1536
@@ -692,6 +757,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallor
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0651.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0652.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_mallorca_spain\IMG_0653.jpg: 2048 * 1536
+
+2048 * 1536: 81
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_6807.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_6808.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_6810.jpg: 2048 * 1536
@@ -902,9 +972,20 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_7233.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_7234.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_road_spain\IMG_7237.jpg: 2048 * 1536
+
+2048 * 1536: 210
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_2007\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_2007\IMG_2785.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_2007\IMG_2786.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_2007\IMG_2787.jpg: 1536 * 2048
+
+2048 * 1536: 2
+1536 * 2048: 1
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\img_1893.jpg: 2336 * 3504
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\img_1895.jpg: 3504 * 2336
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\img_1896.jpg: 3504 * 2336
@@ -994,6 +1075,13 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\img_2040.jpg: 3504 * 2336
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\img_2041.jpg: 3504 * 2336
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_barcelona_spain_night\IMG_2978.jpg: 2048 * 1536
+
+3504 * 2336: 84
+2336 * 3504: 4
+2048 * 1536: 1
+The total type is: 3
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2805.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2806.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2813.jpg: 2048 * 1536
@@ -1009,6 +1097,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2825.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2826.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_gerona_spain\IMG_2827.jpg: 2048 * 1536
+
+2048 * 1536: 15
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_3097_night.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_3160.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_3164_night.jpg: 2048 * 1536
@@ -1073,17 +1166,33 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_6791.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_6792.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_city_madrid_spain\IMG_6793.jpg: 2048 * 1536
+
+2048 * 1536: 62
+1536 * 2048: 2
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6905.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6906.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6907.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6925.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6945.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_benavente_leon_spain\IMG_6946.jpg: 2048 * 1536
+
+2048 * 1536: 6
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\IMG_7582.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\IMG_7588.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\IMG_7651.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\IMG_7684.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_galicia_spain\IMG_7719.jpg: 2048 * 1536
+
+2048 * 1536: 5
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9011.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9012.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9034.jpg: 2048 * 1536
@@ -1093,6 +1202,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_vill
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9082.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9304.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_palafrugel_spain\IMG_9314.jpg: 2048 * 1536
+
+2048 * 1536: 9
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4103.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4107.jpg: 1536 * 2048
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4110.jpg: 2048 * 1536
@@ -1199,6 +1313,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_vill
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4230.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4231.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_street_village_puigpunyent_mallorca_spain\IMG_4232.jpg: 2048 * 1536
+
+2048 * 1536: 86
+1536 * 2048: 20
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_6993.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_6994.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_6995.jpg: 2048 * 1536
@@ -1210,6 +1330,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_7074.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_7082.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_astorga_leon_spain\IMG_7102.jpg: 2048 * 1536
+
+2048 * 1536: 10
+1536 * 2048: 1
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_7715.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_7716.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_7726.jpg: 2048 * 1536
@@ -1694,6 +1820,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_8219.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_8220.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_outdoor_urban_city_street_coruna_spain\IMG_8221.jpg: 2048 * 1536
+
+2048 * 1536: 478
+1536 * 2048: 6
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8270310.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8280318.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8280320.jpg: 2048 * 1536
@@ -1737,6 +1869,12 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8310386.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8310394.jpg: 1536 * 2048
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_2004\p8310397.jpg: 1536 * 2048
+
+2048 * 1536: 38
+1536 * 2048: 5
+The total type is: 2
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1008.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1010.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1011.jpg: 2592 * 1944
@@ -1861,6 +1999,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_augus
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1276.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1277.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005\img_1278.jpg: 2592 * 1944
+
+2592 * 1944: 124
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1286.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1287.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1291.jpg: 2592 * 1944
@@ -2041,6 +2184,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_augus
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1661.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1676.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set2\img_1677.jpg: 2592 * 1944
+
+2592 * 1944: 180
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1716.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1717.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1718.jpg: 2592 * 1944
@@ -2158,6 +2306,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_augus
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1943.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1944.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set3\img_1946.jpg: 2592 * 1944
+
+2592 * 1944: 117
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_1993.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_1994.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_1995.jpg: 2592 * 1944
@@ -2318,6 +2471,11 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_augus
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_2273.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_2274.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set4\img_2276.jpg: 2592 * 1944
+
+2592 * 1944: 160
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\dsc02750.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\dsc02751.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\dsc02759.jpg: 960 * 1280
@@ -2442,6 +2600,14 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_augus
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\img_2657.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\IMG_3784.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_palma_outdoor_august_2005_set5\IMG_3785.jpg: 2592 * 1944
+
+2592 * 1944: 117
+1280 * 960: 4
+960 * 1280: 2
+1944 * 2592: 1
+The total type is: 4
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_0398.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_0399.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_0408.jpg: 2048 * 1536
@@ -2646,8 +2812,22 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palm
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_0802.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_0805.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain\IMG_1793.jpg: 2816 * 2112
+
+2048 * 1536: 121
+2592 * 1944: 45
+1536 * 2048: 29
+1944 * 2592: 8
+2816 * 2112: 1
+The total type is: 5
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain_2007\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain_2007\IMG_2901.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_street_outdoor_palma_mallorca_spain_2007\IMG_2905.jpg: 2048 * 1536
+
+2048 * 1536: 2
+The total type is: 1
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\dsc02547.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\dsc02549.jpg: 1280 * 960
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\dsc02565.jpg: 1280 * 960
@@ -2712,6 +2892,15 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_ou
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\p1010318.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\p1010329.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_mallorca_outdoor\village_3806.jpg: 2592 * 1944
+
+1280 * 960: 45
+2048 * 1536: 10
+960 * 1280: 7
+1536 * 2048: 1
+2592 * 1944: 1
+The total type is: 5
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\img_1963.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\img_1964.jpg: 2592 * 1944
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\img_1965.jpg: 2592 * 1944
@@ -2794,6 +2983,13 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\p1010399.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\p1010405.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\static_village_outdoor_2005\p1010408.jpg: 2048 * 1536
+
+2592 * 1944: 72
+1600 * 1200: 5
+2048 * 1536: 5
+The total type is: 3
+
+C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\\zzz.txt
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\IMG_6858.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\IMG_7051.jpg: 1600 * 1200
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\IMG_7098.jpg: 1600 * 1200
@@ -2919,7 +3115,9 @@ C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\p
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\p1010626.jpg: 2048 * 1536
 C:\Users\codinglee\Desktop\Semester\Databases\LabelMe\valladolid_static_street\p1010627.jpg: 2048 * 1536
 
-
+2048 * 1536: 120
+1600 * 1200: 4
+The total type is: 2
 
 
 2048 * 1536: 1463
