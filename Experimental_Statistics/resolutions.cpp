@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <unordered_map>
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,27 +9,44 @@
 #include <time.h>
 
 #define N 1024
+#define BASIC_ 10000
 
 using namespace std;
 
-int bmpwidth, bmpheight, linebyte;
+typedef pair<int, int> one;
+
+bool cmp(one& a, one& b) {
+	return a.second > b.second;
+}
+
+typedef unordered_map<int, int> part;
+typedef part::iterator iter;
+
+int bmpwidth, bmpheight, step;
+part counterBmp;
 
 void readBmp(ofstream& output, char *bmpName) {
 	FILE *fp;
 	if ((fp = fopen(bmpName, "rb")) == NULL) { //以二进制的方式打开文件  
-		cout << "The file " << bmpName << "was not opened" << endl;
+		cout << "The file " << bmpName << "was not opened" << "\n";
 		return;
 	}
 	if (fseek(fp, sizeof(BITMAPFILEHEADER), 0)) { //跳过BITMAPFILEHEADE  
-		cout << "跳转失败" << endl;
+		cout << "跳转失败" << "\n";
 		return;
 	}
 	BITMAPINFOHEADER infoHead;
 	fread(&infoHead, sizeof(BITMAPINFOHEADER), 1, fp);   //从fp中读取BITMAPINFOHEADER信息到infoHead中,同时fp的指针移动  
 	bmpwidth = infoHead.biWidth;
 	bmpheight = infoHead.biHeight;
+	step = bmpwidth * BASIC_ + bmpheight;
+	iter stepIter = counterBmp.find(step);
+	if (stepIter == counterBmp.end())
+		counterBmp[step] = 1;
+	else
+		stepIter->second++;
 	fclose(fp);   //关闭文件  
-	output << bmpwidth << " * " << bmpheight << endl;
+	output << bmpName << ": " << bmpwidth << " * " << bmpheight << "\n";
 }
 
 void pristine() {
@@ -43,12 +62,24 @@ void pristine() {
 		strcpy(file, root);
 		input >> pic;
 		if (strlen(pic)) {
-			//cout << pic << endl;
+			//cout << pic << "\n";
 			strcat(file, pic);
 			readBmp(output, file);
 		}
 		else
 			break;
+	}
+	vector<one> total;
+	iter stepIter = counterBmp.begin();
+	for (; stepIter != counterBmp.end(); stepIter++)
+		total.push_back(one(stepIter->first, stepIter->second));
+	counterBmp.clear();
+	sort(total.begin(), total.end(), cmp);
+	output << "\n\n\n\n";
+	int i, n = total.size();
+	for (i = 0; i < n; i++) {
+		step = total[i].first;
+		output << step / BASIC_ << " * " << step%BASIC_ << ": " << total[i].second << "\n";
 	}
 	input.close();
 	output.close();
@@ -162,6 +193,7 @@ short    restart;
 static  long iclip[1024];
 static  long *iclp;
 
+part counterJpeg;
 ////////////////////////////////////////////////////////////////  
 void LoadJpegFile(ofstream& output, char *JpegFileName) {
 	FILE*		hfjpg;
@@ -199,7 +231,13 @@ void LoadJpegFile(ofstream& output, char *JpegFileName) {
 	bi.biSize = (DWORD)sizeof(BITMAPINFOHEADER);
 	bi.biWidth = (LONG)(ImgWidth);
 	bi.biHeight = (LONG)(ImgHeight);
-	output << bi.biWidth << " * " << bi.biHeight << endl;
+	step = bi.biWidth * BASIC_ + bi.biHeight;
+	iter stepIter = counterJpeg.find(step);
+	if (stepIter == counterJpeg.end())
+		counterJpeg[step] = 1;
+	else
+		stepIter->second++;
+	output << JpegFileName << ": " << bi.biWidth << " * " << bi.biHeight << "\n";
 	free(hJpegBuf);
 	free(hImgData);
 }
@@ -476,24 +514,24 @@ void labelme() {
 		char subFile[N], sub[N];
 		inputR >> sub;
 		if (strlen(sub)) {
-			//cout << sub << endl;
+			//cout << sub << "\n";
 			strcpy(subFile, root);
 			strcat(subFile, sub);
 			strcat(subFile, gap);
-			//cout << subFile << endl;
+			//cout << subFile << "\n";
 			char subIndex[N];
 			strcpy(subIndex, subFile);
 			strcat(subIndex, gap);
 			strcat(subIndex, index);
-			//cout << subIndex << endl;
+			//cout << subIndex << "\n";
 			ifstream input(subIndex);
-			//output << subIndex << endl;
+			//output << subIndex << "\n";
 			for (;;) {
 				char file[N], pic[N];
 				strcpy(file, subFile);
 				input >> pic;
 				if (strlen(pic)) {
-					//cout << pic << endl;
+					//cout << pic << "\n";
 					strcat(file, pic);
 					LoadJpegFile(output, file);
 				}
@@ -504,6 +542,18 @@ void labelme() {
 		}
 		else
 			break;
+	}
+	vector<one> total;
+	iter stepIter = counterJpeg.begin();
+	for (; stepIter != counterJpeg.end(); stepIter++)
+		total.push_back(one(stepIter->first, stepIter->second));
+	counterJpeg.clear();
+	sort(total.begin(), total.end(), cmp);
+	output << "\n\n\n\n";
+	int i, n = total.size();
+	for (i = 0; i < n; i++) {
+		step = total[i].first;
+		output << step / BASIC_ << " * " << step%BASIC_ << ": " << total[i].second << "\n";
 	}
 	inputR.close();
 	output.close();
