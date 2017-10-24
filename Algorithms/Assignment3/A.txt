@@ -73,3 +73,60 @@ int main() {
 	}
 	return 0;
 }
+
+
+
+#include <iostream>  
+using namespace std;
+
+#define N 1005  
+
+struct NODE {
+	int p, r;
+};
+
+NODE node[N];
+
+void init(int n) {
+	for (int i = 0; i<n; i++) {
+		node[i].p = i;
+		node[i].r = 0;
+	}
+}
+
+int FindParent(int i) {
+	if (i == node[i].p)
+		return i;
+	int ip = node[i].p;
+	node[i].p = FindParent(ip);
+	node[i].r = (node[i].r == node[ip].r ? 0 : 1);
+	return node[i].p;
+}
+
+int main() {
+	bool bug;
+	int n, m, i, k, a, b, ap, bp;
+	while (cin >> n >> m) {
+		init(n);
+		bug = false;
+		for (i = 1; i <= m; i++) {
+			cin >> a >> b >> k;
+			ap = FindParent(a);
+			bp = FindParent(b);
+			if (ap == bp) {
+				if ((k == 0 && node[a].r != node[b].r) || (k == 1 && node[a].r == node[b].r))
+					bug = true;
+			}
+			else {
+				node[bp].p = ap;
+				if (k == 0)
+					node[bp].r = (node[a].r == node[b].r ? 0 : 1);
+				else
+					node[bp].r = (node[a].r == node[b].r ? 1 : 0);
+			}
+		}
+		if (bug)	cout << "NO\n";
+		else		cout << "YES\n";
+	}
+	return 0;
+}
