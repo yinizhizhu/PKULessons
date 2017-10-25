@@ -49,7 +49,10 @@ void readBmp(ofstream& output, char *bmpName) {
 	fread(&infoHead, sizeof(BITMAPINFOHEADER), 1, fp);   //从fp中读取BITMAPINFOHEADER信息到infoHead中,同时fp的指针移动  
 	bmpwidth = infoHead.biWidth;
 	bmpheight = infoHead.biHeight;
-	step = bmpwidth * BASIC_ + bmpheight;
+	if (bmpwidth > bmpheight)
+		step = bmpwidth * BASIC_ + bmpheight;
+	else
+		step = bmpwidth + BASIC_ * bmpheight;
 	iter stepIter = counterBmp.find(step);
 	if (stepIter == counterBmp.end())
 		counterBmp[step] = 1;
@@ -84,7 +87,7 @@ void pristine() {
 	for (; stepIter != counterBmp.end(); stepIter++)
 		total.push_back(one(stepIter->first, stepIter->second));
 	counterBmp.clear();
-	sort(total.begin(), total.end(), cmp);
+	sort(total.begin(), total.end(), cmpTotal);
 	output << "\n\n\n\n";
 	int i, n = total.size();
 	for (i = 0; i < n; i++) {
