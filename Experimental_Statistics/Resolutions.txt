@@ -1,0 +1,101 @@
+3840*2160
+
+*******************1920 * 1080*******************
+
+*******************1280 * 720********************
+
+960*540
+
+854*480
+
+480*320
+
+手机分辨率：
+	VIVO-Y66:		1280*720(1300万)
+	MEIZU4-PRO:		2560*1536(20170万)
+	Huawei畅享7:	1280*720(1300万)
+	
+苹果：
+	iphone8:		1334*750
+	iphone7 plus\iPhone 6s Plus:	1920*1080
+	iphone 5s\iphone5:		 1136*640
+	iphone 4:		320*240
+
+小米：
+	小米 MIX2： 2160*1080
+	小米 Note3、小米手机6、小米 5X、红米Note 4X、红米Note 4：1920*1080
+	小米 红米Note 5A、红米4X 、红米4A：1280*720
+	
+华为：
+	荣耀 V9、P10 Plus： 2560*1440
+	荣耀 畅玩7X、麦芒6： 2160*1080
+	 P10、荣耀9、荣耀8青春版、荣耀 畅玩6X、荣耀8、 NOVA、Mate 9、MATE8：1920*1080
+	荣耀V9 PLAY、荣耀 畅玩6、畅享7、畅享7 Plus：1280*720
+
+VIVO：
+	vivo X20： 2160*1080
+	vivo X9s、vivo X9s Plus、vivo X9： 1920*1080
+	vivo Y66、vivo Y67、vivo Y55： 1280*720
+	vivo Y23L：854*480
+
+OPPO：
+	R11、R11 Plus、A77、R9、R7S：1920*1080
+	A57、 A59S、A37：1280*720
+
+三星：
+	Galaxy S8+、Galaxy Note8、Galaxy S8： 2960*1440
+	Galaxy S7 edge、 Galaxy S6 Edge、Galaxy S6、Galaxy Note 5、Galaxy S7：2560*1440
+	Galaxy C9 Pro、Galaxy C8、Galaxy C7 Pro、Galaxy C5 Pro：1920*1080
+	SM-J3300：1280*720
+
+魅族：
+	PRO7 Plus、PRO 6 Plus： 2560 *1440
+	MX4： 1920*1152
+	魅蓝note6、魅蓝note5、魅蓝E2、PRO7、魅蓝note2、 魅蓝X 、魅蓝note3、魅蓝E、PRO 6S、MX6、MX5: 1920*1080
+	魅蓝6、魅蓝5s、魅蓝 A5、魅蓝5、魅蓝3s: 1280*720
+
+美图：
+	T8s、M8、T8、M6、M6S： 1920*1080
+	M4: 1280*720
+	
+索尼：
+	 Xperia XZ Premium、Z5 Premium：3840*2160
+	 Xperia XZ1、Xperia Z5、Xperia XZ、Xperia Z3： 1920*1080
+
+360：
+	N5s、360 VIZZA、N5、 F4S： 1920*1080
+	F5： 1280*720
+
+努比亚：
+	Z17S： 2040*1080
+	Z17 mini、Z17、M2、Z11： 1920*1080
+
+锤子：
+	M1L： 2560*1440
+	坚果Pro、坚果手机： 1920*1080
+
+金立：
+	M7： 2160*1080
+	S10、M6S Plus、M6 Plus： 1920*1080
+	W909、S10C： 1280*720
+	大金钢2： 1440*720
+
+酷派：
+	Cool1、Cool S1： 1920*1080
+	8737、8720L、B770S、5370、奇酷大神 F2 、8722V： 1280*720
+	锋尚2： 960*540
+	5267： 854*480
+
+中兴：
+	V7 MAX、AXON天机 MAX、Blade V8、Blade A2S： 1920*1080
+	BA520、BA601、BA510、 BA603、Blade A2、远航4： 1280*720
+	S36： 854*480
+
+天语：
+	X9： 1280*720
+	X7 Pro： 960*540
+	H2、K5： 854*480
+
+HTC：
+	One M9+、M10H、U11、U Ultra： 2560*1440
+	One A9、One M9、One、One M8、Desire 10 pro： 1920*1080
