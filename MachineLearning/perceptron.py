@@ -1,7 +1,7 @@
-from time import clock
-import matplotlib.pyplot as plt
 import random
 import numpy as np
+from time import clock
+import matplotlib.pyplot as plt
 
 start = clock()
 
@@ -26,7 +26,7 @@ class perceptron():
         
     def generateData(self):
         '''
-        generate the source data:
+        generate the source data:(convinient to get access to the data)
             the separating hyperplane is 'y=x'
             output the data into text file
         '''
@@ -89,7 +89,7 @@ class perceptron():
         
     def loss(self):
         for i in xrange(len(self.x)):
-            if self.function(i)*self.y[i] < 0:
+            if self.function(i)*self.y[i] <= 0:
                 return 1
         return 0
         
@@ -102,6 +102,7 @@ class perceptron():
                 if self.function(i)*self.y[i] < 0:
                     deltaW += self.y[i]*self.x[i]
                     deltaB += self.y[i]
+                    break
             self.w[0] += self.yeta*deltaW
             self.b += self.yeta*deltaB
 
