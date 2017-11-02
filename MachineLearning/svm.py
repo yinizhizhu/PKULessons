@@ -13,6 +13,7 @@ class perceptron():
         bias - the bias
         yet - the ratio of learning
         '''
+        print w1, w2, bias
         self.clf = svm.LinearSVC()
         
         self.x = [] #store the properties of the object
@@ -71,8 +72,8 @@ class perceptron():
                 plt.plot(self.x[i][0], self.x[i][1], 'ro')
             else:
                 plt.plot(self.x[i][0], self.x[i][1], 'g^')
-        h = -self.clf.raw_coef_[0][2]/self.clf.raw_coef_[0][1]
-        t = -self.clf.raw_coef_[0][0]/self.clf.raw_coef_[0][1]*101+h
+        h = -self.clf.tol/self.clf.coef_[0][1]
+        t = -self.clf.coef_[0][0]/self.clf.coef_[0][1]*101+h
         self.drawLine(h, t, 'b')
         plt.xlabel('X')
         plt.ylabel('Y')
@@ -82,11 +83,12 @@ class perceptron():
         self.clf.fit(self.x, self.y)
         print self.clf.predict([[-0.8, -1]])
         print self.clf.class_weight
-        print self.clf.class_weight_
         print self.clf.decision_function
         print self.clf.loss
         print self.clf.C
-        print self.clf.raw_coef_ #store the weight and bias
+        print self.clf.coef_
+        print self.clf.penalty
+        print self.clf.tol
 
 tmp = perceptron(random.random(), random.random(), random.random(), 0.01)
 tmp.drawData()
