@@ -31,6 +31,9 @@ clf2 = pickle.loads(s)
 
 ans = clf2.predict(X[0])
 print 'predict', ans, ', target', y[0]
+#SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+#kernel='rbf', max_iter=-1, probability=False, random_state=None,
+#shrinking=True, tol=0.001, verbose=False)
 
 joblib.dump(clf, 'filename.pkl')
 clf = joblib.load('filename.pkl')
