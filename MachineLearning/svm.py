@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 start = clock()
 
-class perceptron():
+class SVM():
     def __init__(self, w1, w2, bias, yet):
         '''
         w1, w2 - the weights
@@ -90,7 +90,7 @@ class perceptron():
         print self.clf.penalty
         print self.clf.tol
 
-tmp = perceptron(random.random(), random.random(), random.random(), 0.01)
+tmp = SVM(random.random(), random.random(), random.random(), 0.01)
 tmp.drawData()
 
 end = clock()
