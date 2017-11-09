@@ -72,7 +72,7 @@ class AdaBoost():
         self.y= np.array(self.y)
     
     def I(self, value):
-        if value > 0:
+        if value != 0:
             return 1
         return 0
     
@@ -98,10 +98,12 @@ class AdaBoost():
             tmp = self.weight[i]*math.exp(self.y[i]*self.G(m, i))
             self.weight[i] = tmp
             z = z+tmp
-        return math.exp(-aerfa)*z
+        return z
         
     def Aerfa(self, m):
+        print m, 
         em = self.Em(m)
+        print em
         return 0.5*math.log((1-em)/em)
     
     def step(self, m):
@@ -110,7 +112,7 @@ class AdaBoost():
         zm = self.Zm(m, aerfa)
         for i in xrange(self.sample_n):
             self.weight[i] = self.weight[i]/zm
-        print aerfa
+#        print aerfa
         self.a_m.append(aerfa)
 
     def basicLearn(self, m):
@@ -170,7 +172,7 @@ class AdaBoost():
         plt.xlabel('X')
         plt.ylabel('Y')
         plt.show()
-        
+
 man = AdaBoost()
 man.main()
 for i in xrange(man.clf_n):
