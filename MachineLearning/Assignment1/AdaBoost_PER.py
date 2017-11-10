@@ -1,4 +1,3 @@
-from sklearn import svm
 import numpy as np
 import random
 from time import clock
@@ -7,19 +6,72 @@ import matplotlib.pyplot as plt
 
 start = clock()
 
-class AdaBoost():
+class perceptron():
     def __init__(self):
         '''
-            w1, w2 - the weights
-            bias - the bias
-            yet - the ratio of learning
+            Just do this
         '''
+        return
+        
+    def function(self, i):
+        '''
+        calculate the 'w*x + b'
+            return the value calculated
+        '''
+        ans = self.x[i].dot(self.coef_.transpose())+self.intercept_
+        return ans[0]
+        
+    def loss(self):
+        for i in xrange(len(self.x)):
+            if self.function(i)*self.y[i] < 0:
+                return 1
+        return 0
+
+    def fit(self, x, y, weight, yet = 0.01):
+        self.x = x #store the properties of the object
+        self.y = y #store the kind of class
+        
+        self.weight = weight
+        self.yeta = yet  #the ratio of learning
+        
+        self.max_iter = 300
+        
+        self.coef_ = np.array([[random.random() for i in xrange(len(self.x[0]))]]) #the weight of each properties
+        self.intercept_ = np.array([random.random()])    #the bias
+        
+        pre_loss = 0
+        
+        while self.max_iter:
+            cur_loss = 0
+            for i in xrange(len(self.x)):
+                if self.function(i)*self.y[i] < 0:
+                    cur_loss = self.weight[i]
+            
+            number = 0
+            deltaw = np.array([0 for i in xrange(len(self.x[0]))])
+            deltab = np.array([0])
+            for i in xrange(len(self.x)):
+                if self.function(i)*self.y[i] < 0:
+                    deltaw += self.y[i]*self.x[i]*self.weight[i]
+                    deltab += self.y[i]*self.weight[i]
+                    number += 1
+            self.coef_[0] += self.yeta*deltaw/number
+            self.intercept_ += self.yeta*deltab/number
+            
+            if pre_loss == cur_loss:
+                self.max_iter = self.max_iter - 1
+            else:
+                pre_loss = cur_loss
+                self.max_iter = 300
+
+class AdaBoost():
+    def __init__(self, n):
         self.sample_n = 200
         self.weight = [1.0/self.sample_n for i in xrange(self.sample_n)]
         
         self.a_m = []
-        self.clf_n = 6
-        self.clf = [svm.LinearSVC() for i in xrange(self.clf_n)]
+        self.clf_n = n
+        self.clf = [perceptron() for i in xrange(self.clf_n)]
         
         self.x = [] #store the properties of the object
         self.y = [] #store the kind of class
@@ -71,11 +123,6 @@ class AdaBoost():
         self.x = np.array(self.x)
         self.y= np.array(self.y)
     
-    def I(self, value):
-        if value != 0:
-            return 1
-        return 0
-    
     def sign(self, value):
         if value > 0:
             return 1
@@ -84,40 +131,39 @@ class AdaBoost():
     def G(self, m, i):
         ans = self.sign(self.x[i].dot(self.clf[m].coef_.transpose())
                 +self.clf[m].intercept_)
-        return ans
+        if ans > 0:
+            return 1
+        return -1
     
     def Em(self, m):
         em = 0.0
         for i in xrange(self.sample_n):
-            em = em + self.weight[i]*self.I(self.G(m, i)-self.y[i])
+            if self.G(m, i) != self.y[i]:
+                em = em + self.weight[i]
         return em
     
-    def Zm(self, m, aerfa):
-        z = 0
-        for i in xrange(self.sample_n):
-            tmp = self.weight[i]*math.exp(self.y[i]*self.G(m, i))
-            self.weight[i] = tmp
-            z = z+tmp
-        return z
-        
     def Aerfa(self, m):
-        print m, 
+#        print m, 
         em = self.Em(m)
-        print em
+#        print em
         return 0.5*math.log((1-em)/em)
     
     def step(self, m):
         self.basicLearn(m)
         aerfa = self.Aerfa(m)
-        zm = self.Zm(m, aerfa)
+        z = 0
         for i in xrange(self.sample_n):
-            self.weight[i] = self.weight[i]/zm
+            tmp = self.weight[i]*math.exp(-aerfa*self.y[i]*self.G(m, i))
+            self.weight[i] = tmp
+            z = z+tmp
+        for i in xrange(self.sample_n):
+            self.weight[i] /= z
 #        print aerfa
         self.a_m.append(aerfa)
 
     def basicLearn(self, m):
         self.clf[m].max_iter = 1000+m*1000
-        self.clf[m].fit(self.x, self.y)
+        self.clf[m].fit(self.x, self.y, self.weight)
 #        print self.clf.__doc__
 #        print self.clf.coef_
 #        print self.clf.intercept_
@@ -165,20 +211,41 @@ class AdaBoost():
                 plt.plot(self.x[i][0], self.x[i][1], 'ro')
             else:
                 plt.plot(self.x[i][0], self.x[i][1], 'g^')
-        for i in xrange(self.clf_n):
-            h = -self.clf[i].intercept_[0]/self.clf[i].coef_[0][1]
-            t = -self.clf[i].coef_[0][0]/self.clf[i].coef_[0][1]*101+h
-            self.drawLine(h, t, 'b')
+
+#        t = []
+        for j in xrange(self.sample_n):
+            tmp = 0
+            for i in xrange(self.clf_n):
+                tmp += self.G(i, j)*self.weight[j]
+                h = -self.clf[i].intercept_[0]/self.clf[i].coef_[0][1]
+                t = -self.clf[i].coef_[0][0]/self.clf[i].coef_[0][1]*101+h
+                self.drawLine(h, t, 'b')
+#            t.append(tmp)
+        plt.plot(t, 'b')
         plt.xlabel('X')
         plt.ylabel('Y')
         plt.show()
 
-man = AdaBoost()
+#out = open('result.txt', 'w')
+
+min_loss = 200
+max_loss = 0
+
+#n = random.randint(1, 9)
+man = AdaBoost(6)
 man.main()
-for i in xrange(man.clf_n):
-    print man.partLoss(i)
-print man.finalLoss()
+ans = man.finalLoss()
+if ans > max_loss:
+    max_loss = ans
+if ans < min_loss:
+    min_loss = ans
+print ans
+
+#print >> out, n, ans
 man.drawData()
+
+#print >> out, min_loss, max_loss
+#out.close()
 
 end = clock()
 print "The total time is: ", end-start
