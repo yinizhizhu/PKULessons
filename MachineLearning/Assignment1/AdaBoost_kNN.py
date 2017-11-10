@@ -91,7 +91,7 @@ class AdaBoost():
 
         for i in xrange(len(self.map)):
             n = len(self.data[i])
-            n_train = int(n*0.8)
+            n_train = int(n*0.5)
             self.train_test[i] = n_train
             
             for j in xrange(n_train):
@@ -128,7 +128,7 @@ class AdaBoost():
     def Em(self, m):
         em = 0.0
         for i in xrange(self.test_n):
-            if self.G(m, i) != self.y[i]:
+            if self.G(m, i) != self.y_test[i]:
                 em = em + self.weight[i]
         return em
         
@@ -142,7 +142,7 @@ class AdaBoost():
         aerfa = self.Aerfa(m)
         z = 0
         for i in xrange(self.sample_n):
-            tmp = self.weight[i]*math.exp(-aerfa*self.y[i]*self.G(m, i))
+            tmp = self.weight[i]*math.exp(-aerfa*self.y_test[i]*self.G(m, i))
             self.weight[i] = tmp
             z = z+tmp
         for i in xrange(self.sample_n):
@@ -225,5 +225,7 @@ class AdaBoost():
 
 a = AdaBoost(3)
 a.showKind('zero')
+a.showKind('one')
+a.showKind('two')
 a.main()
-a.finalLoss()
+print a.finalLoss()
