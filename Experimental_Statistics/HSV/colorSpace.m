@@ -10,6 +10,7 @@ fileNames = fopen([str_temp '\src\zzz.txt'], 'r');
 colorhist = zeros(1,256);
 
 tmp = [];
+tmp_names = {};
 
 t_h = [];
 s_h = [];
@@ -18,7 +19,9 @@ v_h = [];
 i = 1;
 while feof(fileNames) == 0
     fprintf('The %dth iteration...\n', i);
-    fileName = [str_temp '\src\' fgetl(fileNames)];
+    name = fgetl(fileNames);
+    tmp_names(i) = {name};
+    fileName = [str_temp '\src\' name];
     f = imread(fileName);
     tmp(i) = size(f, 1)*size(f,2);
 %     imshow(f);
@@ -50,6 +53,7 @@ fclose(fileNames);
 %     bar(v_h(i, :));
 % end
 
+
 % output the bar into the text file
 hf = fopen('data\h.txt', 'w');
 fprintf('Checking the hue...\n');
@@ -59,9 +63,9 @@ for i=1:145
         fprintf('Oh on! %d %d\n',i, check);
     end
     
-    fprintf(hf, '%d', t_h(i, 1)/tmp(i));
+    fprintf(hf, '%s %f', tmp_names{1,i}, t_h(i, 1)/tmp(i));
     for j=2:360
-        fprintf(hf, ' %d', t_h(i, j)/tmp(i));
+        fprintf(hf, ' %f', t_h(i, j)/tmp(i));
     end
     fprintf(hf, ' \n');
 end
@@ -75,7 +79,7 @@ for i=1:145
         fprintf('Oh on! %d %d\n',i, check);
     end
     
-    fprintf(sf, '%f', s_h(i, 1)/tmp(i));
+    fprintf(sf, '%s %f', tmp_names{1,i}, s_h(i, 1)/tmp(i));
     for j=2:256
         fprintf(sf, ' %f', s_h(i, j)/tmp(i));
     end
@@ -91,10 +95,90 @@ for i=1:145
         fprintf('Oh on! %d %d\n',i, check);
     end
     
-    fprintf(vf, '%d', v_h(i, 1)/tmp(i));
+    fprintf(vf, '%s %f', tmp_names{1,i}, v_h(i, 1)/tmp(i));
     for j=2:256
-        fprintf(vf, ' %d', v_h(i, j)/tmp(i));
+        fprintf(vf, ' %f', v_h(i, j)/tmp(i));
     end
     fprintf(vf, ' \n');
 end
 fclose(vf);
+
+
+
+plotName = fopen('cluster\h_.txt', 'r');
+while feof(plotName) == 0
+    word = fgetl(plotName);
+    if size(name, 2) > 0
+        if word == '*'
+            word = fgetl(plotName);
+            [N, M] = getN_M(str2num(word)*2);
+            fprintf('\n%s*2: %d * %d:\n', word, N, M);
+            i = 1;
+            figure();
+        else
+            imgI = str2num(word);
+            fileName = [str_temp '\src\' tmp_names{1,imgI}];
+            fprintf('%d, %s\n', imgI, fileName);
+            f = imread(fileName);
+            subplot(N, M, i);
+            imshow(f);
+            subplot(N, M, i+1);
+            bar(t_h(imgI, :));
+            i = i + 2;
+        end
+    end
+end
+fclose(plotName);
+
+
+
+plotName = fopen('cluster\s_.txt', 'r');
+while feof(plotName) == 0
+    word = fgetl(plotName);
+    if size(name, 2) > 0
+        if word == '*'
+            word = fgetl(plotName);
+            [N, M] = getN_M(str2num(word)*2);
+            fprintf('\n%s*2: %d * %d:\n', word, N, M);
+            i = 1;
+            figure();
+        else
+            imgI = str2num(word);
+            fileName = [str_temp '\src\' tmp_names{1,imgI}];
+            fprintf('%d, %s\n', imgI, fileName);
+            f = imread(fileName);
+            subplot(N, M, i);
+            imshow(f);
+            subplot(N, M, i+1);
+            bar(s_h(imgI, :));
+            i = i + 2;
+        end
+    end
+end
+fclose(plotName);
+
+
+plotName = fopen('cluster\v_.txt', 'r');
+while feof(plotName) == 0
+    word = fgetl(plotName);
+    if size(name, 2) > 0
+        if word == '*'
+            word = fgetl(plotName);
+            [N, M] = getN_M(str2num(word)*2);
+            fprintf('\n%s*2: %d * %d:\n', word, N, M);
+            i = 1;
+            figure();
+        else
+            imgI = str2num(word);
+            fileName = [str_temp '\src\' tmp_names{1,imgI}];
+            fprintf('%d, %s\n', imgI, fileName);
+            f = imread(fileName);
+            subplot(N, M, i);
+            imshow(f);
+            subplot(N, M, i+1);
+            bar(v_h(imgI, :));
+            i = i + 2;
+        end
+    end
+end
+fclose(plotName);
