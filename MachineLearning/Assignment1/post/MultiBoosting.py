@@ -1,11 +1,96 @@
-import random
 from math import *
 from time import clock
 from sklearn import neighbors
 
 start = clock()
 
-class Bagging():
+class AdaBoost:
+    def __init__(self, n = 9):
+        self.n_features = 18
+        self.clf_n = n
+        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 6)
+                                                   for i in xrange(self.clf_n)]
+
+    def BootstrapSample(self):
+        self.x = []
+        self.y = []
+
+        self.x_test = []
+        self.y_test = []
+
+        n = len(self.data_x)
+        index = [0 for j in xrange(n)]
+        
+        n_train = 0
+        while n_train < n*0.8:
+            tmp = random.randint(0,n-1)
+            if index[tmp] == 0:
+                n_train += 1
+                index[tmp] = 1
+        
+        for j in xrange(n):
+            if index[j]:
+                self.x.append(self.data_x[j])
+                self.y.append(self.data_y[j])
+            else:
+                self.x_test.append(self.data_x[j])
+                self.y_test.append(self.data_y[j])
+
+        self.train_n = n_train
+        self.test_n = n - n_train
+
+    def judge(self, value):
+        return self.verse_map[value]
+        
+    def Em(self, m):
+        em = 0.0
+        G_m = []
+        for i in xrange(self.train_n):
+            tmp = self.clf[m].predict(self.x[i])[0]
+            G_m.append(tmp)
+            if tmp != self.y[i]:
+                em = em + self.weight[i]
+        return [em, G_m]
+
+    def main(self):
+        self.a_m = []
+        for m in xrange(self.clf_n):
+            self.BootstrapSample()
+            self.weight = [1.0/self.train_n for i in xrange(self.train_n)]
+            self.clf[m].fit(self.x, self.y)
+            [em, G_m] = self.Em(m)
+            while em > 0.5:
+                self.BootstrapSample()
+                self.weight = [1.0/self.train_n for i in xrange(self.train_n)]
+                self.clf[m].fit(self.x, self.y)
+                [em, G_m] = self.Em(m)
+            
+            aerfa = 0.5*log((1-em)/em)
+#            print aerfa
+            self.a_m.append(aerfa)
+#            print self.a_m
+    
+    def fit(self, x, y):
+        self.data_x = x;
+        self.data_y = y;
+        print 'Fitting...'
+        self.main()
+        print 'Fitting finished!'
+        
+    def predict(self, x):
+        ans = [0 for j in xrange(self.n_features)]
+        for j in xrange(self.clf_n):
+            k = self.clf[j].predict(x)[0]
+            ans[k] += self.a_m[j]
+        maxT = 0
+        maxN = ans[0]
+        for j in xrange(1, len(ans)):
+            if ans[j] > maxN:
+                maxN = ans[j]
+                maxT = j
+        return  maxT
+
+class MultiBoosting():
     def __init__(self, n):
         '''
         The source data set
@@ -36,7 +121,7 @@ class Bagging():
         '''
         
         self.input_file = 'data\krkopt.data'
-        self.output_file = 'result\Bagging.txt'
+        self.output_file = 'result\MultiBoosting.txt'
         self.out = open(self.output_file, 'w')
         
         self.attr_len = 6
@@ -46,10 +131,9 @@ class Bagging():
         self.loadData()
         
         self.clf_n = n
-        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 6)
-                                                   for i in xrange(self.clf_n)]
-
+        self.clf = [AdaBoost() for i in xrange(self.clf_n)]
         self.BootstrapSample()
+        
 
     def getMap(self):
         self.map = dict()
@@ -63,6 +147,7 @@ class Bagging():
                 self.verse_map[i] = one
                 i = i+1
         read.close()
+        self.train_test = [0 for j in xrange(len(self.map))]
 
     def insertData(self, words):
         kind = words[self.attr_len]
@@ -76,7 +161,7 @@ class Bagging():
         print 'The number of {0} is {1}: '.format(kind, n)
         for i in xrange(len(self.data[kind])):
             print self.data[kind][i]
-        
+            
     def BootstrapSample(self):
         self.x = [[] for i in xrange(self.clf_n)]
         self.y = [[] for i in xrange(self.clf_n)]
@@ -112,6 +197,14 @@ class Bagging():
             self.insertData(words)
         data.close()
 
+    def trainingLoss(self, m):
+        ans = 0
+        for i in xrange(self.train_n[m]):
+            if self.clf[m].predict(self.x[m][i]) == self.y[m][i]:
+                ans += 1
+        print 'Trainig accuracy is:', ans*1.0/self.train_n[m]
+        print >> self.out, 'Trainig accuracy is:', ans*1.0/self.train_n[m]
+        
     def main(self):
         for m in xrange(self.clf_n):
             s = clock()
@@ -125,9 +218,9 @@ class Bagging():
         ans = [0 for j in xrange(len(self.map))]
         for j in xrange(self.clf_n):
             if tag:
-                ans[self.clf[j].predict(self.x_test[0][i])[0]] += 1
+                ans[self.clf[j].predict(self.x_test[0][i])] += 1
             else:
-                ans[self.clf[j].predict(self.x[0][i])[0]] += 1
+                ans[self.clf[j].predict(self.x[0][i])] += 1
         maxT = 0
         maxN = ans[0]
         for j in xrange(1, len(ans)):
@@ -153,14 +246,6 @@ class Bagging():
         print 'The total accuracy for train sets is: ', ans*1.0/self.train_n[0]
         print >> self.out, 'The total accuracy for train sets is: ', ans*1.0/self.train_n[0]
     
-    def trainingLoss(self, m):
-        ans = 0
-        for i in xrange(self.train_n[m]):
-            if self.clf[m].predict(self.x[m][i]) == self.y[m][i]:
-                ans += 1
-        print 'Trainig accuracy is:', ans*1.0/self.train_n[m]
-        print >> self.out, 'Trainig accuracy is:', ans*1.0/self.train_n[m]
-
     def partLoss(self):
         for j in xrange(self.clf_n):
             ans = 0
@@ -170,7 +255,7 @@ class Bagging():
             print 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j]
             print >> self.out, 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j]
 
-a = Bagging(6)
+a = MultiBoosting(6)
 #a.showKind('zero')
 #a.showKind('one')
 #a.showKind('two')
