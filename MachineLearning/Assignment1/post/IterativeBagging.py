@@ -8,34 +8,6 @@ start = clock()
 
 class Bagging():
     def __init__(self, n = 6):
-        '''
-        The source data set
-            Number of Attributes:
-                There are six attribute variables and one class variable.
-
-            Class Distribution:
-               draw       2796
-               zero         27
-               one          78
-               two         246
-               three        81
-               four        198
-               five        471
-               six         592
-               seven       683
-               eight      1433
-               nine       1712
-               ten        1985
-               eleven     2854
-               twelve     3597
-               thirteen   4194
-               fourteen   4553
-               fifteen    2166
-               sixteen     390
-            
-               Total     28056
-        '''
-        
         self.clf_n = n
         self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 6)
                                                    for i in xrange(self.clf_n)]
@@ -238,9 +210,9 @@ class IterativeBagging():
         ans = [0 for j in xrange(len(self.map))]
         for j in xrange(self.clf_n):
             if tag:
-                k = self.clf[j].predict(self.x_test[i])[0]
+                k = self.clf[j].predict(self.x_test[i])
             else:
-                k = self.clf[j].predict(self.x[i])[0]
+                k = self.clf[j].predict(self.x[i])
             ans[k] += self.a_m[j]
         maxT = 0
         maxN = ans[0]
@@ -277,7 +249,7 @@ class IterativeBagging():
         for j in xrange(self.clf_n):
             ans = 0
             for i in xrange(self.test_n):
-                if self.y_test[i] == self.clf[j].predict(self.x_test[i])[0]:
+                if self.y_test[i] == self.clf[j].predict(self.x_test[i]):
                     ans += 1
             print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
             print >> self.out, '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n

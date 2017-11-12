@@ -1,3 +1,4 @@
+import random
 from math import *
 from time import clock
 from sklearn import neighbors

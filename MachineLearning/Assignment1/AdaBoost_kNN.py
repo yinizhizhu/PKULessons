@@ -1,3 +1,4 @@
+import random
 from math import *
 from time import clock
 from sklearn import neighbors
@@ -95,7 +96,7 @@ class AdaBoost():
         for i in xrange(len(self.map)):
             n = len(self.data[i])
             index = [0 for j in xrange(n)]
-            while sum(index) < n*0.8:
+            while sum(index) < n*0.64:
                 index[random.randint(0,n-1)] = 1
             
             for j in xrange(n):
