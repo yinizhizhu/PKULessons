@@ -11,7 +11,7 @@ class perceptron():
         '''
             Just do this
         '''
-        return
+        self.max_iter = 900
         
     def function(self, i):
         '''
@@ -27,31 +27,28 @@ class perceptron():
                 return 1
         return 0
 
-    def fit(self, x, y, weight, yet = 0.01):
+    def fit(self, x, y, weight, yet = 0.1):
         self.x = x #store the properties of the object
         self.y = y #store the kind of class
         
         self.weight = weight
         self.yeta = yet  #the ratio of learning
         
-        self.max_iter = 300
-        
         self.coef_ = np.array([[random.random() for i in xrange(len(self.x[0]))]]) #the weight of each properties
         self.intercept_ = np.array([random.random()])    #the bias
         
         pre_loss = 0
         
-        while self.max_iter:
-            cur_loss = 0
-            for i in xrange(len(self.x)):
-                if self.function(i)*self.y[i] < 0:
-                    cur_loss = self.weight[i]
-            
+        self.max_iter = 300
+        iter_i = self.max_iter
+        while iter_i:
             number = 0
             deltaw = np.array([0 for i in xrange(len(self.x[0]))])
             deltab = np.array([0])
+            cur_loss = 0
             for i in xrange(len(self.x)):
-                if self.function(i)*self.y[i] < 0:
+                if self.function(i)*self.y[i] <= 0:
+                    cur_loss += self.weight[i]
                     deltaw += self.y[i]*self.x[i]*self.weight[i]
                     deltab += self.y[i]*self.weight[i]
                     number += 1
@@ -59,10 +56,35 @@ class perceptron():
             self.intercept_ += self.yeta*deltab/number
             
             if pre_loss == cur_loss:
-                self.max_iter = self.max_iter - 1
+                iter_i = iter_i - 1
             else:
                 pre_loss = cur_loss
-                self.max_iter = 300
+                iter_i = self.max_iter
+
+    def fitRandom(self, x, y, weight, yet = 0.1):
+        self.x = x #store the properties of the object
+        self.y = y #store the kind of class
+        
+        self.weight = weight
+        self.yeta = yet  #the ratio of learning
+        
+        
+        self.coef_ = np.array([[random.random() for i in xrange(len(self.x[0]))]]) #the weight of each properties
+        self.intercept_ = np.array([random.random()])    #the bias
+        
+        iter_i = self.max_iter
+        while iter_i:
+            index = []
+            for i in xrange(len(self.x)):
+                if self.function(i)*self.y[i] <= 0:
+                    index.append(i)
+                    
+            if len(index):
+                i = index[random.randint(0, len(index)-1)]
+                self.coef_[0] += self.yeta*self.y[i]*self.x[i]*self.weight[i]
+                self.intercept_ += self.yeta*self.y[i]*self.weight[i]
+            
+            iter_i = iter_i - 1
 
 class AdaBoost():
     def __init__(self, n):
@@ -163,11 +185,9 @@ class AdaBoost():
 
     def basicLearn(self, m):
         self.clf[m].max_iter = 1000+m*1000
-        self.clf[m].fit(self.x, self.y, self.weight)
-#        print self.clf.__doc__
-#        print self.clf.coef_
-#        print self.clf.intercept_
-#        print self.clf.predict([[-0.8, -1]])
+#        self.clf[m].fit(self.x, self.y, self.weight)
+        self.clf[m].fitRandom(self.x, self.y, self.weight)
+        
     
     def main(self):
         for i in xrange(self.clf_n):
