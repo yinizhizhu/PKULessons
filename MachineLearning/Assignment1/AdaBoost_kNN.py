@@ -41,7 +41,7 @@ class AdaBoost():
         
         self.loadData()
         
-        self.AdaSample()
+        self.BootstrapSample()
         
         self.weight = [1.0/self.test_n for i in xrange(self.test_n)]
         
@@ -77,7 +77,7 @@ class AdaBoost():
         for i in xrange(len(self.data[kind])):
             print self.data[kind][i]
 
-    def AdaSample(self):
+    def BootstrapSample(self):
         self.x = []
         self.y = []
         self.train_n = 0
@@ -88,17 +88,19 @@ class AdaBoost():
 
         for i in xrange(len(self.map)):
             n = len(self.data[i])
-            n_train = int(n*0.8)
-            self.train_test[i] = n_train
+            index = [0 for j in xrange(n)]
+            while sum(index) < n*0.8:
+                index[random.randint(0,n-1)] = 1
             
-            for j in xrange(n_train):
-                self.x.append(self.data[i][j])
-                self.y.append(i)
+            for j in xrange(n):
+                if index[j]:
+                    self.x.append(self.data[i][j])
+                    self.y.append(i)
+                else:
+                    self.x_test.append(self.data[i][j])
+                    self.y_test.append(i)
+            n_train = sum(index)
             self.train_n += n_train
-            
-            for j in xrange(n_train, n):
-                self.x_test.append(self.data[i][j])
-                self.y_test.append(i)
             self.test_n += n - n_train
 
     def loadData(self):
@@ -118,8 +120,10 @@ class AdaBoost():
         return self.verse_map[value]
 
     def G(self, m, i):
-        return self.clf[m].predict(self.x_test[i])[0]
-
+        ans =  self.clf[m].predict(self.x_test[i])
+        if ans[0] > 17:
+            print ans[0] - self.y_test[i]
+        return ans[0]
     def Em(self, m):
         em = 0.0
         G_m = []
@@ -133,11 +137,11 @@ class AdaBoost():
     def Aerfa(self, m):
 #        print m, 
         [em, G_m] = self.Em(m)
-#        print em
+        print em
         return [0.5*log((1-em)/em), G_m]
 
     def step(self, m):
-        print self.weight[0]
+#        print self.weight[0]
         [aerfa, G_m] = self.Aerfa(m)
         z = 0
         for i in xrange(self.test_n):
@@ -159,16 +163,14 @@ class AdaBoost():
             self.clf[m].fit(self.x, self.y)
             self.step(m)
             e = clock()
-            print self.a_m
+#            print self.a_m
             print "The step time is: ", e-s
 
     def finalG(self, i):
         ans = [0 for j in xrange(len(self.map))]
         for j in xrange(self.clf_n):
             k = self.G(j, i)
-            if ans[k] == 0:
-                ans[k] = 1.0
-            ans[k] *= exp(self.a_m[j])
+            ans[k] += self.a_m[j]
         maxT = 0
         maxN = ans[0]
         for j in xrange(1, len(ans)):
@@ -190,9 +192,9 @@ class AdaBoost():
             for i in xrange(self.test_n):
                 if self.y_test[i] == self.G(j, i):
                     ans += 1
-            print '{0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n
+            print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
 
-a = AdaBoost(5)
+a = AdaBoost(9)
 #a.showKind('zero')
 #a.showKind('one')
 #a.showKind('two')
@@ -204,7 +206,6 @@ print a.a_m
 a.partLoss()
 
 a.finalLoss()
-
 
 end = clock()
 print "The total time is: ", end-start
