@@ -175,7 +175,7 @@ if ans > max_loss:
 if ans < min_loss:
     min_loss = ans
 print ans
-print >> out, n, ans
+print >> out, ans
 man.drawData()
 
 print >> out, min_loss, max_loss

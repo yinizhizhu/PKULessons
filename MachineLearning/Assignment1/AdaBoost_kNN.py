@@ -41,13 +41,8 @@ class AdaBoost():
         
         self.loadData()
         
-        self.BootstrapSample()
-        
-        self.weight = [1.0/self.test_n for i in xrange(self.test_n)]
-        
-        
         self.clf_n = n
-        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 15+i)
+        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 6)
                                                    for i in xrange(self.clf_n)]
 
     def getMap(self):
@@ -134,37 +129,37 @@ class AdaBoost():
                 em = em + self.weight[i]
         return [em, G_m]
 
-    def Aerfa(self, m):
-#        print m, 
-        [em, G_m] = self.Em(m)
-        print em
-        return [0.5*log((1-em)/em), G_m]
-
-    def step(self, m):
-#        print self.weight[0]
-        [aerfa, G_m] = self.Aerfa(m)
-        z = 0
-        for i in xrange(self.test_n):
-            if self.y_test[i] == G_m[i]:
-                tmp = self.weight[i]*exp(-aerfa)
-            else:
-                tmp = self.weight[i]*exp(aerfa)
-            self.weight[i] = tmp
-            z = z+tmp
-        for i in xrange(self.test_n):
-            self.weight[i] /= z
-#        print aerfa
-        self.a_m.append(aerfa)
-
     def main(self):
         self.a_m = []
         for m in xrange(self.clf_n):
             s = clock()
+            
+            self.BootstrapSample()
+            self.weight = [1.0/self.test_n for i in xrange(self.test_n)]
             self.clf[m].fit(self.x, self.y)
-            self.step(m)
+            [em, G_m] = self.Em(m)
+            while em > 0.5:
+                self.BootstrapSample()
+                self.weight = [1.0/self.test_n for i in xrange(self.test_n)]
+                self.clf[m].fit(self.x, self.y)
+                [em, G_m] = self.Em(m)
+            
+            aerfa = 0.5*log((1-em)/em)
+            z = 0
+            for i in xrange(self.test_n):
+                if self.y_test[i] == G_m[i]:
+                    tmp = self.weight[i]*exp(-aerfa)
+                else:
+                    tmp = self.weight[i]*exp(aerfa)
+                self.weight[i] = tmp
+                z = z+tmp
+            for i in xrange(self.test_n):
+                self.weight[i] /= z
+    #        print aerfa
+            self.a_m.append(aerfa)
             e = clock()
 #            print self.a_m
-            print "The step time is: ", e-s
+            print "The step {0}, time consuming: {1}".format(m+1, e-s)
 
     def finalG(self, i):
         ans = [0 for j in xrange(len(self.map))]
@@ -194,7 +189,7 @@ class AdaBoost():
                     ans += 1
             print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
 
-a = AdaBoost(9)
+a = AdaBoost(24)
 #a.showKind('zero')
 #a.showKind('one')
 #a.showKind('two')
@@ -208,7 +203,7 @@ a.partLoss()
 a.finalLoss()
 
 end = clock()
-print "The total time is: ", end-start
+print "The total time consuming: ", end-start
 
 #
 #tmp = neighbors.KNeighborsClassifier(algorithm='auto')

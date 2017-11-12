@@ -43,12 +43,11 @@ class Bagging():
         self.loadData()
         
         self.clf_n = n
-        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 15)
+        self.clf = [neighbors.KNeighborsClassifier(n_neighbors = 6)
                                                    for i in xrange(self.clf_n)]
 
         self.BootstrapSample()
-        
-        
+
     def getMap(self):
         self.map = dict()
         self.verse_map = dict()
@@ -115,7 +114,7 @@ class Bagging():
             s = clock()
             self.clf[m].fit(self.x[m], self.y[m])
             e = clock()
-            print "The step time is: ", e-s
+            print "The step time consuming: ", e-s
 
     def finalG(self, i):
         ans = [0 for j in xrange(len(self.map))]
@@ -145,7 +144,7 @@ class Bagging():
                     ans += 1
             print 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j]
 
-a = Bagging(5)
+a = Bagging(6)
 #a.showKind('zero')
 #a.showKind('one')
 #a.showKind('two')
@@ -158,7 +157,7 @@ a.finalLoss()
 
 
 end = clock()
-print "The total time is: ", end-start
+print "The total time consuming: ", end-start
 
 #
 #tmp = neighbors.KNeighborsClassifier(algorithm='auto')

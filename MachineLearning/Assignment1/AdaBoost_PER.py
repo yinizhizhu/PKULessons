@@ -61,7 +61,7 @@ class perceptron():
                 pre_loss = cur_loss
                 iter_i = self.max_iter
 
-    def fitRandom(self, x, y, weight, yet = 0.1):
+    def fitRandom(self, x, y, weight, yet = 0.01):
         self.x = x #store the properties of the object
         self.y = y #store the kind of class
         
@@ -252,7 +252,7 @@ min_loss = 200
 max_loss = 0
 
 #n = random.randint(1, 9)
-man = AdaBoost(6)
+man = AdaBoost(3)
 man.main()
 ans = man.finalLoss()
 if ans > max_loss:
