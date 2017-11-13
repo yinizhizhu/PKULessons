@@ -12,7 +12,7 @@ colorhist = zeros(1,256);
 tmp = [];
 tmp_names = {};
 
-t_h = [];
+h_h = [];
 s_h = [];
 v_h = [];
 
@@ -26,7 +26,7 @@ while feof(fileNames) == 0
     tmp(i) = size(f, 1)*size(f,2);
 %     imshow(f);
     [h_s, s_s, v_s] = hsv(f);
-    t_h(i, :) = h_s;
+    h_h(i, :) = h_s;
     s_h(i, :) = s_s;
     v_h(i, :) = v_s;
 %     colorhist = colorhist + gethsv(f);
@@ -34,13 +34,44 @@ while feof(fileNames) == 0
 end
 fclose(fileNames);
 
+% Show the similarity between hue
+% s1 = '0.044822';
+% s2 = '0.045986'; 
+% s3 = '0.047918';
+showHSVSimilar(h_h, str_temp, tmp_names, 'Similar_h', 7, 26, 26, 50, 26, 61);
+% s1 = '0.184473';
+% s2 = '0.293852'; 
+% s3 = '0.767887';
+showHSVSimilar(h_h, str_temp, tmp_names, 'Similar_h', 120, 131, 32, 124, 117, 130);
+
+% Show the similarity between saturation
+% s1 = '0.016351';
+% s2 = '0.017146'; 
+% s3 = '0.017293';
+showHSVSimilar(s_h, str_temp, tmp_names, 'Similar_s', 70, 103, 8, 84, 22, 99);
+% s1 = '0.110453';
+% s2 = '0.214342'; 
+% s3 = '0.568175';
+showHSVSimilar(s_h, str_temp, tmp_names, 'Similar_s', 88, 132, 45, 70, 9, 36);
+
+% Show the similarity between saturation
+% s1 = '0.013452';
+% s2 = '0.016165'; 
+% s3 = '0.017313';
+showHSVSimilar(v_h, str_temp, tmp_names, 'Similar_v', 14, 96, 96, 112, 7, 135);
+% s1 = '0.072984';
+% s2 = '0.158329'; 
+% s3 = '0.416436';
+showHSVSimilar(v_h, str_temp, tmp_names, 'Similar_v', 33, 76, 44, 100, 118, 139);
+
+% 
 % figure('numbertitle','off','name','Color');
 % bar(colorhist);
 % 
 % % show the bar
 % for i=1:145
 %     figure('numbertitle','off','name', sprintf('Hue %d', i));
-%     bar(t_h(i, :));
+%     bar(h_h(i, :));
 % end
 % 
 % for i=1:145
@@ -58,14 +89,14 @@ fclose(fileNames);
 hf = fopen('data\h.txt', 'w');
 fprintf('Checking the hue...\n');
 for i=1:145
-    check =  sum(t_h(i, :))-tmp(i);
+    check =  sum(h_h(i, :))-tmp(i);
     if check
         fprintf('Oh on! %d %d\n',i, check);
     end
     
-    fprintf(hf, '%s %f', tmp_names{1,i}, t_h(i, 1)/tmp(i));
+    fprintf(hf, '%s %f', tmp_names{1,i}, h_h(i, 1)/tmp(i));
     for j=2:360
-        fprintf(hf, ' %f', t_h(i, j)/tmp(i));
+        fprintf(hf, ' %f', h_h(i, j)/tmp(i));
     end
     fprintf(hf, ' \n');
 end
@@ -123,7 +154,7 @@ while feof(plotName) == 0
             subplot(N, M, i);
             imshow(f);
             subplot(N, M, i+1);
-            bar(t_h(imgI, :));
+            bar(h_h(imgI, :));
             i = i + 2;
         end
     end
@@ -182,3 +213,43 @@ while feof(plotName) == 0
     end
 end
 fclose(plotName);
+
+
+out = fopen('similar\h_similar.txt', 'w');
+for i=1:144
+    for j=i+1:145
+        distance = 0;
+        for k=1:360
+            part = h_h(i, k)/tmp(i) - h_h(j, k)/tmp(j);
+            distance = distance + part*part;
+        end
+        fprintf(out, '%d %d %f %s %s\n', i, j, sqrt(distance), tmp_names{1, i}, tmp_names{1,j});
+    end
+end
+fclose(out);
+
+out = fopen('similar\s_similar.txt', 'w');
+for i=1:144
+    for j=i+1:145
+        distance = 0;
+        for k=1:256
+            part = s_h(i, k)/tmp(i) - s_h(j, k)/tmp(j);
+            distance = distance + part*part;
+        end
+        fprintf(out, '%d %d %f %s %s\n', i, j, sqrt(distance), tmp_names{1, i}, tmp_names{1,j});
+    end
+end
+fclose(out);
+
+out = fopen('similar\v_similar.txt', 'w');
+for i=1:144
+    for j=i+1:145
+        distance = 0;
+        for k=1:256
+            part = v_h(i, k)/tmp(i) - v_h(j, k)/tmp(j);
+            distance = distance + part*part;
+        end
+        fprintf(out, '%d %d %f %s %s\n', i, j, sqrt(distance), tmp_names{1, i}, tmp_names{1,j});
+    end
+end
+fclose(out);
