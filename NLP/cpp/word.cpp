@@ -1,6 +1,6 @@
 #include "word.h"
 
-#define SHOW
+//#define SHOW
 
 word::word() {
 	store = NULL;
