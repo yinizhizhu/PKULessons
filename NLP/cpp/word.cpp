@@ -18,7 +18,14 @@ word::~word() {
 }
 
 //set the store, attr, tag with str which is not splited by '/'
-void word::setWord(string& str) {
+void word::setWordTrain(string& str) {
+	if (store)
+		delete[]store;
+	if (attr)
+		delete[]attr;
+	if (tag)
+		delete[]tag;
+
 	int i, j, d = 0, d1, len = str.size();
 	for (i=0; i<len; i++)
 		if (str[i] == '/') {
@@ -69,6 +76,41 @@ void word::setWord(string& str) {
 #endif
 }
 
+void word::setWordTest(string& str) {
+	if (store)
+		delete[]store;
+	if (attr)
+		delete[]attr;
+
+	int i, j, d = 0, d1, len = str.size();
+	for (i = 0; i<len; i++)
+		if (str[i] == '/') {
+			d1 = i;
+			break;
+		}
+	store = new char[d1 + 1];
+	for (j = 0; d < d1; j++, d++)
+		store[j] = str[d];
+	store[j] = '\0';
+
+#ifdef SHOW
+	cout << d1 + 1 << " " << strlen(store) << endl;
+#endif // SHOW
+
+#ifdef SHOW
+	cout << len - d << " ";
+#endif // SHOW
+	attr = new char[len - d];
+	for (j = 0, ++d; d < len; j++, d++)
+		attr[j] = str[d];
+	attr[j] = '\0';
+
+#ifdef SHOW
+	cout << strlen(attr) << endl;
+	cout << store << " " << attr << endl;
+#endif // SHOW
+}
+
 char *word::getWord() {
 	if (store)
 		return store;
@@ -92,8 +134,13 @@ char *word::getTag() {
 
 void word::demo() {
 	string str = "企业/NN/O";
-	setWord(str);
+	setWordTrain(str);
 	cout << getWord() << endl;
 	cout << getAttr() << endl;
 	cout << getTag() << endl;
+
+	string str2 = "企业/NN";
+	setWordTest(str2);
+	cout << getWord() << endl;
+	cout << getAttr() << endl;
 }

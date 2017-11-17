@@ -53,7 +53,7 @@ void tree::showTree(ofstream& out, PNODE r, int deep = 0) {
 
 void tree::demo() {
 	ifstream in("data\\result.txt");
-	ofstream out("test.txt");
+	ofstream out("tree.txt");
 
 	int i, len, process = 0;
 	string part, attr, word;
