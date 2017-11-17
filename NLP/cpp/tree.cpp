@@ -12,8 +12,8 @@ tree::~tree() {
 		freeNode(root);
 }
 
-PNODE tree::insert(PNODE r, string& a, string word = "") {
-	PNODE newone = new NODE(a, word);
+PNODE tree::insert(PNODE r, string& attr, string word = "") {
+	PNODE newone = new NODE(attr, word);
 	if (r) {
 		r->childs.push_back(newone);
 		newone->parent = r;
@@ -23,13 +23,18 @@ PNODE tree::insert(PNODE r, string& a, string word = "") {
 	return newone;
 }
 
+bool tree::isLeaf(PNODE r) {
+	if (r->word.size()) return true;
+	return false;
+}
+
 void tree::showTree(PNODE r, int deep = 0) {
 	if (r) {
 		int i, len = r->childs.size();
 		cout << endl;
 		showH(deep);
 		cout << "(" << r->attr;
-		if (r->word.size())
+		if (isLeaf(r))
 			cout << " " << r->word;
 		for (i = 0; i < len; i++)
 			showTree(r->childs[i], deep + 2);
@@ -43,7 +48,7 @@ void tree::showTree(ofstream& out, PNODE r, int deep = 0) {
 		out << endl;
 		showH(out, deep);
 		out << "(" << r->attr;
-		if (r->word.size())
+		if (isLeaf(r))
 			out << " " << r->word;
 		for (i = 0; i < len; i++)
 			showTree(out, r->childs[i], deep + 2);
@@ -51,11 +56,93 @@ void tree::showTree(ofstream& out, PNODE r, int deep = 0) {
 	}
 }
 
+void tree::outputPred() {
+	cout << "Finally, the number of predicates: " << predicates.size() << endl;
+	ofstream out("predicates.txt");
+	ITER step = predicates.begin();
+	for (; step != predicates.end(); step++)
+		out << step->first << " " << step->second << endl;
+	out.close();
+}
+
+void tree::addPred(word& w) {
+	string word, attr, tag;
+	word = w.getWord();
+	attr = w.getAttr();
+	tag = w.getTag();
+	ITER iter = predicates.find(word);
+	if (iter == predicates.end())
+		predicates[word] = tag;
+	else {
+		if (iter->second.find(tag) == -1)
+			iter->second += ' ' + tag;
+	}
+}
+
+//add words which are labeled and used to get the predicates
+void tree::addDatabase(char *filename) {
+	cout << "Get the predicates in file " << filename << "...\n";
+	ifstream in(filename);
+
+	/*
+	pre - store the head index of the 'word' which looks just like 'word/attr/tag'
+	cur - store the tail index of the 'word' which is same with pre
+
+	line - get a line of text file
+	w - store the 'word' which is same with pre
+
+	tmp - a class which is used to split the 'word' into word, attr and tag,
+	and supply a api to get the each content of the 'word'
+	(You can get the details in those two files: 'word.cpp' and 'word.h')
+	*/
+	char noTag[10] = "O";
+	int pre, cur, len;
+	string line, w;
+	word tmp;
+	for (; getline(in, line);) {
+		len = line.size();
+		for (pre = 0, cur = 0; cur < len; cur++) {
+			if (line[cur] == ' ') {
+				w = line.substr(pre, cur - pre);
+				tmp.setWordTrain(w);
+
+				if (strcmp(noTag, tmp.getTag()))
+					addPred(tmp);
+
+				pre = cur + 1;
+			}
+		}
+		if (pre < cur) {
+			w = line.substr(pre, cur - pre);
+			tmp.setWordTrain(w);
+
+			if (strcmp(noTag, tmp.getTag()))
+				addPred(tmp);
+		}
+	}
+	in.close();
+	cout << "Now, the number of predicates: " << predicates.size() << endl;
+}
+
+void tree::getPred() {
+	//add words in training data
+	char train[100] = "data\\cpbtrain.txt";
+	addDatabase(train);
+
+	//add words in developing data
+	char dev[100] = "data\\cpbdev.txt";
+	addDatabase(dev);
+}
+
 void tree::demo() {
-	ifstream in("data\\result.txt");
-	ofstream out("tree.txt");
+	getPred();
+	outputPred();
+
+	ifstream in("data\\demo.txt");
+	ofstream out("demoTree.txt");
 
 	int i, len, process = 0;
+	vector<PNODE> leaves;
 	string part, attr, word;
 	PNODE step = NULL;
 	for (; !in.eof();) {
@@ -90,6 +177,7 @@ void tree::demo() {
 						break;
 				word = part.substr(0, i);
 				step->word = word;
+				leaves.push_back(step);
 				process -= len - i;
 				for (; i<len; i++)
 					step = step->parent;
@@ -106,15 +194,37 @@ void tree::demo() {
 				//Deal with the data which is shaped into tree
 				//
 #ifdef OUT
+				cout << "Output the original tree" << endl;
 				showTree(out, root, 0);
 				out << endl;
+
+				/*
+				Start Senmantic Roles Labeling (SRL)
+				*/
+				cout << "Start pruing..." << endl;
+				for (i = 0; i < leaves.size(); i++) {
+					ITER iter = predicates.find(leaves[i]->word);
+					if (iter == predicates.end()) {
+						cout << leaves[i]->word << endl;
+						delNode(leaves[i]);
+					}
+				}
+
+				cout << "Output the tree" << endl;
+				showTree(out, root, 0);
+				out << endl;
+
+
 #else
 				showTree(root, 0);
 				cout << endl;
 #endif
+				cout << "Free the tree" << endl;
+
 				freeNode(root);
 				root = NULL;
 				step = NULL;
+				leaves.clear();
 			}
 		}
 		part = "";
@@ -141,6 +251,8 @@ void tree::delNode(PNODE r) {
 				break;
 		parent->childs.erase(parent->childs.begin() + i);
 		freeNode(r);
+		for (; parent->childs.size() == 0;)
+			delNode(parent);
 	}
 }
 
