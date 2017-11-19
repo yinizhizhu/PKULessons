@@ -88,16 +88,16 @@ void cleanData(char *filename, char *outname, int tag) {
 }
 
 void clean() {
-	char train[100] = "data\\cpbtrain.txt";
-	char outTrain[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\parser\\src\\data\\train.txt";
+	char train[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtrain.txt";
+	char outTrain[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\train.txt";
 	cleanData(train, outTrain, 1);
 
-	char dev[100] = "data\\cpbdev.txt";
-	char outDev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\parser\\src\\data\\dev.txt";
+	char dev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbdev.txt";
+	char outDev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\dev.txt";
 	cleanData(dev, outDev, 1);
 
-	char test[100] = "data\\cpbtest.txt";
-	char outTest[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\parser\\src\\data\\test.txt";
+	char test[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtest.txt";
+	char outTest[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\test.txt";
 	cleanData(test, outTest, 0);
 }
 

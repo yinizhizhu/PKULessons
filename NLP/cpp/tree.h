@@ -14,13 +14,14 @@
 using namespace std;
 
 typedef struct node {
-	string			attr, word;
+	string			attr, word, tag;
 	node			*parent;
 	vector<node*>	childs;
 	node(string& a, string& str) {
 		parent = NULL;
 		attr = a;
 		word = str;
+		tag = "O";
 	}
 }NODE, *PNODE;
 
@@ -38,6 +39,7 @@ public:
 	bool	isLeaf(PNODE r);
 	void	showTree(PNODE r, int deep);
 	void	showTree(ofstream& out, PNODE r, int deep);
+	void	showSentence(ofstream& out, PNODE r);
 	void	showH(int deep);
 	void	showH(ofstream& out, int deep);
 	void	delNode(PNODE r);
@@ -47,6 +49,9 @@ public:
 	void	addDatabase(char *filename);
 	void	getPred();
 	void	demo();
+
+	void	pruing();
+	void	label();
 };
 
 

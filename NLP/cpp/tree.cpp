@@ -56,6 +56,18 @@ void tree::showTree(ofstream& out, PNODE r, int deep = 0) {
 	}
 }
 
+void tree::showSentence(ofstream& out, PNODE r) {
+	if (r) {
+		if (isLeaf(r))
+			out << r->word << "/" << r->attr << "/" << r->tag << " ";
+		else {
+			int i, n = r->childs.size();
+			for (i = 0; i < n; i++)
+				showSentence(out, r->childs[i]);
+		}
+	}
+}
+
 void tree::outputPred() {
 	cout << "Finally, the number of predicates: " << predicates.size() << endl;
 	ofstream out("predicates.txt");
@@ -126,20 +138,21 @@ void tree::addDatabase(char *filename) {
 
 void tree::getPred() {
 	//add words in training data
-	char train[100] = "data\\cpbtrain.txt";
+	char train[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtrain.txt";
 	addDatabase(train);
 
 	//add words in developing data
-	char dev[100] = "data\\cpbdev.txt";
+	char dev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbdev.txt";
 	addDatabase(dev);
 }
 
 void tree::demo() {
-	getPred();
-	outputPred();
+	//getPred();
+	//outputPred();
 
-	ifstream in("data\\demo.txt");
+	ifstream in("C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\demo.txt");
 	ofstream out("demoTree.txt");
+	ofstream out2("demoSentence.txt");
 
 	int i, len, process = 0;
 	vector<PNODE> leaves;
@@ -198,29 +211,19 @@ void tree::demo() {
 				showTree(out, root, 0);
 				out << endl;
 
-				/*
-				Start Senmantic Roles Labeling (SRL)
-				*/
-				cout << "Start pruing..." << endl;
-				for (i = 0; i < leaves.size(); i++) {
-					ITER iter = predicates.find(leaves[i]->word);
-					if (iter == predicates.end()) {
-						cout << leaves[i]->word << endl;
-						delNode(leaves[i]);
-					}
-				}
-
-				cout << "Output the tree" << endl;
-				showTree(out, root, 0);
-				out << endl;
-
-
+				showSentence(out2, root);
+				out2 << endl;
 #else
 				showTree(root, 0);
 				cout << endl;
 #endif
-				cout << "Free the tree" << endl;
+				/*
+				Start Senmantic Roles Labeling (SRL)
+				*/
+				pruing();
+				label();
 
+				cout << "Free the tree" << endl;
 				freeNode(root);
 				root = NULL;
 				step = NULL;
@@ -229,9 +232,25 @@ void tree::demo() {
 		}
 		part = "";
 	}
-
+	out2.close();
 	out.close();
 	in.close();
+}
+
+
+
+void tree::pruing() {
+	/*
+	Pruing hexuritic
+	*/
+}
+
+void tree::label() {
+	/*
+	ARG0, ARG1 (Exchange position of ARG0 and ARG1 while the SB\LB appears)
+	REL
+	ARGM - LOC, TMP, ADV, CND, PRP, BNF, MNR, DIR, DIS, FRQ, EXT, TPC(ADV)
+	*/
 }
 
 void tree::showH(int deep) {
