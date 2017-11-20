@@ -101,11 +101,24 @@ void clean() {
 	cleanData(test, outTest, 0);
 }
 
+void show(vector<int>& ans) {
+	for (int i = 0; i < ans.size(); i++)
+		cout << ans[i] << " ";
+	cout << endl;
+}
+
 int main() {
 	//clean();
 
 	tree t;
 	t.demo();
+
+	//vector<int> a;
+	//for (int i = 0; i < 10; i++)
+	//	a.push_back(i);
+	//show(a);
+	//a.erase(a.begin() + 1);
+	//show(a);
 
     return 0;
 }
