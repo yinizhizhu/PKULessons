@@ -15,6 +15,8 @@
 
 using namespace std;
 
+typedef pair<int, int> headT;
+
 typedef struct node {
 	string			attr, word, tag;
 	node			*parent;
@@ -47,6 +49,8 @@ private:
 	vector<string>	tmp;
 
 	vector<string>	preLex;
+
+	vector<PNODE> leaves;
 public:
 	tree();
 	~tree();
@@ -56,6 +60,8 @@ public:
 	void	showTree(PNODE r, int deep);
 	void	showTree(ofstream& out, PNODE r, int deep);
 
+	int		getI(PNODE r);
+	headT	getHT(PNODE r);
 	void	showSentence(ofstream& out, PNODE r);
 	void	labelSentence(ofstream& out, PNODE r);
 	void	label(ofstream& out, PNODE r);

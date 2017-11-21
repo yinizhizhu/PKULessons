@@ -78,6 +78,27 @@ void tree::showSentence(ofstream& out, PNODE r) {
 	}
 }
 
+int tree::getI(PNODE r) {
+	int i = leaves.size() - 1;
+	for (; i >= 0; i--)
+		if (leaves[i] == r)
+			return i;
+}
+
+headT tree::getHT(PNODE r) {
+	int h, t;
+	PNODE step = r;
+	for (; !isLeaf(step);)
+		step = step->childs[0];
+	h = getI(step);
+
+	step = r;
+	for (; !isLeaf(step);)
+		step = step->childs[step->childs.size() - 1];
+	t = getI(step);
+	return headT(h, t);
+}
+
 void tree::labelSentence(ofstream& out, PNODE r) {
 	if (r) {
 		if (isLeaf(r))
@@ -85,34 +106,19 @@ void tree::labelSentence(ofstream& out, PNODE r) {
 		else {
 			string tag = r->tag;
 			if (tag.size()) {
-				vector<PNODE> leaves, store;
-				store.push_back(r);
-				int i, n = store.size(), len;
-				for (; n;) {
-					for (; n; n--) {
-						r = store[0];
-						store.erase(store.begin());
-						if (isLeaf(r))
-							leaves.push_back(r);
-						else {
-							len = r->childs.size();
-							for (i = 0; i < len; i++)
-								store.push_back(r->childs[i]);
-						}
-					}
-					n = store.size();
-				}
-				n = leaves.size();
+				headT h_t = getHT(r);
+				int h = h_t.first, t = h_t.second;
+				int n = t - h + 1, i;
 				if (n == 1) {
-					r = leaves[0];
+					r = leaves[h];
 					r->tag = "S-" + tag;
 					label(out, r);
 				}
 				else {
-					r = leaves[0];
+					r = leaves[h];
 					r->tag = "B-" + tag;
 					label(out, r);
-					for (i = 1; i < n - 1; i++) {
+					for (i = h+1; i < t; i++) {
 						leaves[i]->tag = "I-" + tag;
 						label(out, leaves[i]);
 					}
@@ -277,12 +283,12 @@ void tree::demo() {
 	addFeatureW();
 
 	//ifstream in("C:\\Users\\codinglee\\Desktop\\◊‘»ª”Ô—‘\\Project_coding\\data\\demo.txt");
-	ifstream in("tree\\testTree.txt");
+	ifstream in("tree\\trainTree.txt");
+	//ifstream in("tree\\testTree.txt");
 	ofstream out("demoTree.txt");
 	ofstream out2("demoSentence.txt");
 
 	int i, len, process = 0, counter = 1;
-	vector<PNODE> leaves;
 	string part, attr, word;
 	PNODE step = NULL;
 	for (; !in.eof();) {
@@ -341,6 +347,8 @@ void tree::demo() {
 				showSentence(out2, root);
 				out2 << endl;
 #endif
+				//showSentence(out2, root);
+				//out2 << endl;
 				cout << counter << "th is moving on..." << endl;
 				/*
 				Start Senmantic Roles Labeling (SRL)
@@ -417,6 +425,7 @@ void tree::label() {
 		int h, mid = -1, t = p->childs.size();
 		for (h = 0; h < t; h++) {
 			PNODE c = p->childs[h];
+			if (mid == -1 && c == vv) mid = h;
 			attr = c->tag;
 			if (attr == "PP") {
 				attr = c->childs[1]->attr;
@@ -523,8 +532,9 @@ PNODE tree::getVV() {
 				int i, len = step->childs.size();
 				for (i = 0; i < len; i++) {
 					string tmp = step->childs[i]->attr;
-					if (tmp == "IP" || tmp[0] == 'V')
+					if (tmp == "IP" || tmp[0] == 'V') {
 						store.push_back(step->childs[i]);
+					}
 				}
 			}
 		}
