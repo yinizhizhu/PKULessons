@@ -162,13 +162,28 @@ class Bagging():
         print >> self.out, 'Trainig accuracy is:', ans*1.0/self.train_n[m]
 
     def partLoss(self):
+        testL = 0
+        trainL= 0
         for j in xrange(self.clf_n):
             ans = 0
             for i in xrange(self.test_n[j]):
                 if self.y_test[j][i] == self.clf[j].predict(self.x_test[j][i]):
                     ans += 1
-            print 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j]
-            print >> self.out, 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j]
+            print 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j],
+            print >> self.out, 'The {0}th'.format(j+1), 'clf accuracy is: ', ans*1.0/self.test_n[j],
+            
+            testL += ans*1.0/self.test_n[j]
+            
+            ans = 0
+            for i in xrange(self.train_n[j]):
+                if self.y[j][i] == self.clf[j].predict(self.x[j][i]):
+                    ans += 1
+            print ans*1.0/self.train_n[j]
+            print >> self.out, ans*1.0/self.train_n[j]
+            
+            trainL += ans*1.0/self.train_n[j]
+            
+        print "Average accuracy is: ", testL/self.clf_n, trainL/self.clf_n
 
 a = Bagging(6)
 #a.showKind('zero')

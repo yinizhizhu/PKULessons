@@ -251,8 +251,14 @@ class IterativeBagging():
             for i in xrange(self.test_n):
                 if self.y_test[i] == self.clf[j].predict(self.x_test[i]):
                     ans += 1
-            print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
-            print >> self.out, '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
+            print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n,
+            print >> self.out, '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n,
+            ans2 = 0
+            for i in xrange(self.train_n):
+                if self.y[i] == self.clf[j].predict(self.x[i]):
+                    ans2 += 1
+            print ans2*1.0/self.trian_n
+            print >> self.out, ans2*1.0/self.trian_n
 
 a = IterativeBagging(9)
 #a.showKind('zero')

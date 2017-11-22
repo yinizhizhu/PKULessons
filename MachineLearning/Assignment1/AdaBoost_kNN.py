@@ -186,13 +186,28 @@ class AdaBoost():
         print >> self.out, 'Trainig accuracy is:', ans*1.0/self.train_n
 
     def partLoss(self):
+        testL = 0
+        trainL= 0
         for j in xrange(self.clf_n):
             ans = 0
             for i in xrange(self.test_n):
                 if self.y_test[i] == self.clf[j].predict(self.x_test[i])[0]:
                     ans += 1
-            print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
-            print >> self.out, '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n
+            print '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n,
+            print >> self.out, '{0}th'.format(j+1), 'clf accuracy is:', ans*1.0/self.test_n,
+
+            testL += ans*1.0/self.test_n
+            
+            ans = 0
+            for i in xrange(self.train_n):
+                if self.y[i] == self.clf[j].predict(self.x[i]):
+                    ans += 1
+            print ans*1.0/self.train_n
+            print >> self.out, ans*1.0/self.train_n
+            
+            trainL += ans*1.0/self.train_n
+            
+        print "Average accuracy is: ", testL/self.clf_n, trainL/self.clf_n
 
 a = AdaBoost(9)
 #a.showKind('zero')
