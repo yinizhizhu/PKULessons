@@ -51,6 +51,7 @@ private:
 	vector<string>	preLex;
 
 	vector<PNODE> leaves;
+	vector<string> verbs;
 public:
 	tree();
 	~tree();
@@ -85,11 +86,13 @@ public:
 	void	demo();
 
 	void	pruing(vector<PNODE>& leaves);
-	void	label();
+	void	label(int l);
 	bool	noVV(PNODE r);
 	string	getLeafW(PNODE r);
 	string	getLeafA(PNODE r);
-	PNODE	getVV();
+	PNODE	getVerbs();
+	PNODE	getVNode(PNODE r, string& verb);
+	PNODE	getVV(int l);
 };
 
 

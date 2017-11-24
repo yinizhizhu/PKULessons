@@ -4,15 +4,76 @@
 
 using namespace std;
 
-void cleanData(char *filename, char *outname, int tag) {
+void seperateData(char *filename, char *outname, char *outAttr) {
 	ifstream in(filename);
 	ofstream out(outname);
+	ofstream outA(outAttr);
 
-	cout << filename << ", " << outname;
+	cout << filename << "\n   " << outname << endl;
+	cout << "---> Clean data..." << endl;
+
+	ofstream out2("checkEnd.txt");
+
+	/*
+	pre - store the head index of the 'word' which looks just like 'word/attr/tag'
+	cur - store the tail index of the 'word' which is same with pre
+	counter - counter the number of completed sentence
+	index - index the completed sentence
+
+	line - get a line of text file
+	w - store the 'word' which is same with pre
+
+	tmp - a class which is used to split the 'word' into word, attr and tag,
+	and supply a api to get the each content of the 'word'
+	(You can get the details in the two files: 'word.cpp' and 'word.h')
+	*/
+	int pre, cur, len, counter = 0, index = 1;
+	string line, w;
+	word tmp;
+	for (; getline(in, line); index++) {
+		len = line.size();
+		for (pre = 0, cur = 0; cur < len; cur++) {
+			if (line[cur] == ' ') {
+				w = line.substr(pre, cur - pre);
+				tmp.setWordTrain(w);
+				out << tmp.getWord();
+				outA << tmp.getAttr();
+				if (cur < len - 1) {
+					out << " ";
+					outA << " ";
+				}
+				pre = cur + 1;
+			}
+		}
+		if (pre < cur) {
+			w = line.substr(pre, cur - pre);
+			counter++;
+			tmp.setWordTrain(w);
+			char *tmp_w = tmp.getWord();
+			out << tmp_w;
+			outA << tmp.getAttr();
+		}
+		out << endl;
+		outA << endl;
+	}
+	out2 << counter << endl;
+	out2.close();
+
+	outA.close();
+	out.close();
+	in.close();
+}
+
+void cleanData(char *filename, char *outname, char *outAttr, int tag) {
+	ifstream in(filename);
+	ofstream out(outname);
+	ofstream outA(outAttr);
+
+	cout << filename << "\n   " << outname << endl;
 	if (tag)
-		cout << ": Clean data for cpbtrain..." << endl;
+		cout << "---> Clean data... " << endl;
 	else
-		cout << ": Clean data for cpbtest..." << endl;
+		cout << "---> Clean data..." << endl;
 
 	ifstream inE("end.txt");
 	/*
@@ -46,25 +107,28 @@ void cleanData(char *filename, char *outname, int tag) {
 		len = line.size();
 		for (pre = 0, cur = 0; cur < len; cur++) {
 			if (line[cur] == ' ') {
-				w = line.substr(pre, cur-pre);
+				w = line.substr(pre, cur - pre);
 				if (tag)
 					tmp.setWordTrain(w);
 				else {
 					if (w.find(end1) != -1) {
 						out2 << index << ": " << line << endl;
-						out2 << pre<<", "<<cur<<": "<< w << endl;
+						out2 << pre << ", " << cur << ": " << w << endl;
 						counter++;
 					}
 					tmp.setWordTest(w);
 				}
 				out << tmp.getWord();
-				if (cur < len - 1)
+				outA << tmp.getAttr();
+				if (cur < len - 1) {
 					out << " ";
+					outA << " ";
+				}
 				pre = cur + 1;
 			}
 		}
 		if (pre < cur) {
-			w = line.substr(pre, cur-pre);
+			w = line.substr(pre, cur - pre);
 			counter++;
 			if (tag)
 				tmp.setWordTrain(w);
@@ -72,17 +136,25 @@ void cleanData(char *filename, char *outname, int tag) {
 				tmp.setWordTest(w);
 			char *tmp_w = tmp.getWord();
 			out << tmp_w;
-			if (w[w.length() - 1] != 'U' || w[w.length() - 2] != 'P')
+			outA << tmp.getAttr();
+			if (w[w.length() - 1] != 'U' || w[w.length() - 2] != 'P') {
 				out << " " << end1;
+				outA << " " << endl;
+			}
 			else {
-				if (strcmp(tmp_w, end2) == 0)
+				if (strcmp(tmp_w, end2) == 0) {
 					out << " " << end1;
+					outA << " " << end1;
+				}
 			}
 		}
 		out << endl;
+		outA << endl;
 	}
 	out2 << counter << endl;
 	out2.close();
+
+	outA.close();
 	out.close();
 	in.close();
 }
@@ -90,21 +162,18 @@ void cleanData(char *filename, char *outname, int tag) {
 void clean() {
 	char train[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtrain.txt";
 	char outTrain[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\train.txt";
-	cleanData(train, outTrain, 1);
+	char outTrainAttr[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\trainAttr.txt";
+	seperateData(train, outTrain, outTrainAttr);
 
 	char dev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbdev.txt";
 	char outDev[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\dev.txt";
-	cleanData(dev, outDev, 1);
+	char outDevAttr[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\devAttr.txt";
+	seperateData(dev, outDev, outDevAttr);
 
 	char test[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtest.txt";
 	char outTest[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\test.txt";
-	cleanData(test, outTest, 0);
-}
-
-void show(vector<int>& ans) {
-	for (int i = 0; i < ans.size(); i++)
-		cout << ans[i] << " ";
-	cout << endl;
+	char outTestAttr[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\testAttr.txt";
+	seperateData(test, outTest, outTestAttr);
 }
 
 int main() {
@@ -112,13 +181,5 @@ int main() {
 
 	tree t;
 	t.demo();
-
-	//vector<int> a;
-	//for (int i = 0; i < 10; i++)
-	//	a.push_back(i);
-	//show(a);
-	//a.erase(a.begin() + 1);
-	//show(a);
-
     return 0;
 }

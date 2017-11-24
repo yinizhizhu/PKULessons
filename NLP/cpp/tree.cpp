@@ -281,9 +281,10 @@ void tree::demo() {
 	//getPred();
 	//outputPred();
 	addFeatureW();
+	getVerbs();
 
-	//ifstream in("C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\demo.txt");
-	ifstream in("tree\\trainTree.txt");
+	ifstream in("C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\testTree.txt");
+	//ifstream in("tree\\trainTree.txt");
 	//ifstream in("tree\\testTree.txt");
 	ofstream out("demoTree.txt");
 	ofstream out2("demoSentence.txt");
@@ -354,7 +355,7 @@ void tree::demo() {
 				Start Senmantic Roles Labeling (SRL)
 				*/
 				//pruing(leaves);
-				label();
+				label(counter - 1);
 
 				labelSentence(out2, root);
 				out2 << endl;
@@ -408,13 +409,13 @@ bool tree::noVV(PNODE r) {
 	return ans;
 }
 
-void tree::label() {
+void tree::label(int l) {
 	/*
 	ARG0, ARG1 (Exchange position of ARG0 and ARG1 while the SB\LB appears)
 	REL
 	ARGM - LOC, TMP, ADV, CND, PRP, BNF, MNR, DIR, DIS, FRQ, EXT, TPC(ADV)
 	*/
-	PNODE vv = getVV();
+	PNODE vv = getVV(l);
 	if (vv) {
 		PNODE p = vv->parent;
 		string left = "ARG0", right = "ARG1", attr;
@@ -494,53 +495,89 @@ string tree::getLeafA(PNODE r) {
 	return r->attr;
 }
 
-PNODE tree::getVV() {
-	vector<PNODE> store;
-	store.push_back(root);
-	int n = store.size();
-	for (; n;) {
-		for (; n; n--) {
-			PNODE step = store[0];
-			store.erase(store.begin());
-			if (isLeaf(step)) {
-				if (step->attr == "VV") {
-					step->tag = "rel";
-					for (; step->parent->attr == "VP";) {
-						step = step->parent;
-						for (int i = step->childs.size() - 1; i >= 0; i--) {
-							string tmp = step->childs[i]->attr;
-							if (tmp == "ADVP") {
-								tmp = getLeafW(step->childs[i]);
-								if (inFeatureW(dis, tmp))
-									step->childs[i]->tag = "ARGM-DIS";
-								else
-									step->childs[i]->tag = "ARGM-ADV";
-							}
-							else if (tmp == "LCP")
-								step->childs[i]->tag = "ARGM-ADV";
-							else if (tmp == "NP") {
-								tmp = getLeafA(step->childs[i]);
-								if (tmp == "NT")
-									step->childs[i]->tag = "ARGM-TMP";
-							}
-						}
-					}
-					return step;
+PNODE tree::getVerbs() {
+	char filename[100] = "C:\\Users\\codinglee\\Desktop\\自然语言\\Project_coding\\data\\cpbtest.txt";
+	ifstream in(filename);
+	ofstream out("rel.txt");
+
+	int pre, cur, len, tag;
+	string line, w;
+	word tmp;
+	char tagS[10] = "rel";
+	for (; getline(in, line); ) {
+		len = line.size();
+		tag = 1;
+		for (pre = 0, cur = 0; cur < len; cur++) {
+			if (line[cur] == ' ') {
+				w = line.substr(pre, cur - pre);
+				tmp.setWordTrain(w);
+				if (tmp.getTag() && strcmp(tmp.getTag(), tagS) == 0) {
+					tag = 0;
+					break;
 				}
-			}
-			else {
-				int i, len = step->childs.size();
-				for (i = 0; i < len; i++) {
-					string tmp = step->childs[i]->attr;
-					if (tmp == "IP" || tmp[0] == 'V') {
-						store.push_back(step->childs[i]);
-					}
-				}
+				pre = cur + 1;
 			}
 		}
-		n = store.size();
+		if (tag && pre < cur)
+			tmp.setWordTrain(line.substr(pre, cur - pre));
+		verbs.push_back(tmp.getWord());
+	}
+	for (int i = 0; i < verbs.size(); i++)
+		out << verbs[i] << endl;
+	out.close();
+	in.close();
+	return NULL;
+}
+
+PNODE tree::getVNode(PNODE r, string& verb) {
+	if (r) {
+		if (isLeaf(r)) {
+			if (r->word == verb)
+				return r;
+		}
+		else {
+			PNODE ans = NULL;
+			for (int i = 0; i < r->childs.size(); i++) {
+				ans = getVNode(r->childs[i], verb);
+				if (ans)
+					return ans;
+			}
+		}
 	}
 	return NULL;
+}
+
+PNODE tree::getVV(int l) {
+	cout << "In getVNode: " << verbs[l] << endl;
+	PNODE step = getVNode(root, verbs[l]);
+	cout << "Out getVNode!" << endl;
+	if (step)
+		cout << "Yeah! I got this node!" << endl;
+	else
+		cout << "What's up? Freak!" << endl;
+	cout << step->attr << endl;
+	step->tag = "rel";
+	for (; step->parent->attr == "VP";) {
+		step = step->parent;
+		for (int i = step->childs.size() - 1; i >= 0; i--) {
+			string tmp = step->childs[i]->attr;
+			if (tmp == "ADVP") {
+				tmp = getLeafW(step->childs[i]);
+				if (inFeatureW(dis, tmp))
+					step->childs[i]->tag = "ARGM-DIS";
+				else
+					step->childs[i]->tag = "ARGM-ADV";
+			}
+			else if (tmp == "LCP")
+				step->childs[i]->tag = "ARGM-ADV";
+			else if (tmp == "NP") {
+				tmp = getLeafA(step->childs[i]);
+				if (tmp == "NT")
+					step->childs[i]->tag = "ARGM-TMP";
+			}
+		}
+	}
+	return step;
 }
 
 void tree::showH(int deep) {
