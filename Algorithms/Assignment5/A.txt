@@ -3,6 +3,8 @@
 #include <vector>
 #include <stdio.h>
 #include <algorithm>
+#include <queue>
+#include <math.h>
 #include <unordered_map>
 
 using namespace std;
@@ -13,16 +15,21 @@ const int INF = 2147483647;
 typedef unordered_map<string, int> map;
 typedef map::iterator iter;
 
-int n;
 map store;
-double dis[N];
+int n, s, t;
+double d[N];
+int c[N];
+queue <int> q;
+double graph[N][N];
+bool vis[N];
 
-typedef struct Edge
-{
-	int u, v;
-	double rate;
-} Edge;
-Edge edge[N];
+void init() {
+	int i, j;
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++)
+			graph[i][j] = INF;
+	}
+}
 
 int getI(string& str) {
 	iter tmp = store.find(str);
@@ -31,25 +38,42 @@ int getI(string& str) {
 	return tmp->second;
 }
 
-bool check() {
-	for (int i = 0; i < n; i++)	dis[i] = INF;
-	for (int i = 0; i <n - 1; i++)
-		for (int j = 0; j < n; j++) {
-			if (dis[j] > dis[edge[j].u] * edge[j].rate)
-				dis[edge[j].v] = dis[edge[j].u] * edge[j].rate;
+int spfa_bfs() {
+	queue <int> q;
+	for (int i = 0; i < n; i++) {
+		c[i] = 0;
+		d[i] = INF;
+		vis[i] = false;
+	}
+	q.push(s);
+	vis[s] = true;
+	c[s] = 1;
+	d[s] = 0;
+	while (!q.empty()) {
+		int x = q.front();
+		q.pop();
+		vis[x] = false;
+		for (int k = 0; k < n; k++) {
+			double w = graph[x][k];
+			if (w != INF) {
+				if (d[x] + w < d[k]) {
+					d[k] = d[x] + w;
+					if (!vis[k]) {
+						vis[k] = true;
+						c[k]++;
+						q.push(k);
+						if (c[k]>n)
+							return true;
+					}
+				}
+			}
 		}
-	bool flag = 0;
-	for (int i = 0; i <n; i++)
-		if (dis[edge[i].v] > dis[edge[i].u] * edge[i].rate) {
-			flag = 1;
-			break;
-		}
-	return flag;
+	}
+	return false;
 }
 
 int main() {
-	int i, m, c = 1;
-	bool ans;
+	int i, m, x, y, c = 1;
 	double rate;
 	string cur1, cur2;
 	while (cin >> n && n) {
@@ -57,15 +81,16 @@ int main() {
 			cin >> cur1;
 			store[cur1] = i;
 		}
+		init();
 		cin >> m;
 		for (i = 0; i < m; i++) {
 			cin >> cur1 >> rate >> cur2;
-			edge[i].u = getI(cur1);
-			edge[i].v = getI(cur2);
-			edge[i].rate = rate;
+			x = getI(cur1);
+			y = getI(cur2);
+			graph[x][y] = -log(rate);
 		}
 		cout << "Case " << c;
-		if (check())
+		if (spfa_bfs())
 			cout << ": Yes" << endl;
 		else
 			cout << ": No" << endl;
@@ -73,7 +98,3 @@ int main() {
 	}
 	return 0;
 }
-
-
-
-
