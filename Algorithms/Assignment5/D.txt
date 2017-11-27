@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <algorithm>
+
+using namespace std;
+
+#define N 402
+#define INF 2147483647
+
+struct node {
+	int index, des, cap;
+	node(int i, int d, int c) : index(i), des(d), cap(c) {}
+};
+
+int m, n;
+vector<node> v[N];
+bool used[N];
+
+int minLee(int a, int b) {
+	return (a > b ? b : a);
+}
+
+void addNode(int from, int to, int cap) {
+	v[from].push_back(node(v[to].size(), to, cap));
+	v[to].push_back(node(v[from].size() - 1, from, 0));
+}
+
+int bfs(int s, int t, int f) {
+	if (s == t)	return f;
+	used[s] = true;
+	for (int i = 0; i < v[s].size(); i++) {
+		node& tmp = v[s][i];
+		if (used[tmp.des] == false && tmp.cap > 0) {
+			int d = bfs(tmp.des, t, minLee(f, tmp.cap));
+			if (d > 0) {
+				tmp.cap -= d;
+				v[tmp.des][tmp.index].cap += d;
+				return d;
+			}
+		}
+	}
+	return 0;
+}
+
+int maxFlow() {
+	int flow = 0;
+	for (;;) {
+		for (int i = 0; i <= n + m + 1; i++) used[i] = false;
+		int f = bfs(0, n + m + 1, INF);
+		if (f == 0) break;
+		flow += f;
+	}
+	return flow;
+}
+
+int main() {
+	int i, j, len;
+	for (; cin >> n >> m;) {
+		for (i = 0; i <= n + m + 1; i++)
+			v[i].clear();
+		for (i = 1; i <= n; i++) {
+			cin >> len;
+			for (; len; len--) {
+				cin >> j;
+				addNode(i, n + j, 1);
+			}
+			addNode(0, i, 1);
+		}
+		for (i = 1; i <= m; i++)
+			addNode(n + i, n + m + 1, 1);
+		cout << maxFlow() << endl;
+	}
+	return 0;
+}

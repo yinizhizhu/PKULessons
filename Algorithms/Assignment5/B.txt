@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+#define INF 2147483647
+
+int main() {
+	int i, j, k, l, t, n, a[105], d[105][105] = { 0 };
+	cin >> n;
+	for (i = 1; i <= n; i++)
+		cin >> a[i];
+	for (l = 2; l < n; l++)
+		for (i = 1; i <= n - l; i++) {
+			j = i + l;
+			for (k = i + 1; k < j; k++) {
+				t = d[i][k] + d[k][j] + a[i] * a[j] * a[k];
+				if (!d[i][j] || d[i][j] > t)
+					d[i][j] = t;
+			}
+		}
+	cout << d[1][n] << endl;
+}
