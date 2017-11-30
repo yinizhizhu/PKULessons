@@ -1,0 +1,111 @@
+#include "data.h"
+
+Data::Data() {}
+
+Data::~Data() {}
+
+bool Data::getNextLine(ifstream& in) {
+	step = 0;
+	clear();
+	int pre, cur, len, tag = 1;
+	string line, w;
+	char rel[4] = "rel", *strTag;
+	word tmp;
+	if (getline(in, line)) {
+		len = line.size();
+		for (pre = 0, cur = 0; cur < len; cur++) {
+			if (line[cur] == ' ') {
+				w = line.substr(pre, cur - pre);
+				tmp.setWordTrain(w);
+				strTag = tmp.getTag();
+				if (strTag && strlen(strTag) > 1) {
+					if (tag && strcmp(strTag, rel) == 0) {
+						verb = tmp.getWord();
+						tag = 0;
+					}
+					else
+						push(tmp);
+				}
+				pre = cur + 1;
+			}
+		}
+		if (pre < cur) {
+			w = line.substr(pre, cur - pre);
+			tmp.setWordTrain(w);
+			strTag = tmp.getTag();
+			if (strTag && strlen(strTag) > 1) {
+				if (tag && strcmp(strTag, rel) == 0) {
+					verb = tmp.getWord();
+					tag = 0;
+				}
+				else
+					push(tmp);
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
+Pair Data::getNext() {
+	unsigned int i = step;
+	if (i < tags.size() && tags[i][0] == 'S') {
+		step++;
+		return Pair(i, i);
+	}
+	for (++i; i < tags.size(); i++) {
+		if (tags[i][0] == 'E') {
+			int h = step;
+			step = i + 1;
+			return Pair(h, i);
+		}
+	}
+	return Pair(-1, -1);
+}
+
+void Data::push(word& w) {
+	words.push_back(w.getWord());
+	attrs.push_back(w.getAttr());
+	tags.push_back(w.getTag());
+}
+
+void Data::clear() {
+	words.clear();
+	attrs.clear();
+	tags.clear();
+}
+
+void Data::show() {
+	for (unsigned int i = 0; i < words.size(); i++)
+		cout << words[i] << " " << attrs[i] << " " << tags[i] << endl;
+	cout << verb << endl;
+	cout << endl;
+}
+
+void Data::demo() {
+	char filename[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpblee.txt";
+	ifstream in(filename);
+	for (; getNextLine(in);) {
+		Pair p;
+		do {
+			p = getNext();
+			cout << p.first << " " << p.second << endl;
+		} while (p.first != -1);
+		show();
+	}
+	in.close();
+}
+
+string Data::v() { return verb; }
+
+string	Data::w(int i) {
+	return words[i];
+}
+
+string	Data::a(int i) {
+	return attrs[i];
+}
+
+string	Data::t(int i) {
+	return tags[i];
+}
