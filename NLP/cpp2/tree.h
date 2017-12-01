@@ -24,8 +24,15 @@ typedef struct node {
 	}
 }NODE, *PNODE;
 
+typedef pair<string, int> Path;
+
 //typedef unordered_map<string, string> PRED;
 //typedef PRED::iterator ITER;
+
+typedef unordered_map<string, int> STR_INT;
+typedef STR_INT::iterator SIter;
+typedef unordered_map<int, string> INT_STR;
+typedef INT_STR::iterator IIter;
 
 class tree {
 private:
@@ -50,6 +57,25 @@ private:
 	vector<PNODE> vPath;
 	vector<PNODE> candidates;	//store the candicates
 	//vector<vector<PNODE>> allPath; // store the path corresponding to the candidate node
+
+	int		arg_c;
+	STR_INT	str_int;	//for the arguments
+	INT_STR	int_str;	//remap
+
+	int		verb_c, verb_n;
+	STR_INT verb_int;	//for the verb
+
+	int		head_c, head_n;
+	STR_INT head_int;	//for the head word
+
+	int		hpos_c, hpos_n;
+	STR_INT hpos_int;	//for the pos of head word
+
+	int		ptype_c, ptype_n;
+	STR_INT ptype_int;	//for the prase type
+
+	int		path_c, path_n;
+	STR_INT path_int;	//for the path
 public:
 	tree();
 	~tree();
@@ -90,7 +116,7 @@ public:
 	PNODE	getVV(int l);
 	void	firstTry(void); //label
 
-	void	getTestData();
+	void	secondTry();
 	void	pruing(vector<PNODE>& leaves);
 
 	void	getTrainData();
@@ -101,7 +127,7 @@ public:
 	void	showPath(vector<PNODE>& path);
 
 	void	reachRoot(PNODE r, vector<PNODE>& path);
-	string	getPath(vector<PNODE>& path);
+	Path	getPath(vector<PNODE>& path);
 	void	getCandidates(PNODE r);
 
 };

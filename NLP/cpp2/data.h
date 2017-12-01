@@ -10,6 +10,8 @@
 #include <string>
 #include "word.h"
 
+#define STRING_LEE
+
 using namespace std;
 
 typedef pair<int, int> Pair;
@@ -31,10 +33,15 @@ public:
 	void	clear();
 	void	show();
 	void	demo();
-
+#ifdef STRING_LEE
 	string	v();
 	string	w(int i);
 	string	a(int i);
+#else
+	long long	v();
+	long long	w(int i);
+	long long	a(int i);
+#endif // STRING_LEE
 	string	t(int i);
 };
 

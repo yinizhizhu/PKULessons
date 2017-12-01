@@ -96,16 +96,42 @@ void Data::demo() {
 	in.close();
 }
 
-string Data::v() { return verb; }
+#ifdef STRING_LEE
+string Data::v() {
+	return verb;
+}
 
-string	Data::w(int i) {
+string Data::w(int i) {
 	return words[i];
 }
 
-string	Data::a(int i) {
+string Data::a(int i) {
 	return attrs[i];
 }
+#else
+long long Data::v() {
+	long long ans = 0;
+	for (int i = 0; i < verb.size(); i++)
+		ans += (ans << 8) + verb[i];
+	return ans;
+}
 
-string	Data::t(int i) {
+long long Data::w(int i) {
+	long long ans = 0;
+	for (int j = 0; j < words[i].size(); j++)
+		ans += (ans << 8) + words[i][j];
+	return ans;
+}
+
+long long Data::a(int i) {
+	long long ans = 0;
+	for (int j = 0; j < attrs[i].size(); j++)
+		ans += (ans << 8) + attrs[i][j];
+	return ans;
+}
+
+#endif // STRING_LEE
+
+string Data::t(int i) {
 	return tags[i];
 }

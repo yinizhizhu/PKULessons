@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdio.h>
+#include <Python.h>
 #include "tree.h"
+
 
 using namespace std;
 
@@ -177,16 +179,19 @@ void clean() {
 }
 
 int main() {
+	Py_Initialize();
+	system("python SGD.py");
 	//clean();
 
 	//Data d;
 	//d.demo();
 
 	tree t;
-	t.firstTry();
+	//t.firstTry();
 
-	//t.getTrainData();
-	t.getTestData();
+	t.getTrainData();
+	t.secondTry();
 
+	system("python calc_f1.py");
     return 0;
 }

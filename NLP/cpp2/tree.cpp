@@ -6,11 +6,25 @@
 // output the prase type of verb
 #define SHOWVVPT
 #define DEV
+//#define OUTFEATURE
 
 
 tree::tree() {
 	root = NULL;
 	lsb = false;
+	arg_c = 1;
+
+	verb_c = 1;
+	head_c = 1;
+	hpos_c = 1;
+	ptype_c = 1;
+	path_c = 1;
+
+	verb_n = -1;
+	head_n = -1;
+	hpos_n = -1;
+	ptype_n = -1;
+	path_n = -1;
 }
 
 tree::~tree() {
@@ -32,7 +46,7 @@ PNODE tree::insert(PNODE r, string& attr, string word = "") {
 
 //judge whether the current node is leaf or not
 bool tree::isLeaf(PNODE r) {
-	if (r->word.size()) return true;
+	if (r->childs.size() == 0) return true;
 	return false;
 }
 
@@ -560,7 +574,7 @@ void tree::firstTry() {
 				step->word = word;
 				leaves.push_back(step);
 				process -= len - i;
-				for (; i<len; i++)
+				for (; i < len; i++)
 					step = step->parent;
 #ifdef SHOW_DIVIDE
 #ifdef OUT
@@ -586,7 +600,7 @@ void tree::firstTry() {
 #endif
 				//showSentence(out2, root);
 				//out2 << endl;
-				cout << counter << "th is moving on..." << endl;
+				//cout << counter << "th is moving on..." << endl;
 				/*
 				Start Senmantic Roles Labeling (SRL)
 				*/
@@ -601,7 +615,7 @@ void tree::firstTry() {
 				showTree(out, root, 0);
 				out << endl;
 #endif
-				cout << "Done parseing! Free the tree..." << endl;
+				//cout << "Done parseing! Free the tree..." << endl;
 				freeNode(root);
 				root = NULL;
 				step = NULL;
@@ -620,11 +634,14 @@ void tree::firstTry() {
 
 // do main job: labeling
 void tree::getTrainData() {
+	cout << "Training..." << endl;
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\trainTree.txt");
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtrain.txt");
 	Data d;
-
-	ofstream outFeature("demoFeature.txt");
+#ifdef OUTFEATURE
+	ofstream outFeature("demoFeature.txt"); //for the multi-classifier
+	ofstream outFeature2("demoFeature2.txt"); //for the binary classifier
+#endif // OUTFEATURE
 
 	int i, len, process = 0, counter;
 	string part, attr, word;
@@ -647,12 +664,12 @@ void tree::getTrainData() {
 				step->word = word;
 				leaves.push_back(step);
 				process -= len - i;
-				for (; i<len; i++)
+				for (; i < len; i++)
 					step = step->parent;
 			}
 			if (process == 0) {
 				in >> counter;
-				cout << counter << "th is moving on..." << endl;
+				//cout << counter << "th is moving on..." << endl;
 				/*
 				Get the training data, and get the features from text file
 				verb - predicate
@@ -664,13 +681,14 @@ void tree::getTrainData() {
 				path - the path between candicate node and predicate node in the prase tree
 				*/
 				if (d.getNextLine(inData)) {
-					step = getVNode(root, d.v()); // the node of predicate in the parse tree
+					step = getVNode(root, d.verb); // the node of predicate in the parse tree
 					reachRoot(step, vPath); //get the path of current node to the root
 					getRelMid(step);
 
 					Pair p;
 					PNODE a, b, c, up;
 					vector<PNODE> pathC;
+					unordered_map<PNODE, int> hasIt;//store the pnode with tagging
 					for (p = d.getNext(); p.first != -1; p = d.getNext()) {
 						int x = p.first, y = p.second;
 						getNode(a, b, d, p);
@@ -680,24 +698,116 @@ void tree::getTrainData() {
 							c = getComP(a, b);
 						else
 							for (c = a; c->parent->childs.size() == 1; c = c->parent);
+						hasIt[c] = 1;
 						reachRoot(c, pathC);
 						//showPath(pathC);
 						//showPath(vPath);
-						string path = getPath(pathC);
+						Path path = getPath(pathC);
 
-						outFeature << d.v() << " ";	//predicate
+						//multi
+						if (verb_int.find(d.v()) == verb_int.end()) {
+							verb_int[d.v()] = verb_c;
+							verb_c++;
+						}
+						if (head_int.find(d.w(x)) == head_int.end()) {
+							head_int[d.w(x)] = head_c;
+							head_c++;
+						}
+						if (hpos_int.find(d.a(x)) == hpos_int.end()) {
+							hpos_int[d.a(x)] = hpos_c;
+							hpos_c++;
+						}
+						if (ptype_int.find(c->attr) == ptype_int.end()) {
+							ptype_int[c->attr] = ptype_c;
+							ptype_c++;
+						}
+						if (path_int.find(path.first) == path_int.end()) {
+							path_int[path.first] = path_c;
+							path_c++;
+						}
+
+#ifdef OUTFEATURE
+						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
-						outFeature << d.w(x) << " " << d.a(x) << " ";	//head word & POS of head word
-						outFeature << c->attr << " ";	//phrase type
-						outFeature << path << " ";	// path
-						outFeature << d.t(x).substr(2, d.t(x).size() - 2) << endl;
+						outFeature << head_int[d.w(x)] << " " << hpos_int[d.a(x)] << " ";	//head word & POS of head word
+						outFeature << ptype_int[c->attr] << " ";	//phrase type
+						outFeature << path_int[path.first] << " " << path.second << " ";	// path
+
+																							//binary
+						outFeature2 << verb_int[d.v()] << " ";	//predicate
+						outFeature2 << lsb << " ";	//voice
+						outFeature2 << getPosition(c, step) << " ";	//position
+						outFeature2 << head_int[d.w(x)] << " " << hpos_int[d.a(x)] << " ";	//head word & POS of head word
+						outFeature2 << ptype_int[c->attr] << " ";	//phrase type
+						outFeature2 << path_int[path.first] << " " << path.second << " ";	// path
+
+#endif // OUTFEATURE
+						word = d.tags[x].substr(2, d.tags[x].size() - 2);
+						if (str_int.find(word) == str_int.end()) {
+							str_int[word] = arg_c;
+							int_str[arg_c] = word;
+							arg_c++;
+						}
+
+#ifdef OUTFEATURE
+						//multi
+						outFeature << str_int[word] << endl;
+
+						//binary: tag 1, which means the current node is a candidate
+						outFeature2 << 1 << endl;
+#endif // OUTFEATURE
+
+					}
+
+					getCandidates(step);
+
+					for (i = 0; i < candidates.size(); i++) {
+						c = candidates[i];
+						if (hasIt.find(c) == hasIt.end()) {
+							reachRoot(c, pathC);
+							//showPath(pathC);
+							//showPath(vPath);
+							Path path = getPath(pathC);
+
+							if (verb_int.find(d.v()) == verb_int.end()) {
+								verb_int[d.v()] = verb_n;
+								verb_n--;
+							}
+							word = getLeafW(c);
+							if (head_int.find(word) == head_int.end()) {
+								head_int[word] = head_n;
+								head_n--;
+							}
+							word = getLeafA(c);
+							if (hpos_int.find(word) == hpos_int.end()) {
+								hpos_int[word] = hpos_n;
+								hpos_n--;
+							}
+							if (ptype_int.find(c->attr) == ptype_int.end()) {
+								ptype_int[c->attr] = ptype_n;
+								ptype_n--;
+							}
+							if (path_int.find(path.first) == path_int.end()) {
+								path_int[path.first] = path_n;
+								path_n--;
+							}
+
+#ifdef OUTFEATURE
+							outFeature2 << verb_int[d.v()] << " ";	//predicate
+							outFeature2 << lsb << " ";	//voice
+							outFeature2 << getPosition(c, step) << " ";	//position
+							outFeature2 << head_int[getLeafW(c)] << " " << hpos_int[word] << " ";	//head word & POS of head word
+							outFeature2 << ptype_int[c->attr] << " ";	//phrase type
+							outFeature2 << path_int[path.first] << " " << path.second << " 0" << endl;	// path
+#endif // OUTFEATURE
+						}
 					}
 				}
 				else
 					cout << "Cannot read data!!!!" << endl;
 
-				cout << "Done parseing! Free the tree..." << endl;
+				//cout << "Done parseing! Free the tree..." << endl;
 				freeNode(root);
 				root = NULL;
 				step = NULL;
@@ -709,13 +819,17 @@ void tree::getTrainData() {
 		}
 		part = "";
 	}
+	cout << "Done training!" << endl;
+#ifdef OUTFEATURE
+	outFeature2.close();
 	outFeature.close();
+#endif // OUTFEATURE
 	inData.close();
 	in.close();
 }
 
 void tree::getRelMid(PNODE step) {
-	relMid = leaves.size()-1;
+	relMid = leaves.size() - 1;
 	for (; relMid >= 0; relMid--)
 		if (leaves[relMid] == step)
 			return;
@@ -746,31 +860,31 @@ void tree::getNode(PNODE& a, PNODE& b, Data& d, Pair& p) {
 	int i, j, len = y - x + 1;
 	if (len == 1) {
 		for (i = relMid - 1, j = relMid + 1; i >= 0 && j < leaves.size(); i--, j++) {
-			if (leaves[i]->word == d.w(x) && leaves[i]->attr == d.a(x)) {
+			if (leaves[i]->word == d.words[x] && leaves[i]->attr == d.attrs[x]) {
 				a = leaves[i];
 				return;
 			}
-			if (leaves[j]->word == d.w(x) && leaves[j]->attr == d.a(x)) {
+			if (leaves[j]->word == d.words[x] && leaves[j]->attr == d.attrs[x]) {
 				a = leaves[j];
 				return;
 			}
 		}
 		for (; i >= 0; i--)
-			if (leaves[i]->word == d.w(x) && leaves[i]->attr == d.a(x)) {
+			if (leaves[i]->word == d.words[x] && leaves[i]->attr == d.attrs[x]) {
 				a = leaves[i];
 				return;
 			}
-		for (; j<leaves.size(); j++)
-			if (leaves[j]->word == d.w(x) && leaves[j]->attr == d.a(x)) {
+		for (; j < leaves.size(); j++)
+			if (leaves[j]->word == d.words[x] && leaves[j]->attr == d.attrs[x]) {
 				a = leaves[j];
 				return;
 			}
 	}
 	else {
 		for (i = 0; i < leaves.size(); i++) {
-			if (leaves[i]->word == d.w(x) && leaves[i]->attr == d.a(x)) {
+			if (leaves[i]->word == d.words[x] && leaves[i]->attr == d.attrs[x]) {
 				for (j = 1; j < len; j++) {
-					if (leaves[i+j]->word == d.w(x+j) && leaves[i+j]->attr != d.a(x+j))
+					if (leaves[i + j]->word == d.words[x + j] && leaves[i + j]->attr != d.attrs[x + j])
 						break;
 				}
 				if (j == len) {
@@ -796,17 +910,20 @@ void tree::reachRoot(PNODE r, vector<PNODE>& path) {
 		path.push_back(r);
 }
 
-string tree::getPath(vector<PNODE>& path) {
+Path tree::getPath(vector<PNODE>& path) {
 	string ans = "";
+	int len = 1;
 	int iv = vPath.size() - 1, i = path.size() - 1, j;
-	for (; iv>=0 && i >=0 && vPath[iv] == path[i]; iv--, i--);
+	for (; iv >= 0 && i >= 0 && vPath[iv] == path[i]; iv--, i--);
 	for (j = 0; j <= i; j++)
 		ans += path[j]->attr + "-1-";
+	len += i+1;
 	ans += path[j]->attr + "-0-";
 	for (; iv > 0; iv--)
 		ans += vPath[iv]->attr + "-0-";
+	len += iv + 1;
 	ans += vPath[iv]->attr;
-	return ans;
+	return Path(ans, len);
 }
 
 // eliminate the node from the tree
@@ -831,24 +948,29 @@ void tree::freeNode(PNODE r) {
 }
 
 // do main job: labeling
-void tree::getTestData() {
+void tree::secondTry() {
+	cout << "Labeling..." << endl;
 #ifndef DEV
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testTree.txt");
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt");
 #else
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\devTree.txt");
+	ifstream inLabel("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\demoFeatureDevLabel.txt");
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt");
 #endif // !DEV
-
 
 	Data d;
 #ifndef DEV
 	ofstream outFeature("demoFeatureTest.txt");
 #else
-		ofstream outFeature("demoFeatureDev.txt");
+#ifdef OUTFEATURE
+	ofstream outFeature("demoFeatureDev.txt");
+#endif // OUTFEATURE
+
+	ofstream out2("demoFeatureDevLabelSentence.txt");
 #endif // !DEV
 
-	int i, len, process = 0, counter;
+	int i, len, process = 0, counter, label;
 	string part, attr, word;
 	PNODE step = NULL;
 	for (; !in.eof();) {
@@ -874,7 +996,7 @@ void tree::getTestData() {
 			}
 			if (process == 0) {
 				in >> counter;
-				cout << counter << "th is moving on..." << endl;
+				//cout << counter << "th is moving on..." << endl;
 				/*
 				Get the training data, and get the features from text file
 				verb - predicate
@@ -886,7 +1008,8 @@ void tree::getTestData() {
 				path - the path between candicate node and predicate node in the prase tree
 				*/
 				if (d.getNextLine(inData)) {
-					step = getVNode(root, d.v()); // the node of predicate in the parse tree
+					step = getVNode(root, d.verb); // the node of predicate in the parse tree
+					step->tag = "rel";
 					reachRoot(step, vPath); //get the path of current node to the root
 					getRelMid(step);
 
@@ -896,23 +1019,56 @@ void tree::getTestData() {
 					vector<PNODE> pathC;
 					for (i = 0; i < candidates.size(); i++) {
 						c = candidates[i];
+						inLabel >> label;
+						//cout << label << " ";
+						if (label) {
+							//cout << int_str[label] << " ";
+							c->tag = int_str[label];
+						}
 						reachRoot(c, pathC);
 						//showPath(pathC);
 						//showPath(vPath);
-						string path = getPath(pathC);
+						Path path = getPath(pathC);
 
-						outFeature << d.v() << " ";	//predicate
+						if (verb_int.find(d.v()) == verb_int.end()) {
+							verb_int[d.v()] = verb_n;
+							verb_n--;
+						}
+						word = getLeafW(c);
+						if (head_int.find(word) == head_int.end()) {
+							head_int[word] = head_n;
+							head_n--;
+						}
+						word = getLeafA(c);
+						if (hpos_int.find(word) == hpos_int.end()) {
+							hpos_int[word] = hpos_n;
+							hpos_n--;
+						}
+						if (ptype_int.find(c->attr) == ptype_int.end()) {
+							ptype_int[c->attr] = ptype_n;
+							ptype_n--;
+						}
+						if (path_int.find(path.first) == path_int.end()) {
+							path_int[path.first] = path_n;
+							path_n--;
+						}
+#ifdef OUTFEATURE
+						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
-						outFeature << getLeafW(c) << " " << getLeafA(c) << " ";	//head word & POS of head word
-						outFeature << c->attr << " ";	//phrase type
-						outFeature << path << endl;	// path
+						outFeature << head_int[getLeafW(c)] << " " << hpos_int[word] << " ";	//head word & POS of head word
+						outFeature << ptype_int[c->attr] << " ";	//phrase type
+						outFeature << path_int[path.first] << " " << path.second << endl;	// path
+#endif // OUTFEATURE
 					}
+					labelSentence(out2, root);
+					out2 << endl;
+					//cout << endl;
 				}
 				else
 					cout << "Cannot read data!!!!" << endl;
 
-				cout << "Done parseing! Free the tree..." << endl;
+				//cout << "Done parseing! Free the tree..." << endl;
 				freeNode(root);
 				root = NULL;
 				step = NULL;
@@ -923,9 +1079,14 @@ void tree::getTestData() {
 		}
 		part = "";
 	}
+	out2.close();
+#ifdef OUTFEATURE
 	outFeature.close();
+#endif // OUTFEATURE
 	inData.close();
+	inLabel.close();
 	in.close();
+	cout << "Finish the labeling!" << endl;
 }
 
 // pruing
@@ -946,9 +1107,9 @@ void tree::pruing(vector<PNODE>& leaves) {
 
 void tree::getCandidates(PNODE r) {
 	candidates.clear();
-	PNODE pre = NULL, cur = r;
+	PNODE pre = NULL;
 	for (; r != root; ) {
-		pre = cur;
+		pre = r;
 		r = r->parent;
 		for (int i = 0; i < r->childs.size(); i++)
 			if (r->childs[i] != pre)
