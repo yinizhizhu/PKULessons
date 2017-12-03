@@ -1,0 +1,83 @@
+#include <cstdio>  
+#include <algorithm>  
+
+using namespace std;
+
+const int maxn = 1005, maxm = 100005, maxq = 10000, inf = 0x3f3f3f3f;
+
+int n, food, drink, cur[maxn], head[maxn], cnt, depth[maxn], bg, ed, q[maxq];
+
+struct edge {
+	int v, w, next;
+	edge() : v(0), w(0), next(0) {}
+	edge(int a, int b, int c) : v(a), w(b), next(c) {}
+} g[maxm];
+
+inline int iread() {
+	int f = 1, x = 0; char ch = getchar();
+	for (; ch < '0' || ch > '9'; ch = getchar()) f = ch == '-' ? -1 : 1;
+	for (; ch >= '0' && ch <= '9'; ch = getchar()) x = x * 10 + ch - '0';
+	return f * x;
+}
+
+inline void add(int u, int v, int w) {
+	g[cnt] = edge(v, w, head[u]);
+	head[u] = cnt++;
+}
+
+inline void insert(int u, int v, int w) {
+	add(u, v, w); add(v, u, 0);
+}
+
+inline bool bfs() {
+	for (int i = 0; i <= ed; i++) depth[i] = -1;
+	int h = 0, t = 0, u, i; depth[q[t++] = bg] = 1;
+	while (h != t) for (i = head[u = q[h++]]; ~i; i = g[i].next) if (g[i].w && !~depth[g[i].v]) {
+		depth[g[i].v] = depth[u] + 1;
+		if (g[i].v == ed) return 1;
+		q[t++] = g[i].v;
+	}
+	return 0;
+}
+
+inline int dfs(int x, int flow) {
+	if (x == ed) return flow;
+	int left = flow;
+	for (int i = cur[x]; ~i; i = g[i].next) if (g[i].w && depth[g[i].v] == depth[x] + 1) {
+		int tmp = dfs(g[i].v, min(left, g[i].w));
+		left -= tmp; g[i].w -= tmp; g[i ^ 1].w += tmp;
+		if (g[i].w) cur[x] = i;
+		if (!left) return flow;
+	}
+	if (left == flow) depth[x] = -1;
+	return flow - left;
+}
+
+int main() {
+	n = iread(); food = iread(); drink = iread(); bg = 0; ed = food + (n << 1) + drink + 1;
+	for (int i = 0; i <= ed; i++) head[i] = -1; cnt = 0;
+
+	for (int i = 1; i <= n; i++) {
+		int m1 = iread(), m2 = iread();
+		while (m1--) {
+			int u = iread();
+			insert(u, food + i, 1);
+		}
+		while (m2--) {
+			int u = iread();
+			insert(food + n + i, food + (n << 1) + u, 1);
+		}
+	}
+
+	for (int i = 1; i <= food; i++) insert(bg, i, 1);
+	for (int i = 1; i <= drink; i++) insert(food + (n << 1) + i, ed, 1);
+	for (int i = 1; i <= n; i++) insert(food + i, food + n + i, 1);
+
+	int ans = 0;
+	while (bfs()) {
+		for (int i = 0; i <= ed; i++) cur[i] = head[i];
+		ans += dfs(bg, inf);
+	}
+	printf("%d\n", ans);
+	return 0;
+}

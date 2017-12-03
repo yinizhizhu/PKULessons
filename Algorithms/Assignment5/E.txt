@@ -1,0 +1,98 @@
+#include <cstdio>
+#include <cstring>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+const int maxn = 20000 + 10;
+const int INF = 123456789;
+
+struct edge {
+	int to, cap, rev;
+	edge(int t, int c, int r) : to(t), cap(c), rev(r) {}
+};
+
+vector<edge> G[maxn];
+int level[maxn];
+int iter[maxn];
+
+void add_edge(int from, int to, int cap) {
+	G[from].push_back(edge(to, cap, G[to].size()));
+	G[to].push_back(edge(from, 0, G[from].size() - 1));
+}
+
+void Bfs(int s) {
+	memset(level, -1, sizeof(level));
+	queue<int> q;
+	level[s] = 0;
+	q.push(s);
+	while (!q.empty()) {
+		int v = q.front();
+		q.pop();
+		for (int i = 0; i < G[v].size(); i++) {
+			edge &e = G[v][i];
+			if (e.cap > 0 && level[e.to] < 0) {
+				level[e.to] = level[v] + 1;
+				q.push(e.to);
+			}
+		}
+	}
+}
+
+int Dfs(int v, int t, int f) {
+	if (v == t) {
+		return f;
+	}
+	for (int &i = iter[v]; i < G[v].size(); i++) {
+		edge &e = G[v][i];
+		if (e.cap > 0 && level[v] < level[e.to]) {
+			int d = Dfs(e.to, t, min(e.cap, f));
+			if (d > 0) {
+				e.cap -= d;
+				G[e.to][e.rev].cap += d;
+				return d;
+			}
+		}
+	}
+	return 0;
+}
+
+int max_flow(int s, int t) {
+	int flow = 0;
+	for (; ; ) {
+		Bfs(s);
+		if (level[t] < 0) {
+			return flow;
+		}
+		memset(iter, 0, sizeof(iter));
+		int f;
+		while ((f = Dfs(s, t, INF)) > 0) {
+			flow += f;
+		}
+	}
+}
+
+int main() {
+	int n, m;
+	scanf("%d%d", &n, &m);
+
+	int s = n, t = n + 1;
+	for (int i = 0; i < n; i++) {
+		int a, b;
+		scanf("%d%d", &a, &b);
+		add_edge(i, t, a);
+		add_edge(s, i, b);
+	}
+
+	for (int i = 0; i < m; i++) {
+		int a, b, w;
+		scanf("%d%d%d", &a, &b, &w);
+		add_edge(a - 1, b - 1, w);
+		add_edge(b - 1, a - 1, w);
+	}
+
+	printf("%d\n", max_flow(s, t));
+
+	return 0;
+}

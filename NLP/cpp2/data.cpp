@@ -1,6 +1,6 @@
 #include "data.h"
 
-Data::Data() {}
+Data::Data() { addHeadWords(); }
 
 Data::~Data() {}
 
@@ -51,12 +51,14 @@ Pair Data::getNext() {
 	unsigned int i = step;
 	if (i < tags.size() && tags[i][0] == 'S') {
 		step++;
+		findHeadWord(i, i);
 		return Pair(i, i);
 	}
 	for (++i; i < tags.size(); i++) {
 		if (tags[i][0] == 'E') {
 			int h = step;
 			step = i + 1;
+			findHeadWord(h, i);
 			return Pair(h, i);
 		}
 	}
@@ -93,6 +95,28 @@ void Data::demo() {
 		} while (p.first != -1);
 		show();
 	}
+	in.close();
+}
+
+int Data::getHeadWordIndex() {
+	return indexHeadWord;
+}
+
+void Data::findHeadWord(int h, int t) {
+	for (int j=h; j<=t; j++)
+		for (int i = 0; i < headWords.size(); i++)
+			if (headWords[i] == words[j]) {
+				indexHeadWord = j;
+				return;
+			}
+	indexHeadWord = h;
+}
+
+void Data::addHeadWords() {
+	ifstream in("headWords.txt");
+	string str;
+	for (; in >> str;)
+		headWords.push_back(str);
 	in.close();
 }
 

@@ -6,8 +6,10 @@
 // output the prase type of verb
 #define SHOWVVPT
 #define DEV
-//#define OUTFEATURE
 
+#ifdef NEW_OUTPUT
+#define OUTFEATURE
+#endif // NEW_OUTPUT
 
 tree::tree() {
 	root = NULL;
@@ -20,11 +22,10 @@ tree::tree() {
 	ptype_c = 1;
 	path_c = 1;
 
-	verb_n = -1;
-	head_n = -1;
-	hpos_n = -1;
-	ptype_n = -1;
-	path_n = -1;
+	left_c = 1;
+	right_c = 1;
+	vpos_c = 1;
+	ppath_c = 1;
 }
 
 tree::~tree() {
@@ -461,8 +462,13 @@ void tree::getVerbs() {
 PNODE tree::getVNode(PNODE r, string verb) {
 	if (r) {
 		if (isLeaf(r)) {
-			if (r->attr[0] == 'V' && r->word == verb)
+			if (r->attr[0] == 'V' && r->word == verb) {
+				if (vpos_int.find(r->attr) == vpos_int.end()) {
+					vpos_int[r->attr] = vpos_c;
+					vpos_c++;
+				}
 				return r;
+			}
 		}
 		else {
 			PNODE ans = NULL;
@@ -642,7 +648,6 @@ void tree::getTrainData() {
 	ofstream outFeature("demoFeature.txt"); //for the multi-classifier
 	ofstream outFeature2("demoFeature2.txt"); //for the binary classifier
 #endif // OUTFEATURE
-
 	int i, len, process = 0, counter;
 	string part, attr, word;
 	PNODE step = NULL;
@@ -685,12 +690,14 @@ void tree::getTrainData() {
 					reachRoot(step, vPath); //get the path of current node to the root
 					getRelMid(step);
 
-					Pair p;
+					string ppath;
+					Pair p, cLeftRight;
 					PNODE a, b, c, up;
 					vector<PNODE> pathC;
 					unordered_map<PNODE, int> hasIt;//store the pnode with tagging
 					for (p = d.getNext(); p.first != -1; p = d.getNext()) {
 						int x = p.first, y = p.second;
+						int iHW = d.getHeadWordIndex();
 						getNode(a, b, d, p);
 						if (a == NULL)
 							cout << "Freak!!!" << endl;
@@ -700,21 +707,19 @@ void tree::getTrainData() {
 							for (c = a; c->parent->childs.size() == 1; c = c->parent);
 						hasIt[c] = 1;
 						reachRoot(c, pathC);
-						//showPath(pathC);
-						//showPath(vPath);
-						Path path = getPath(pathC);
-
+						cLeftRight = getLeftRight(c);
+						Path path = getPath(pathC, ppath);
 						//multi
 						if (verb_int.find(d.v()) == verb_int.end()) {
 							verb_int[d.v()] = verb_c;
 							verb_c++;
 						}
-						if (head_int.find(d.w(x)) == head_int.end()) {
-							head_int[d.w(x)] = head_c;
+						if (head_int.find(d.w(iHW)) == head_int.end()) {
+							head_int[d.w(iHW)] = head_c;
 							head_c++;
 						}
-						if (hpos_int.find(d.a(x)) == hpos_int.end()) {
-							hpos_int[d.a(x)] = hpos_c;
+						if (hpos_int.find(d.a(iHW)) == hpos_int.end()) {
+							hpos_int[d.a(iHW)] = hpos_c;
 							hpos_c++;
 						}
 						if (ptype_int.find(c->attr) == ptype_int.end()) {
@@ -725,22 +730,38 @@ void tree::getTrainData() {
 							path_int[path.first] = path_c;
 							path_c++;
 						}
+						if (ppath_int.find(ppath) == ppath_int.end()) {
+							ppath_int[ppath] = ppath_c;
+							ppath_c++;
+						}
 
 #ifdef OUTFEATURE
 						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
-						outFeature << head_int[d.w(x)] << " " << hpos_int[d.a(x)] << " ";	//head word & POS of head word
+						outFeature << head_int[d.w(iHW)] << " ";
+						outFeature << hpos_int[d.a(iHW)] << " ";	//head word & POS of head word
 						outFeature << ptype_int[c->attr] << " ";	//phrase type
-						outFeature << path_int[path.first] << " " << path.second << " ";	// path
+						outFeature << path_int[path.first] << " ";
+						outFeature << cLeftRight.first << " ";
+						outFeature << cLeftRight.second << " ";
+						outFeature << vpos_int[step->attr] << " ";
+						outFeature << ppath_int[ppath] << " ";
+						//outFeature << path.second << " ";	// path
 
 																							//binary
 						outFeature2 << verb_int[d.v()] << " ";	//predicate
 						outFeature2 << lsb << " ";	//voice
 						outFeature2 << getPosition(c, step) << " ";	//position
-						outFeature2 << head_int[d.w(x)] << " " << hpos_int[d.a(x)] << " ";	//head word & POS of head word
+						outFeature2 << head_int[d.w(iHW)] << " ";
+						outFeature2 << hpos_int[d.a(iHW)] << " ";	//head word & POS of head word
 						outFeature2 << ptype_int[c->attr] << " ";	//phrase type
-						outFeature2 << path_int[path.first] << " " << path.second << " ";	// path
+						outFeature2 << path_int[path.first] << " ";
+						outFeature2 << cLeftRight.first << " ";
+						outFeature2 << cLeftRight.second << " ";
+						outFeature2 << vpos_int[step->attr] << " ";
+						outFeature2 << ppath_int[ppath] << " ";
+						//outFeature2 << path.second << " ";	// path
 
 #endif // OUTFEATURE
 						word = d.tags[x].substr(2, d.tags[x].size() - 2);
@@ -757,7 +778,6 @@ void tree::getTrainData() {
 						//binary: tag 1, which means the current node is a candidate
 						outFeature2 << 1 << endl;
 #endif // OUTFEATURE
-
 					}
 
 					getCandidates(step);
@@ -765,41 +785,48 @@ void tree::getTrainData() {
 					for (i = 0; i < candidates.size(); i++) {
 						c = candidates[i];
 						if (hasIt.find(c) == hasIt.end()) {
+							HWPair headWord = getHeadWord(c, d.headWords);
 							reachRoot(c, pathC);
-							//showPath(pathC);
-							//showPath(vPath);
-							Path path = getPath(pathC);
+							cLeftRight = getLeftRight(c);
+							Path path = getPath(pathC, ppath);
 
 							if (verb_int.find(d.v()) == verb_int.end()) {
-								verb_int[d.v()] = verb_n;
-								verb_n--;
+								verb_int[d.v()] = verb_c;
+								verb_c++;
 							}
-							word = getLeafW(c);
-							if (head_int.find(word) == head_int.end()) {
-								head_int[word] = head_n;
-								head_n--;
+							if (head_int.find(headWord.first) == head_int.end()) {
+								head_int[headWord.first] = head_c;
+								head_c++;
 							}
-							word = getLeafA(c);
-							if (hpos_int.find(word) == hpos_int.end()) {
-								hpos_int[word] = hpos_n;
-								hpos_n--;
+							if (hpos_int.find(headWord.second) == hpos_int.end()) {
+								hpos_int[headWord.second] = hpos_c;
+								hpos_c++;
 							}
 							if (ptype_int.find(c->attr) == ptype_int.end()) {
-								ptype_int[c->attr] = ptype_n;
-								ptype_n--;
+								ptype_int[c->attr] = ptype_c;
+								ptype_c++;
 							}
 							if (path_int.find(path.first) == path_int.end()) {
-								path_int[path.first] = path_n;
-								path_n--;
+								path_int[path.first] = path_c;
+								path_c++;
 							}
-
+							if (ppath_int.find(ppath) == ppath_int.end()) {
+								ppath_int[ppath] = ppath_c;
+								ppath_c++;
+							}
 #ifdef OUTFEATURE
 							outFeature2 << verb_int[d.v()] << " ";	//predicate
 							outFeature2 << lsb << " ";	//voice
 							outFeature2 << getPosition(c, step) << " ";	//position
-							outFeature2 << head_int[getLeafW(c)] << " " << hpos_int[word] << " ";	//head word & POS of head word
+							outFeature2 << head_int[headWord.first] << " ";
+							outFeature2 << hpos_int[headWord.second] << " ";	//head word & POS of head word
 							outFeature2 << ptype_int[c->attr] << " ";	//phrase type
-							outFeature2 << path_int[path.first] << " " << path.second << " 0" << endl;	// path
+							outFeature2 << path_int[path.first] << " ";
+							outFeature2 << cLeftRight.first << " ";
+							outFeature2 << cLeftRight.second << " ";
+							outFeature2 << vpos_int[step->attr] << " ";
+							outFeature2 << ppath_int[ppath] << " 0" << endl;
+							//outFeature2 << path.second << " 0" << endl;	// path
 #endif // OUTFEATURE
 						}
 					}
@@ -826,6 +853,48 @@ void tree::getTrainData() {
 #endif // OUTFEATURE
 	inData.close();
 	in.close();
+}
+
+Pair tree::getLeftRight(PNODE r) {
+	PNODE p = r->parent;
+	int left = 0, right = 0;
+	int i, len = p->childs.size();
+	for (i = 0; i < len; i++)
+		if (p->childs[i] == r) break;
+	if (i != 0) {
+		if (left_int.find(p->childs[i - 1]->attr) == left_int.end()) {
+			left_int[p->childs[i - 1]->attr] = left_c;
+			left_c++;
+		}
+		left = left_int[p->childs[i - 1]->attr];
+	}
+	if (i != len - 1) {
+		if (right_int.find(p->childs[i + 1]->attr) == right_int.end()) {
+			right_int[p->childs[i + 1]->attr] = right_c;
+			right_c++;
+		}
+		right = right_int[p->childs[i + 1]->attr];
+	}
+	return Pair(left, right);
+}
+
+HWPair tree::getHeadWord(PNODE r, vector<string>& headWords) {
+	PNODE left, right, step;
+	for (step = r; !isLeaf(step); step = step->childs[0]);
+	left = step;
+	for (step = r; !isLeaf(step); step = step->childs[step->childs.size() - 1]);
+	right = step;
+	int i, len = leaves.size();
+	for (i = 0; i < len; i++)
+		if (leaves[i] == left)
+			break;
+	for (; i < len; i++) {
+		if (leaves[i] == right) len = 0;
+		for (int j = 0; j < headWords.size(); j++)
+			if (leaves[i]->word == headWords[j])
+				return HWPair(leaves[i]->word, leaves[i]->attr);
+	}
+	return HWPair(left->word, left->attr);
 }
 
 void tree::getRelMid(PNODE step) {
@@ -910,7 +979,7 @@ void tree::reachRoot(PNODE r, vector<PNODE>& path) {
 		path.push_back(r);
 }
 
-Path tree::getPath(vector<PNODE>& path) {
+Path tree::getPath(vector<PNODE>& path, string& ppath) {
 	string ans = "";
 	int len = 1;
 	int iv = vPath.size() - 1, i = path.size() - 1, j;
@@ -918,7 +987,8 @@ Path tree::getPath(vector<PNODE>& path) {
 	for (j = 0; j <= i; j++)
 		ans += path[j]->attr + "-1-";
 	len += i+1;
-	ans += path[j]->attr + "-0-";
+	ppath = ans + path[j]->attr;
+	ans += ppath + "-0-";
 	for (; iv > 0; iv--)
 		ans += vPath[iv]->attr + "-0-";
 	len += iv + 1;
@@ -1015,10 +1085,13 @@ void tree::secondTry() {
 
 					getCandidates(step);
 
+					string ppath;
 					PNODE c, up;
+					Pair cLeftRight;
 					vector<PNODE> pathC;
 					for (i = 0; i < candidates.size(); i++) {
 						c = candidates[i];
+						HWPair headWord = getHeadWord(c, d.headWords);
 						inLabel >> label;
 						//cout << label << " ";
 						if (label) {
@@ -1026,39 +1099,46 @@ void tree::secondTry() {
 							c->tag = int_str[label];
 						}
 						reachRoot(c, pathC);
-						//showPath(pathC);
-						//showPath(vPath);
-						Path path = getPath(pathC);
+						cLeftRight = getLeftRight(c);
+						Path path = getPath(pathC, ppath);
 
 						if (verb_int.find(d.v()) == verb_int.end()) {
-							verb_int[d.v()] = verb_n;
-							verb_n--;
+							verb_int[d.v()] = verb_c;
+							verb_c++;
 						}
-						word = getLeafW(c);
-						if (head_int.find(word) == head_int.end()) {
-							head_int[word] = head_n;
-							head_n--;
+						if (head_int.find(headWord.first) == head_int.end()) {
+							head_int[headWord.first] = head_c;
+							head_c++;
 						}
-						word = getLeafA(c);
-						if (hpos_int.find(word) == hpos_int.end()) {
-							hpos_int[word] = hpos_n;
-							hpos_n--;
+						if (hpos_int.find(headWord.second) == hpos_int.end()) {
+							hpos_int[headWord.second] = hpos_c;
+							hpos_c++;
 						}
 						if (ptype_int.find(c->attr) == ptype_int.end()) {
-							ptype_int[c->attr] = ptype_n;
-							ptype_n--;
+							ptype_int[c->attr] = ptype_c;
+							ptype_c++;
 						}
 						if (path_int.find(path.first) == path_int.end()) {
-							path_int[path.first] = path_n;
-							path_n--;
+							path_int[path.first] = path_c;
+							path_c++;
+						}
+						if (ppath_int.find(ppath) == ppath_int.end()) {
+							ppath_int[ppath] = ppath_c;
+							ppath_c++;
 						}
 #ifdef OUTFEATURE
 						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
-						outFeature << head_int[getLeafW(c)] << " " << hpos_int[word] << " ";	//head word & POS of head word
+						outFeature << head_int[headWord.first] << " ";
+						outFeature << hpos_int[headWord.second] << " ";	//head word & POS of head word
 						outFeature << ptype_int[c->attr] << " ";	//phrase type
-						outFeature << path_int[path.first] << " " << path.second << endl;	// path
+						outFeature << path_int[path.first] << " ";
+						outFeature << cLeftRight.first << " ";
+						outFeature << cLeftRight.second << " ";
+						outFeature << vpos_int[step->attr] << " ";
+						outFeature << ppath_int[ppath] << endl;
+						//outFeature << " " << path.second << endl;	// path
 #endif // OUTFEATURE
 					}
 					labelSentence(out2, root);

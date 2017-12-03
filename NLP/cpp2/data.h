@@ -23,7 +23,9 @@ public:
 	vector<string> words;
 	vector<string> attrs;
 	vector<string> tags;
-	vector<pair<int, int>> index;
+
+	vector<string>	headWords;
+	int	indexHeadWord;
 
 	Data();
 	~Data();
@@ -33,6 +35,9 @@ public:
 	void	clear();
 	void	show();
 	void	demo();
+	int		getHeadWordIndex();
+	void	findHeadWord(int h, int t);
+	void	addHeadWords();
 #ifdef STRING_LEE
 	string	v();
 	string	w(int i);

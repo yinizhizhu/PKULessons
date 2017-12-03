@@ -9,6 +9,7 @@
 #include "data.h"
 
 #define	FN 100
+#define NEW_OUTPUT
 
 using namespace std;
 
@@ -25,6 +26,7 @@ typedef struct node {
 }NODE, *PNODE;
 
 typedef pair<string, int> Path;
+typedef pair<string, string> HWPair;
 
 //typedef unordered_map<string, string> PRED;
 //typedef PRED::iterator ITER;
@@ -50,6 +52,8 @@ private:
 	vector<string>	prp;
 	vector<string>	tmp;
 
+	vector<string>	headWords;
+
 	int		relMid; //store the index of rel in the leaves
 	vector<PNODE> leaves; // store the leaf nodes which is useful for us to label sentence
 	vector<string> verbs; // store the verbs which are predicates
@@ -62,20 +66,32 @@ private:
 	STR_INT	str_int;	//for the arguments
 	INT_STR	int_str;	//remap
 
-	int		verb_c, verb_n;
+	int		verb_c;
 	STR_INT verb_int;	//for the verb
 
-	int		head_c, head_n;
+	int		head_c;
 	STR_INT head_int;	//for the head word
 
-	int		hpos_c, hpos_n;
+	int		hpos_c;
 	STR_INT hpos_int;	//for the pos of head word
 
-	int		ptype_c, ptype_n;
+	int		ptype_c;
 	STR_INT ptype_int;	//for the prase type
 
-	int		path_c, path_n;
+	int		path_c;
 	STR_INT path_int;	//for the path
+
+	int		left_c;
+	STR_INT left_int;	//for the left node of the current node at the same level
+
+	int		right_c;
+	STR_INT right_int;	//for the left node
+
+	int		vpos_c;
+	STR_INT vpos_int;	//for the POS of verb
+
+	int		ppath_c;
+	STR_INT	ppath_int;	//for the partial path between the current node and the predicate node
 public:
 	tree();
 	~tree();
@@ -120,6 +136,9 @@ public:
 	void	pruing(vector<PNODE>& leaves);
 
 	void	getTrainData();
+
+	Pair	getLeftRight(PNODE r);
+	HWPair	getHeadWord(PNODE r, vector<string>& headWords);
 	void	getRelMid(PNODE step);
 	int		getPosition(PNODE a, PNODE v);
 	PNODE	getComP(PNODE a, PNODE b);
@@ -127,7 +146,7 @@ public:
 	void	showPath(vector<PNODE>& path);
 
 	void	reachRoot(PNODE r, vector<PNODE>& path);
-	Path	getPath(vector<PNODE>& path);
+	Path	getPath(vector<PNODE>& path, string& ppath);
 	void	getCandidates(PNODE r);
 
 };

@@ -3,7 +3,6 @@
 #include <Python.h>
 #include "tree.h"
 
-
 using namespace std;
 
 void seperateData(char *filename, char *outname, char *outAttr) {
@@ -179,8 +178,11 @@ void clean() {
 }
 
 int main() {
+#ifndef NEW_OUTPUT
 	Py_Initialize();
 	system("python SGD.py");
+#endif // NEW_OUTPUT
+
 	//clean();
 
 	//Data d;
