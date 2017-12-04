@@ -132,7 +132,7 @@ public:
 	PNODE	getVV(int l);
 	void	firstTry(void); //label
 
-	void	secondTry();
+	void	secondTry(string labelFile, string outFile);
 	void	pruing(vector<PNODE>& leaves);
 
 	void	getTrainData();

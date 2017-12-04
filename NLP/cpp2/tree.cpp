@@ -267,31 +267,31 @@ void tree::featureW(vector<string>& con, char *filename, char *outName) {
 
 //add all the feature for each argument
 void tree::addFeatureW() {
-	char BNF[FN] = "label\\BNF.txt", outBNF[FN] = "label\\bnf_.txt";
+	char BNF[FN] = "feature\\BNF.txt", outBNF[FN] = "feature\\bnf_.txt";
 	featureW(bnf, BNF, outBNF);
 
-	char DIR[FN] = "label\\DIR.txt", outDIR[FN] = "label\\dir_.txt";
+	char DIR[FN] = "feature\\DIR.txt", outDIR[FN] = "feature\\dir_.txt";
 	featureW(dir, DIR, outDIR);
 
-	char DIS[FN] = "label\\DIS.txt", outDIS[FN] = "label\\dis_.txt";
+	char DIS[FN] = "feature\\DIS.txt", outDIS[FN] = "feature\\dis_.txt";
 	featureW(dis, DIS, outDIS);
 
-	char EXT[FN] = "label\\EXT.txt", outEXT[FN] = "label\\ext_.txt";
+	char EXT[FN] = "feature\\EXT.txt", outEXT[FN] = "feature\\ext_.txt";
 	featureW(ext, EXT, outEXT);
 
-	char FRQ[FN] = "label\\FRQ.txt", outFRQ[FN] = "label\\frq_.txt";
+	char FRQ[FN] = "feature\\FRQ.txt", outFRQ[FN] = "feature\\frq_.txt";
 	featureW(frq, FRQ, outFRQ);
 
-	char LOC[FN] = "label\\LOC.txt", outLOC[FN] = "label\\loc_.txt";
+	char LOC[FN] = "feature\\LOC.txt", outLOC[FN] = "feature\\loc_.txt";
 	featureW(loc, LOC, outLOC);
 
-	char MNR[FN] = "label\\MNR.txt", outMNR[FN] = "label\\mnr_.txt";
+	char MNR[FN] = "feature\\MNR.txt", outMNR[FN] = "feature\\mnr_.txt";
 	featureW(mnr, MNR, outMNR);
 
-	char PRP[FN] = "label\\PRP.txt", outPRP[FN] = "label\\prp_.txt";
+	char PRP[FN] = "feature\\PRP.txt", outPRP[FN] = "feature\\prp_.txt";
 	featureW(prp, PRP, outPRP);
 
-	char TMP[FN] = "label\\TMP.txt", outTMP[FN] = "label\\tmp_.txt";
+	char TMP[FN] = "feature\\TMP.txt", outTMP[FN] = "feature\\tmp_.txt";
 	featureW(tmp, TMP, outTMP);
 }
 
@@ -747,7 +747,7 @@ void tree::getTrainData() {
 						outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
 						outFeature << ppath_int[ppath] << " ";
-						//outFeature << path.second << " ";	// path
+						outFeature << path.second << " ";	// path
 
 																							//binary
 						outFeature2 << verb_int[d.v()] << " ";	//predicate
@@ -761,7 +761,7 @@ void tree::getTrainData() {
 						outFeature2 << cLeftRight.second << " ";
 						outFeature2 << vpos_int[step->attr] << " ";
 						outFeature2 << ppath_int[ppath] << " ";
-						//outFeature2 << path.second << " ";	// path
+						outFeature2 << path.second << " ";	// path
 
 #endif // OUTFEATURE
 						word = d.tags[x].substr(2, d.tags[x].size() - 2);
@@ -825,8 +825,8 @@ void tree::getTrainData() {
 							outFeature2 << cLeftRight.first << " ";
 							outFeature2 << cLeftRight.second << " ";
 							outFeature2 << vpos_int[step->attr] << " ";
-							outFeature2 << ppath_int[ppath] << " 0" << endl;
-							//outFeature2 << path.second << " 0" << endl;	// path
+							outFeature2 << ppath_int[ppath] << " ";
+							outFeature2 << path.second << " 0" << endl;	// path
 #endif // OUTFEATURE
 						}
 					}
@@ -1018,14 +1018,15 @@ void tree::freeNode(PNODE r) {
 }
 
 // do main job: labeling
-void tree::secondTry() {
+void tree::secondTry(string labelFile, string outFile) {
 	cout << "Labeling..." << endl;
 #ifndef DEV
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testTree.txt");
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt");
 #else
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\devTree.txt");
-	ifstream inLabel("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\demoFeatureDevLabel.txt");
+	//ifstream inLabel("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel.txt");
+	ifstream inLabel(labelFile);
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt");
 #endif // !DEV
 
@@ -1036,8 +1037,8 @@ void tree::secondTry() {
 #ifdef OUTFEATURE
 	ofstream outFeature("demoFeatureDev.txt");
 #endif // OUTFEATURE
-
-	ofstream out2("demoFeatureDevLabelSentence.txt");
+	//ofstream out2("label\\demoFeatureDevLabelSentence.txt");
+	ofstream out2(outFile);
 #endif // !DEV
 
 	int i, len, process = 0, counter, label;
@@ -1137,8 +1138,8 @@ void tree::secondTry() {
 						outFeature << cLeftRight.first << " ";
 						outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
-						outFeature << ppath_int[ppath] << endl;
-						//outFeature << " " << path.second << endl;	// path
+						outFeature << ppath_int[ppath] << " ";
+						outFeature << path.second << endl;	// path
 #endif // OUTFEATURE
 					}
 					labelSentence(out2, root);

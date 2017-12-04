@@ -3,6 +3,8 @@
 #include <Python.h>
 #include "tree.h"
 
+#define SELECT_METHOD
+
 using namespace std;
 
 void seperateData(char *filename, char *outname, char *outAttr) {
@@ -178,22 +180,39 @@ void clean() {
 }
 
 int main() {
-#ifndef NEW_OUTPUT
-	Py_Initialize();
+#ifdef SELECT_METHOD
 	system("python SGD.py");
-#endif // NEW_OUTPUT
-
-	//clean();
-
-	//Data d;
-	//d.demo();
 
 	tree t;
 	//t.firstTry();
-
 	t.getTrainData();
-	t.secondTry();
 
-	system("python calc_f1.py");
+	char cmd[100];
+	string classifierName[9] = { "SGDBinary", "decisionTree", "knn", "gaussianNB", "svm_",
+		"bagging_", "randomforest", "adaboost", "adaboost_" };
+	string indexTag[9] = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
+	string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel";
+	string outFile = "label\\demoFeatureDevLabelSentence";
+	string check = "python calc_f1.py";
+	for (int i = 8; i < 9; i++) {
+		if (i != 7)
+			for (int j = 0; j < 1; j++) {
+				string tmpLabel = labelFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
+				string tmpOut = outFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
+				string tmpCheck = check + " " + indexTag[i] + " " + indexTag[j];
+				cout << tmpLabel << " " << tmpOut << " " << tmpCheck << endl;
+				t.secondTry(tmpLabel, tmpOut);
+				strcpy(cmd, tmpCheck.c_str());
+				cout << classifierName[i] << " * " << classifierName[j] << ": ";
+				system(cmd);
+			}
+	}
+
+
+#else
+#ifndef NEW_OUTPUT
+	system("python SGD_.py");
+#endif // NEW_OUTPUT
+#endif // SELECT_METHOD
     return 0;
 }
