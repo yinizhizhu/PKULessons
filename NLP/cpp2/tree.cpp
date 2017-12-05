@@ -6,10 +6,7 @@
 // output the prase type of verb
 #define SHOWVVPT
 #define DEV
-
-#ifdef NEW_OUTPUT
 #define OUTFEATURE
-#endif // NEW_OUTPUT
 
 tree::tree() {
 	root = NULL;
@@ -98,8 +95,8 @@ void tree::showSentence(ofstream& out, PNODE r) {
 int tree::getI(PNODE r) {
 	int i = leaves.size() - 1;
 	for (; i >= 0; i--)
-		if (leaves[i] == r)
-			return i;
+		if (leaves[i] == r) break;
+	return i;
 }
 
 //get the leaf node head and tail of the node r
@@ -692,7 +689,7 @@ void tree::getTrainData() {
 
 					string ppath;
 					Pair p, cLeftRight;
-					PNODE a, b, c, up;
+					PNODE a, b, c;
 					vector<PNODE> pathC;
 					unordered_map<PNODE, int> hasIt;//store the pnode with tagging
 					for (p = d.getNext(); p.first != -1; p = d.getNext()) {
@@ -747,7 +744,7 @@ void tree::getTrainData() {
 						outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
 						outFeature << ppath_int[ppath] << " ";
-						outFeature << path.second << " ";	// path
+						//outFeature << path.second << " ";	// path
 
 																							//binary
 						outFeature2 << verb_int[d.v()] << " ";	//predicate
@@ -761,7 +758,7 @@ void tree::getTrainData() {
 						outFeature2 << cLeftRight.second << " ";
 						outFeature2 << vpos_int[step->attr] << " ";
 						outFeature2 << ppath_int[ppath] << " ";
-						outFeature2 << path.second << " ";	// path
+						//outFeature2 << path.second << " ";	// path
 
 #endif // OUTFEATURE
 						word = d.tags[x].substr(2, d.tags[x].size() - 2);
@@ -825,8 +822,8 @@ void tree::getTrainData() {
 							outFeature2 << cLeftRight.first << " ";
 							outFeature2 << cLeftRight.second << " ";
 							outFeature2 << vpos_int[step->attr] << " ";
-							outFeature2 << ppath_int[ppath] << " ";
-							outFeature2 << path.second << " 0" << endl;	// path
+							outFeature2 << ppath_int[ppath] << " 0" << endl;
+							//outFeature2 << path.second << " 0" << endl;	// path
 #endif // OUTFEATURE
 						}
 					}
@@ -879,11 +876,9 @@ Pair tree::getLeftRight(PNODE r) {
 }
 
 HWPair tree::getHeadWord(PNODE r, vector<string>& headWords) {
-	PNODE left, right, step;
-	for (step = r; !isLeaf(step); step = step->childs[0]);
-	left = step;
-	for (step = r; !isLeaf(step); step = step->childs[step->childs.size() - 1]);
-	right = step;
+	PNODE left, right;
+	for (left = r; !isLeaf(left); left = left->childs[0]);
+	for (right = r; !isLeaf(right); right = right->childs[right->childs.size() - 1]);
 	int i, len = leaves.size();
 	for (i = 0; i < len; i++)
 		if (leaves[i] == left)
@@ -905,13 +900,16 @@ void tree::getRelMid(PNODE step) {
 }
 
 int tree::getPosition(PNODE a, PNODE v) {
-	int i = leaves.size() - 1;
+	int i = leaves.size() - 1, ans = 1;
 	for (; i >= 0; i--) {
-		if (leaves[i] == a)
-			return -1;
+		if (leaves[i] == a) {
+			ans = -1;
+			break;
+		}
 		if (leaves[i] == v)
-			return 1;
+			break;
 	}
+	return ans;
 }
 
 PNODE tree::getComP(PNODE a, PNODE b) {
@@ -1018,18 +1016,20 @@ void tree::freeNode(PNODE r) {
 }
 
 // do main job: labeling
-void tree::secondTry(string labelFile, string outFile) {
+void tree::secondTry(string labelFile, string outFile, char* cmd) {
+	// call the SGD to do the classification
+	system(cmd);
+
 	cout << "Labeling..." << endl;
 #ifndef DEV
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testTree.txt");
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt");
 #else
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\devTree.txt");
-	//ifstream inLabel("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel.txt");
-	ifstream inLabel(labelFile);
 	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt");
 #endif // !DEV
-
+	//ifstream inLabel("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel.txt");
+	ifstream inLabel(labelFile);
 	Data d;
 #ifndef DEV
 	ofstream outFeature("demoFeatureTest.txt");
@@ -1087,7 +1087,7 @@ void tree::secondTry(string labelFile, string outFile) {
 					getCandidates(step);
 
 					string ppath;
-					PNODE c, up;
+					PNODE c;
 					Pair cLeftRight;
 					vector<PNODE> pathC;
 					for (i = 0; i < candidates.size(); i++) {
@@ -1138,8 +1138,8 @@ void tree::secondTry(string labelFile, string outFile) {
 						outFeature << cLeftRight.first << " ";
 						outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
-						outFeature << ppath_int[ppath] << " ";
-						outFeature << path.second << endl;	// path
+						outFeature << ppath_int[ppath] << endl; //<< " ";
+						//outFeature << path.second << endl;	// path
 #endif // OUTFEATURE
 					}
 					labelSentence(out2, root);

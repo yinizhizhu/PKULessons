@@ -9,7 +9,6 @@
 #include "data.h"
 
 #define	FN 100
-#define NEW_OUTPUT
 
 using namespace std;
 
@@ -132,7 +131,7 @@ public:
 	PNODE	getVV(int l);
 	void	firstTry(void); //label
 
-	void	secondTry(string labelFile, string outFile);
+	void	secondTry(string labelFile, string outFile, char* cmd);
 	void	pruing(vector<PNODE>& leaves);
 
 	void	getTrainData();

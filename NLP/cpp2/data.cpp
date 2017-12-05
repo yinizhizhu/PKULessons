@@ -103,12 +103,14 @@ int Data::getHeadWordIndex() {
 }
 
 void Data::findHeadWord(int h, int t) {
-	for (int j=h; j<=t; j++)
-		for (int i = 0; i < headWords.size(); i++)
-			if (headWords[i] == words[j]) {
-				indexHeadWord = j;
-				return;
-			}
+	if (h != t) {
+		for (int j = h; j <= t; j++)
+			for (int i = 0; i < headWords.size(); i++)
+				if (headWords[i] == words[j]) {
+					indexHeadWord = j;
+					return;
+				}
+	}
 	indexHeadWord = h;
 }
 
