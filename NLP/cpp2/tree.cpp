@@ -23,6 +23,12 @@ tree::tree() {
 	right_c = 1;
 	vpos_c = 1;
 	ppath_c = 1;
+
+	verbf_c = 1;
+	fusionf_c = 1;
+	fusions_c = 1;
+	first_c = 1;
+	last_c = 1;
 }
 
 tree::~tree() {
@@ -293,7 +299,7 @@ void tree::addFeatureW() {
 }
 
 //check whether the word is in feature or not
-bool tree::inFeatureW(vector<string>& con, string& str) {
+bool tree::inFeatureW(vector<string>& con, string str) {
 	for (int i = 0; i < con.size(); i++)
 		if (con[i].find(str) != -1) //Only if str is in any uint of str can indicate the class str should be tagged with
 			return true;
@@ -456,21 +462,24 @@ void tree::getVerbs() {
 }
 
 // get the VP node: starting node
-PNODE tree::getVNode(PNODE r, string verb) {
+PNODE tree::getVNode(PNODE r, string& verb, string& verbf) {
 	if (r) {
 		if (isLeaf(r)) {
 			if (r->attr[0] == 'V' && r->word == verb) {
-				if (vpos_int.find(r->attr) == vpos_int.end()) {
-					vpos_int[r->attr] = vpos_c;
-					vpos_c++;
-				}
+				insertUnorderMap(vpos_int, r->attr, vpos_c);
+
+				PNODE p = r->parent;
+				verbf = p->attr;
+				for (int i = 0; i < p->childs.size(); i++)
+					verbf += p->childs[i]->attr;
+				insertUnorderMap(verbf_int, verbf, verbf_c);
 				return r;
 			}
 		}
 		else {
 			PNODE ans = NULL;
 			for (int i = 0; i < r->childs.size(); i++) {
-				ans = getVNode(r->childs[i], verb);
+				ans = getVNode(r->childs[i], verb, verbf);
 				if (ans)
 					return ans;
 			}
@@ -482,7 +491,8 @@ PNODE tree::getVNode(PNODE r, string verb) {
 // label the nodes near the starting node, and return the Starting node
 PNODE tree::getVV(int l) {
 	cout << "In getVNode: " << verbs[l] << endl;
-	PNODE step = getVNode(root, verbs[l]);
+	string onuse;
+	PNODE step = getVNode(root, verbs[l], onuse);
 	cout << "Out getVNode!" << endl;
 	if (step) {
 		cout << step->attr << endl;
@@ -635,6 +645,13 @@ void tree::firstTry() {
 	in.close();
 }
 
+void tree::insertUnorderMap(STR_INT& unoderdeMap, string str, int& b) {
+	if (unoderdeMap.find(str) == unoderdeMap.end()) {
+		unoderdeMap[str] = b;
+		b++;
+	}
+}
+
 // do main job: labeling
 void tree::getTrainData() {
 	cout << "Training..." << endl;
@@ -644,6 +661,8 @@ void tree::getTrainData() {
 #ifdef OUTFEATURE
 	ofstream outFeature("demoFeature.txt"); //for the multi-classifier
 	ofstream outFeature2("demoFeature2.txt"); //for the binary classifier
+	ofstream Feature("Feature.txt"); //for the binary classifier
+	ofstream Feature2("Feature2.txt"); //for the binary classifier
 #endif // OUTFEATURE
 	int i, len, process = 0, counter;
 	string part, attr, word;
@@ -683,11 +702,15 @@ void tree::getTrainData() {
 				path - the path between candicate node and predicate node in the prase tree
 				*/
 				if (d.getNextLine(inData)) {
-					step = getVNode(root, d.verb); // the node of predicate in the parse tree
+					string verbf;
+					step = getVNode(root, d.verb, verbf); // the node of predicate in the parse tree
 					reachRoot(step, vPath); //get the path of current node to the root
 					getRelMid(step);
 
 					string ppath;
+					string fusion1, fusion2;
+					string firstw, lastw;
+					string leftA, rightA;
 					Pair p, cLeftRight;
 					PNODE a, b, c;
 					vector<PNODE> pathC;
@@ -696,43 +719,81 @@ void tree::getTrainData() {
 						int x = p.first, y = p.second;
 						int iHW = d.getHeadWordIndex();
 						getNode(a, b, d, p);
+						
 						if (a == NULL)
 							cout << "Freak!!!" << endl;
-						if (x != y)
+						firstw = a->word;
+						insertUnorderMap(first_int, firstw, first_c);
+						if (x != y) {
+							lastw = b->word;
 							c = getComP(a, b);
-						else
+							insertUnorderMap(last_int, lastw, last_c);
+						}
+						else {
+							lastw = a->word;
+							insertUnorderMap(last_int, lastw, last_c);
 							for (c = a; c->parent->childs.size() == 1; c = c->parent);
+						}
 						hasIt[c] = 1;
 						reachRoot(c, pathC);
-						cLeftRight = getLeftRight(c);
+						cLeftRight = getLeftRight(c, leftA, rightA);
 						Path path = getPath(pathC, ppath);
 						//multi
-						if (verb_int.find(d.v()) == verb_int.end()) {
-							verb_int[d.v()] = verb_c;
-							verb_c++;
-						}
-						if (head_int.find(d.w(iHW)) == head_int.end()) {
-							head_int[d.w(iHW)] = head_c;
-							head_c++;
-						}
-						if (hpos_int.find(d.a(iHW)) == hpos_int.end()) {
-							hpos_int[d.a(iHW)] = hpos_c;
-							hpos_c++;
-						}
-						if (ptype_int.find(c->attr) == ptype_int.end()) {
-							ptype_int[c->attr] = ptype_c;
-							ptype_c++;
-						}
-						if (path_int.find(path.first) == path_int.end()) {
-							path_int[path.first] = path_c;
-							path_c++;
-						}
-						if (ppath_int.find(ppath) == ppath_int.end()) {
-							ppath_int[ppath] = ppath_c;
-							ppath_c++;
-						}
+						insertUnorderMap(verb_int, d.v(), verb_c);
 
+						insertUnorderMap(head_int, d.w(iHW), head_c);
+
+						insertUnorderMap(hpos_int, d.a(iHW), hpos_c);
+
+						insertUnorderMap(ptype_int, c->attr, ptype_c);
+
+						insertUnorderMap(path_int, path.first, path_c);
+
+						insertUnorderMap(ppath_int, ppath, ppath_c);
+
+						fusion1 = d.v() + d.w(iHW);
+						insertUnorderMap(fusionf_int, fusion1, fusionf_c);
+						fusion2 = d.v() + c->attr;
+						insertUnorderMap(fusions_int, fusion2, fusions_c);
 #ifdef OUTFEATURE
+						Feature << d.v() << " ";	//predicate
+						Feature << lsb << " ";	//voice
+						Feature << getPosition(c, step) << " ";	//position
+						Feature << d.w(iHW) << " ";
+						Feature << d.a(iHW) << " ";	//head word & POS of head word
+						Feature << c->attr << " ";	//phrase type
+						Feature << path.first << " ";
+						//Feature << leftA << " ";
+						//Feature << rightA << " ";
+						Feature << step->attr << " ";
+						Feature << ppath << " ";
+						Feature << path.second << " ";	// path
+						Feature << verbf << " ";
+						//Feature << fusion1 << " ";
+						//Feature << fusion2 << " ";
+						Feature << firstw << " ";
+						Feature << lastw << " ";
+
+
+						Feature2 << d.v() << " ";	//predicate
+						Feature2 << lsb << " ";	//voice
+						Feature2 << getPosition(c, step) << " ";	//position
+						Feature2 << d.w(iHW) << " ";
+						Feature2 << d.a(iHW) << " ";	//head word & POS of head word
+						Feature2 << c->attr << " ";	//phrase type
+						Feature2 << path.first << " ";
+						//Feature2 << leftA << " ";
+						//Feature2 << rightA << " ";
+						Feature2 << step->attr << " ";
+						Feature2 << ppath << " ";
+						Feature2 << path.second << " ";	// path
+						Feature2 << verbf << " ";
+						//Feature2 << fusion1 << " ";
+						//Feature2 << fusion2 << " ";
+						Feature2 << firstw << " ";
+						Feature2 << lastw << " ";
+
+
 						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
@@ -740,11 +801,16 @@ void tree::getTrainData() {
 						outFeature << hpos_int[d.a(iHW)] << " ";	//head word & POS of head word
 						outFeature << ptype_int[c->attr] << " ";	//phrase type
 						outFeature << path_int[path.first] << " ";
-						outFeature << cLeftRight.first << " ";
-						outFeature << cLeftRight.second << " ";
+						//outFeature << cLeftRight.first << " ";
+						//outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
 						outFeature << ppath_int[ppath] << " ";
-						//outFeature << path.second << " ";	// path
+						outFeature << path.second << " ";	// path
+						outFeature << verbf_int[verbf] << " ";
+						//outFeature << fusionf_int[fusion1] << " ";
+						//outFeature << fusions_int[fusion2] << " ";
+						outFeature << first_int[firstw] << " ";
+						outFeature << last_int[lastw] << " ";
 
 																							//binary
 						outFeature2 << verb_int[d.v()] << " ";	//predicate
@@ -754,11 +820,16 @@ void tree::getTrainData() {
 						outFeature2 << hpos_int[d.a(iHW)] << " ";	//head word & POS of head word
 						outFeature2 << ptype_int[c->attr] << " ";	//phrase type
 						outFeature2 << path_int[path.first] << " ";
-						outFeature2 << cLeftRight.first << " ";
-						outFeature2 << cLeftRight.second << " ";
+						//outFeature2 << cLeftRight.first << " ";
+						//outFeature2 << cLeftRight.second << " ";
 						outFeature2 << vpos_int[step->attr] << " ";
 						outFeature2 << ppath_int[ppath] << " ";
-						//outFeature2 << path.second << " ";	// path
+						outFeature2 << path.second << " ";	// path
+						outFeature2 << verbf_int[verbf] << " ";
+						//outFeature2 << fusionf_int[fusion1] << " ";
+						//outFeature2 << fusions_int[fusion2] << " ";
+						outFeature2 << first_int[firstw] << " ";
+						outFeature2 << last_int[lastw] << " ";
 
 #endif // OUTFEATURE
 						word = d.tags[x].substr(2, d.tags[x].size() - 2);
@@ -767,12 +838,15 @@ void tree::getTrainData() {
 							int_str[arg_c] = word;
 							arg_c++;
 						}
-
 #ifdef OUTFEATURE
 						//multi
+						Feature << str_int[word] << endl;
+
 						outFeature << str_int[word] << endl;
 
 						//binary: tag 1, which means the current node is a candidate
+						Feature2 << 1 << endl;
+
 						outFeature2 << 1 << endl;
 #endif // OUTFEATURE
 					}
@@ -782,36 +856,46 @@ void tree::getTrainData() {
 					for (i = 0; i < candidates.size(); i++) {
 						c = candidates[i];
 						if (hasIt.find(c) == hasIt.end()) {
-							HWPair headWord = getHeadWord(c, d.headWords);
+							HWPair headWord = getHeadWord(c, d.headWords, firstw, lastw);
 							reachRoot(c, pathC);
-							cLeftRight = getLeftRight(c);
+							cLeftRight = getLeftRight(c, leftA, rightA);
 							Path path = getPath(pathC, ppath);
 
-							if (verb_int.find(d.v()) == verb_int.end()) {
-								verb_int[d.v()] = verb_c;
-								verb_c++;
-							}
-							if (head_int.find(headWord.first) == head_int.end()) {
-								head_int[headWord.first] = head_c;
-								head_c++;
-							}
-							if (hpos_int.find(headWord.second) == hpos_int.end()) {
-								hpos_int[headWord.second] = hpos_c;
-								hpos_c++;
-							}
-							if (ptype_int.find(c->attr) == ptype_int.end()) {
-								ptype_int[c->attr] = ptype_c;
-								ptype_c++;
-							}
-							if (path_int.find(path.first) == path_int.end()) {
-								path_int[path.first] = path_c;
-								path_c++;
-							}
-							if (ppath_int.find(ppath) == ppath_int.end()) {
-								ppath_int[ppath] = ppath_c;
-								ppath_c++;
-							}
+							insertUnorderMap(verb_int, d.v(), verb_c);
+
+							insertUnorderMap(head_int, headWord.first, head_c);
+
+							insertUnorderMap(hpos_int, headWord.second, hpos_c);
+
+							insertUnorderMap(ptype_int, c->attr, ptype_c);
+
+							insertUnorderMap(path_int, path.first, path_c);
+
+							insertUnorderMap(ppath_int, ppath, ppath_c);
+
+							fusion1 = d.v() + headWord.first;
+							insertUnorderMap(fusionf_int, fusion1, fusionf_c);
+							fusion2 = d.v() + c->attr;
+							insertUnorderMap(fusions_int, fusion2, fusions_c);
 #ifdef OUTFEATURE
+							Feature2 << d.v() << " ";	//predicate
+							Feature2 << lsb << " ";	//voice
+							Feature2 << getPosition(c, step) << " ";	//position
+							Feature2 << headWord.first << " ";
+							Feature2 << headWord.second << " ";	//head word & POS of head word
+							Feature2 << c->attr << " ";	//phrase type
+							Feature2 << path.first << " ";
+							//Feature2 << leftA << " ";
+							//Feature2 << rightA << " ";
+							Feature2 << step->attr << " ";
+							Feature2 << ppath << " ";
+							Feature2 << path.second << " ";	// path
+							Feature2 << verbf << " ";
+							//Feature2 << fusion1 << " ";
+							//Feature2 << fusion2 << " ";
+							Feature2 << firstw << " ";
+							Feature2 << lastw << " 0" << endl;
+
 							outFeature2 << verb_int[d.v()] << " ";	//predicate
 							outFeature2 << lsb << " ";	//voice
 							outFeature2 << getPosition(c, step) << " ";	//position
@@ -819,11 +903,17 @@ void tree::getTrainData() {
 							outFeature2 << hpos_int[headWord.second] << " ";	//head word & POS of head word
 							outFeature2 << ptype_int[c->attr] << " ";	//phrase type
 							outFeature2 << path_int[path.first] << " ";
-							outFeature2 << cLeftRight.first << " ";
-							outFeature2 << cLeftRight.second << " ";
+							//outFeature2 << cLeftRight.first << " ";
+							//outFeature2 << cLeftRight.second << " ";
 							outFeature2 << vpos_int[step->attr] << " ";
-							outFeature2 << ppath_int[ppath] << " 0" << endl;
-							//outFeature2 << path.second << " 0" << endl;	// path
+							outFeature2 << ppath_int[ppath] << " ";
+							outFeature2 << path.second << " ";	// path
+							outFeature2 << verbf_int[verbf] << " ";
+							//outFeature2 << fusionf_int[fusion1] << " ";
+							//outFeature2 << fusions_int[fusion2] << " ";
+							outFeature2 << first_int[firstw] << " ";
+							outFeature2 << last_int[lastw] << " 0" << endl;
+
 #endif // OUTFEATURE
 						}
 					}
@@ -845,6 +935,8 @@ void tree::getTrainData() {
 	}
 	cout << "Done training!" << endl;
 #ifdef OUTFEATURE
+	Feature2.close();
+	Feature.close();
 	outFeature2.close();
 	outFeature.close();
 #endif // OUTFEATURE
@@ -852,33 +944,32 @@ void tree::getTrainData() {
 	in.close();
 }
 
-Pair tree::getLeftRight(PNODE r) {
+Pair tree::getLeftRight(PNODE r, string& leftA, string& rightA) {
+	leftA = "*", rightA = "*";
 	PNODE p = r->parent;
 	int left = 0, right = 0;
 	int i, len = p->childs.size();
 	for (i = 0; i < len; i++)
 		if (p->childs[i] == r) break;
 	if (i != 0) {
-		if (left_int.find(p->childs[i - 1]->attr) == left_int.end()) {
-			left_int[p->childs[i - 1]->attr] = left_c;
-			left_c++;
-		}
-		left = left_int[p->childs[i - 1]->attr];
+		leftA = p->childs[i - 1]->attr;
+		insertUnorderMap(left_int, leftA, left_c);
+		left = left_int[leftA];
 	}
 	if (i != len - 1) {
-		if (right_int.find(p->childs[i + 1]->attr) == right_int.end()) {
-			right_int[p->childs[i + 1]->attr] = right_c;
-			right_c++;
-		}
-		right = right_int[p->childs[i + 1]->attr];
+		rightA = p->childs[i + 1]->attr;
+		insertUnorderMap(right_int, rightA, right_c);
+		right = right_int[rightA];
 	}
 	return Pair(left, right);
 }
 
-HWPair tree::getHeadWord(PNODE r, vector<string>& headWords) {
+HWPair tree::getHeadWord(PNODE r, vector<string>& headWords, string& firstw, string& lastw) {
 	PNODE left, right;
 	for (left = r; !isLeaf(left); left = left->childs[0]);
 	for (right = r; !isLeaf(right); right = right->childs[right->childs.size() - 1]);
+	firstw = left->word;
+	lastw = right->word;
 	int i, len = leaves.size();
 	for (i = 0; i < len; i++)
 		if (leaves[i] == left)
@@ -987,9 +1078,9 @@ Path tree::getPath(vector<PNODE>& path, string& ppath) {
 	len += i+1;
 	ppath = ans + path[j]->attr;
 	ans += ppath + "-0-";
+	len += iv + 1;
 	for (; iv > 0; iv--)
 		ans += vPath[iv]->attr + "-0-";
-	len += iv + 1;
 	ans += vPath[iv]->attr;
 	return Path(ans, len);
 }
@@ -1016,10 +1107,7 @@ void tree::freeNode(PNODE r) {
 }
 
 // do main job: labeling
-void tree::secondTry(string labelFile, string outFile, char* cmd) {
-	// call the SGD to do the classification
-	system(cmd);
-
+void tree::secondTry(string labelFile, string outFile) {
 	cout << "Labeling..." << endl;
 #ifndef DEV
 	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testTree.txt");
@@ -1036,6 +1124,9 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 #else
 #ifdef OUTFEATURE
 	ofstream outFeature("demoFeatureDev.txt");
+	ofstream outFeature2("demoFeatureDev2.txt");
+	ofstream Feature("FeatureDev.txt");
+	ofstream Feature2("FeatureDev2.txt");
 #endif // OUTFEATURE
 	//ofstream out2("label\\demoFeatureDevLabelSentence.txt");
 	ofstream out2(outFile);
@@ -1079,7 +1170,8 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 				path - the path between candicate node and predicate node in the prase tree
 				*/
 				if (d.getNextLine(inData)) {
-					step = getVNode(root, d.verb); // the node of predicate in the parse tree
+					string verbf;
+					step = getVNode(root, d.verb, verbf); // the node of predicate in the parse tree
 					step->tag = "rel";
 					reachRoot(step, vPath); //get the path of current node to the root
 					getRelMid(step);
@@ -1087,12 +1179,15 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 					getCandidates(step);
 
 					string ppath;
+					string fusion1, fusion2;
+					string firstw, lastw;
+					string leftA, rightA;
 					PNODE c;
 					Pair cLeftRight;
 					vector<PNODE> pathC;
 					for (i = 0; i < candidates.size(); i++) {
 						c = candidates[i];
-						HWPair headWord = getHeadWord(c, d.headWords);
+						HWPair headWord = getHeadWord(c, d.headWords, firstw, lastw);
 						inLabel >> label;
 						//cout << label << " ";
 						if (label) {
@@ -1100,34 +1195,62 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 							c->tag = int_str[label];
 						}
 						reachRoot(c, pathC);
-						cLeftRight = getLeftRight(c);
+						cLeftRight = getLeftRight(c, leftA, rightA);
 						Path path = getPath(pathC, ppath);
 
-						if (verb_int.find(d.v()) == verb_int.end()) {
-							verb_int[d.v()] = verb_c;
-							verb_c++;
-						}
-						if (head_int.find(headWord.first) == head_int.end()) {
-							head_int[headWord.first] = head_c;
-							head_c++;
-						}
-						if (hpos_int.find(headWord.second) == hpos_int.end()) {
-							hpos_int[headWord.second] = hpos_c;
-							hpos_c++;
-						}
-						if (ptype_int.find(c->attr) == ptype_int.end()) {
-							ptype_int[c->attr] = ptype_c;
-							ptype_c++;
-						}
-						if (path_int.find(path.first) == path_int.end()) {
-							path_int[path.first] = path_c;
-							path_c++;
-						}
-						if (ppath_int.find(ppath) == ppath_int.end()) {
-							ppath_int[ppath] = ppath_c;
-							ppath_c++;
-						}
+						insertUnorderMap(verb_int, d.v(), verb_c);
+
+						insertUnorderMap(head_int, headWord.first, head_c);
+
+						insertUnorderMap(hpos_int, headWord.second, hpos_c);
+
+						insertUnorderMap(ptype_int, c->attr, ptype_c);
+
+						insertUnorderMap(path_int, path.first, path_c);
+
+						insertUnorderMap(ppath_int, ppath, ppath_c);
+
+						fusion1 = d.v() + headWord.first;
+						insertUnorderMap(fusionf_int, fusion1, fusionf_c);
+						fusion2 = d.v() + c->attr;
+						insertUnorderMap(fusions_int, fusion2, fusions_c);
 #ifdef OUTFEATURE
+						Feature << d.v() << " ";	//predicate
+						Feature << lsb << " ";	//voice
+						Feature << getPosition(c, step) << " ";	//position
+						Feature << headWord.first << " ";
+						Feature << headWord.second << " ";	//head word & POS of head word
+						Feature << c->attr << " ";	//phrase type
+						Feature << path.first << " ";
+						//Feature << leftA << " ";
+						//Feature << rightA << " ";
+						Feature << step->attr << " ";
+						Feature << ppath << " ";
+						Feature << path.second << " ";	// path
+						Feature << verbf << " ";
+						//Feature << fusion1 << " ";
+						//Feature << fusion2 << " ";
+						Feature << firstw << " ";
+						Feature << lastw << endl;
+
+						Feature2 << d.v() << " ";	//predicate
+						Feature2 << lsb << " ";	//voice
+						Feature2 << getPosition(c, step) << " ";	//position
+						Feature2 << headWord.first << " ";
+						Feature2 << headWord.second << " ";	//head word & POS of head word
+						Feature2 << c->attr << " ";	//phrase type
+						Feature2 << path.first << " ";
+						//Feature2 << leftA << " ";
+						//Feature2 << rightA << " ";
+						Feature2 << step->attr << " ";
+						Feature2 << ppath << " ";
+						Feature2 << path.second << " ";	// path
+						Feature2 << verbf << " ";
+						//Feature2 << fusion1 << " ";
+						//Feature2 << fusion2 << " ";
+						Feature2 << firstw << " ";
+						Feature2 << lastw << endl;
+
 						outFeature << verb_int[d.v()] << " ";	//predicate
 						outFeature << lsb << " ";	//voice
 						outFeature << getPosition(c, step) << " ";	//position
@@ -1135,11 +1258,34 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 						outFeature << hpos_int[headWord.second] << " ";	//head word & POS of head word
 						outFeature << ptype_int[c->attr] << " ";	//phrase type
 						outFeature << path_int[path.first] << " ";
-						outFeature << cLeftRight.first << " ";
-						outFeature << cLeftRight.second << " ";
+						//outFeature << cLeftRight.first << " ";
+						//outFeature << cLeftRight.second << " ";
 						outFeature << vpos_int[step->attr] << " ";
-						outFeature << ppath_int[ppath] << endl; //<< " ";
-						//outFeature << path.second << endl;	// path
+						outFeature << ppath_int[ppath] << " ";
+						outFeature << path.second << " ";	// path
+						outFeature << verbf_int[verbf] << " ";
+						//outFeature << fusionf_int[fusion1] << " ";
+						//outFeature << fusions_int[fusion2] << " ";
+						outFeature << first_int[firstw] << " ";
+						outFeature << last_int[lastw] << endl;
+
+						outFeature2 << verb_int[d.v()] << " ";	//predicate
+						outFeature2 << lsb << " ";	//voice
+						outFeature2 << getPosition(c, step) << " ";	//position
+						outFeature2 << head_int[headWord.first] << " ";
+						outFeature2 << hpos_int[headWord.second] << " ";	//head word & POS of head word
+						outFeature2 << ptype_int[c->attr] << " ";	//phrase type
+						outFeature2 << path_int[path.first] << " ";
+						//outFeature2 << cLeftRight.first << " ";
+						//outFeature2 << cLeftRight.second << " ";
+						outFeature2 << vpos_int[step->attr] << " ";
+						outFeature2 << ppath_int[ppath] << " ";
+						outFeature2 << path.second << " ";	// path
+						outFeature2 << verbf_int[verbf] << " ";
+						//outFeature2 << fusionf_int[fusion1] << " ";
+						//outFeature2 << fusions_int[fusion2] << " ";
+						outFeature2 << first_int[firstw] << " ";
+						outFeature2 << last_int[lastw] << endl;
 #endif // OUTFEATURE
 					}
 					labelSentence(out2, root);
@@ -1162,7 +1308,10 @@ void tree::secondTry(string labelFile, string outFile, char* cmd) {
 	}
 	out2.close();
 #ifdef OUTFEATURE
+	Feature2.close();
+	Feature.close();
 	outFeature.close();
+	outFeature2.close();
 #endif // OUTFEATURE
 	inData.close();
 	inLabel.close();

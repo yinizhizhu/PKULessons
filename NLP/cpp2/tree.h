@@ -91,6 +91,21 @@ private:
 
 	int		ppath_c;
 	STR_INT	ppath_int;	//for the partial path between the current node and the predicate node
+
+	int		verbf_c;
+	STR_INT	verbf_int;	//for the frame of verb
+
+	int		fusionf_c;
+	STR_INT	fusionf_int;	//for the predicate + head word
+
+	int		fusions_c;
+	STR_INT	fusions_int;	//predicate + head word
+
+	int		first_c;
+	STR_INT	first_int;	//the first word of the candidate
+
+	int		last_c;
+	STR_INT	last_int;	//the last word of the candidate
 public:
 	tree();
 	~tree();
@@ -120,24 +135,26 @@ public:
 	void	outputFeatureW(vector<string>& con, char *filename);
 	void	featureW(vector<string>& con, char *filename, char *outName);
 	void	addFeatureW(void);
-	bool	inFeatureW(vector<string>& con, string& str);
+	bool	inFeatureW(vector<string>& con, string str);
 
 	void	label(int l);
 	bool	noVV(PNODE r);
 	string	getLeafW(PNODE r);
 	string	getLeafA(PNODE r);
 	void	getVerbs(void);
-	PNODE	getVNode(PNODE r, string verb);
+	PNODE	getVNode(PNODE r, string& verb, string& verbf);
 	PNODE	getVV(int l);
 	void	firstTry(void); //label
 
-	void	secondTry(string labelFile, string outFile, char* cmd);
+	void	secondTry(string labelFile, string outFile);
 	void	pruing(vector<PNODE>& leaves);
+
+	void	insertUnorderMap(STR_INT & unoderdeMap, string a, int& b);
 
 	void	getTrainData();
 
-	Pair	getLeftRight(PNODE r);
-	HWPair	getHeadWord(PNODE r, vector<string>& headWords);
+	Pair	getLeftRight(PNODE r, string& leftA, string& rightA);
+	HWPair	getHeadWord(PNODE r, vector<string>& headWords, string& firstw, string& lastw);
 	void	getRelMid(PNODE step);
 	int		getPosition(PNODE a, PNODE v);
 	PNODE	getComP(PNODE a, PNODE b);

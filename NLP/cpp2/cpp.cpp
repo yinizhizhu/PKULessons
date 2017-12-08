@@ -3,8 +3,6 @@
 #include <Python.h>
 #include "tree.h"
 
-#define SELECT_METHOD
-
 using namespace std;
 
 void seperateData(char *filename, char *outname, char *outAttr) {
@@ -179,24 +177,61 @@ void clean() {
 	seperateData(test, outTest, outTestAttr);
 }
 
+#define NUMBER_CLASSIFIER 11
+
 int main() {
-	system("python SGD.py");
+	int savetime = 0;
 
-	tree t;
-	//t.firstTry();
-	t.getTrainData();
+	
+	if (savetime == 0) {
+		int select = 0;
+		if (select < 10)
+			system("python SGD.py 0");
 
-	char cmd[100];
-	string classifierName[10] = { "SGDBinary", "decisionTree", "knn", "gaussianNB", "svm_",
-		"bagging_", "randomforest", "adaboost", "adaboost_", "centroid" };
-	string indexTag[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-	string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel";
-	string outFile = "label\\demoFeatureDevLabelSentence";
-	string check = "python calc_f1.py";
+		tree t;
+		//t.firstTry();
+		t.getTrainData();
+		char cmd[100];
+		string classifierName[NUMBER_CLASSIFIER] = { "SGDBinary", "decisionTree", "knn", "gaussianNB", "svm_",
+			"bagging_", "randomforest", "svc", "adaboost_", "centroid", "maxEntropy" };
+		string indexTag[NUMBER_CLASSIFIER] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+		string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel";
+		string outFile = "label\\demoFeatureDevLabelSentence";
+		string check = "python calc_f1.py";
 
-	for (int i = 0; i < 10; i++) {
-		if (i != 7)
-			for (int j = 0; j < 10; j++) {
+		for (int i = select; i < NUMBER_CLASSIFIER; i++) {
+			if (i != 7)
+				for (int j = select; j < NUMBER_CLASSIFIER; j++) {
+					string tmpLabel = labelFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
+					string tmpOut = outFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
+					string tmpCheck = check + " " + indexTag[i] + " " + indexTag[j]
+						+ " " + classifierName[i] + " " + classifierName[j] + " " + indexTag[j];
+					cout << classifierName[i] << " * " << classifierName[j] << ": ";
+					cout << tmpLabel << " " << tmpOut << " " << tmpCheck << endl;
+					strcpy(cmd, tmpCheck.c_str());
+					t.secondTry(tmpLabel, tmpOut);
+					system(cmd);
+				}
+		}
+	}
+	else {
+		int select = 5;
+		if (select < 6)
+			system("python SGD.py 1");
+
+		tree t;
+		//t.firstTry();
+		t.getTrainData();
+		char cmd[100];
+		string classifierName[NUMBER_CLASSIFIER] = { "decisionTree", "knn", "svm_",
+			 "randomforest", "adaboost_", "svc" };
+		string indexTag[NUMBER_CLASSIFIER] = { "0", "1", "2", "3", "4", "5" };
+		string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\cpp\\cpp\\label\\demoFeatureDevLabel";
+		string outFile = "label\\demoFeatureDevLabelSentence";
+		string check = "python calc_f1.py";
+
+		for (int i = select; i < 6; i++) {
+			for (int j = select; j < 6; j++) {
 				string tmpLabel = labelFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
 				string tmpOut = outFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
 				string tmpCheck = check + " " + indexTag[i] + " " + indexTag[j]
@@ -204,8 +239,10 @@ int main() {
 				cout << classifierName[i] << " * " << classifierName[j] << ": ";
 				cout << tmpLabel << " " << tmpOut << " " << tmpCheck << endl;
 				strcpy(cmd, tmpCheck.c_str());
-				t.secondTry(tmpLabel, tmpOut, cmd);
+				t.secondTry(tmpLabel, tmpOut);
+				system(cmd);
 			}
+		}
 	}
     return 0;
 }
