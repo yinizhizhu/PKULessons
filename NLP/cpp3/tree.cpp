@@ -5,7 +5,12 @@
 
 // output the prase type of verb
 #define SHOWVVPT
-#define DEV
+
+/*
+    DEV - label the cpbdev.txt
+    OUTFEATURE - refresh the features in the text file
+*/
+//#define DEV
 //#define OUTFEATURE
 
 tree::tree() {
@@ -82,7 +87,7 @@ void tree::showSentence(ofstream& out, PNODE r) {
 	}
 }
 
-// get the Index 
+// get the Index
 int tree::getI(PNODE r) {
 	int i = leaves.size() - 1;
 	for (; i >= 0; i--)
@@ -151,80 +156,6 @@ void tree::label(ofstream& out, PNODE r) {
 		out << "O ";
 }
 
-// debugging for feature
-void tree::outputFeatureW(vector<string>& con, char *filename) {
-	ofstream out(filename);
-	for (int i = 0; i < con.size(); i++)
-		out << con[i] << endl;
-	out.close();
-}
-
-// get the feature words
-void tree::featureW(vector<string>& con, char *filename, char *outName) {
-	string str;
-	ifstream in(filename);
-	for (; !in.eof(); ) {
-		in >> str;
-		if (str.size())
-			con.push_back(str);
-		str = "";
-	}
-	in.close();
-	outputFeatureW(con, outName);
-}
-
-//add all the feature for each argument
-void tree::addFeatureW() {
-	char BNF[FN] = "feature\\BNF.txt", outBNF[FN] = "feature\\bnf_.txt";
-	featureW(bnf, BNF, outBNF);
-
-	char DIR[FN] = "feature\\DIR.txt", outDIR[FN] = "feature\\dir_.txt";
-	featureW(dir, DIR, outDIR);
-
-	char DIS[FN] = "feature\\DIS.txt", outDIS[FN] = "feature\\dis_.txt";
-	featureW(dis, DIS, outDIS);
-
-	char EXT[FN] = "feature\\EXT.txt", outEXT[FN] = "feature\\ext_.txt";
-	featureW(ext, EXT, outEXT);
-
-	char FRQ[FN] = "feature\\FRQ.txt", outFRQ[FN] = "feature\\frq_.txt";
-	featureW(frq, FRQ, outFRQ);
-
-	char LOC[FN] = "feature\\LOC.txt", outLOC[FN] = "feature\\loc_.txt";
-	featureW(loc, LOC, outLOC);
-
-	char MNR[FN] = "feature\\MNR.txt", outMNR[FN] = "feature\\mnr_.txt";
-	featureW(mnr, MNR, outMNR);
-
-	char PRP[FN] = "feature\\PRP.txt", outPRP[FN] = "feature\\prp_.txt";
-	featureW(prp, PRP, outPRP);
-
-	char TMP[FN] = "feature\\TMP.txt", outTMP[FN] = "feature\\tmp_.txt";
-	featureW(tmp, TMP, outTMP);
-}
-
-//check whether the word is in feature or not
-bool tree::inFeatureW(vector<string>& con, string str) {
-	for (int i = 0; i < con.size(); i++)
-		if (con[i].find(str) != -1) //Only if str is in any uint of str can indicate the class str should be tagged with
-			return true;
-	return false;
-}
-
-// check whether the current subtree has a verb or not
-bool tree::noVV(PNODE r) {
-	bool ans = true;
-	if (r) {
-		if (r->attr[0] == 'V') return false;
-		for (int i = r->childs.size() - 1; i >= 0; i--)
-			if (!noVV(r->childs[i])) {
-				ans = false;
-				break;
-			}
-	}
-	return ans;
-}
-
 // get the leftest leaf node word
 string tree::getLeafW(PNODE r) {
 	for (; !isLeaf(r);)
@@ -237,58 +168,6 @@ string tree::getLeafA(PNODE r) {
 	for (; !isLeaf(r);)
 		r = r->childs[0];
 	return r->attr;
-}
-
-// get the predicates
-void tree::getVerbs() {
-#ifndef DEV
-	char filename[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt";
-#else
-	char filename[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt";
-#endif // !DEV
-
-	ifstream in(filename);
-	ofstream out("rel.txt");
-#ifdef SHOWVVPT
-	unordered_map<string, int> lookUp;
-	typedef unordered_map<string, int>::iterator lookIter;
-#endif // SHOWVVPT
-
-	int pre, cur, len, tag;
-	string line, w;
-	word tmp;
-	char tagS[10] = "rel";
-	for (; getline(in, line); ) {
-		len = line.size();
-		tag = 1;
-		for (pre = 0, cur = 0; cur < len; cur++) {
-			if (line[cur] == ' ') {
-				w = line.substr(pre, cur - pre);
-				tmp.setWordTrain(w);
-				if (tmp.getTag() && strcmp(tmp.getTag(), tagS) == 0) {
-					tag = 0;
-					break;
-				}
-				pre = cur + 1;
-			}
-		}
-		if (tag && pre < cur)
-			tmp.setWordTrain(line.substr(pre, cur - pre));
-		verbs.push_back(tmp.getWord());
-#ifdef SHOWVVPT
-		lookIter lookTmp = lookUp.find(tmp.getAttr());
-		if (lookTmp == lookUp.end())
-			lookUp[tmp.getAttr()] = 1;
-#endif // SHOWVVPT
-	}
-	for (int i = 0; i < verbs.size(); i++)
-		out << verbs[i] << endl;
-#ifdef SHOWVVPT
-	for (lookIter lookTmp = lookUp.begin(); lookTmp != lookUp.end(); lookTmp++)
-		out << lookTmp->first << endl;
-	out.close();
-#endif // SHOWVVPT
-	in.close();
 }
 
 // get the VP node: starting node
@@ -326,6 +205,13 @@ void tree::showH(ofstream& out, int deep) {
 	for (; deep; deep--) out << ' ';
 }
 
+void tree::showStr(ofstream& out, vector<string>& str) {
+	int len = str.size() - 1, i;
+	for (i = 0; i < len; i++)
+		out << str[i] << "-";
+	out << str[i] << " ";
+}
+
 bool tree::check(char c) {
 	if (c >= '0' && c <= '9')
 		return true;
@@ -338,7 +224,7 @@ bool tree::check(char c) {
 	return false;
 }
 
-void tree::divideWord(vector<string>& word, string& words) {
+void tree::divideWord(vector<string>& word, string words) {
 	int j, lenw = words.size();
 	for (j = 0; j < lenw;) {
 		for (; j < lenw && check(words[j]); j++) {
@@ -372,7 +258,7 @@ void tree::getCoder() {
 	inFreak.close();
 
 	cout << "Initial..." << endl;
-	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtrain.txt");
+	ifstream inData("data/cpbtrain.txt");
 	Data d;
 	vector<string> word;
 	int i, len, lines = 1, process = 0, counter;
@@ -383,7 +269,7 @@ void tree::getCoder() {
 		//	continue;
 		//}
 		//if (lines == 1) {
-		//	ofstream out("debug.txt");
+		//	FILE* out("debug.txt");
 		//	len = d.words.size();
 		//	out << len << endl;
 		//	for (i = 0; i < len; i++) {
@@ -404,7 +290,11 @@ void tree::getCoder() {
 	cout << "Train Data is done!" << endl;
 
 	lines = 1;
-	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt");
+#ifdef DEV
+	ifstream in("data/cpbdev.txt");
+#else
+	ifstream in("data/cpbtest.txt");
+#endif // DEV
 	while (d.getNextLine2(in)) {
 		word.clear();
 		len = d.words.size();
@@ -417,7 +307,7 @@ void tree::getCoder() {
 	in.close();
 	cout << "Dev Data is done!" << endl;
 
-	ifstream inT("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\trainTree.txt");
+	ifstream inT("data/trainTree.txt");
 	string part, attr;
 	word.clear();
 	for (; !inT.eof();) {
@@ -455,12 +345,14 @@ void tree::getCoder() {
 // loading the data into map, and computing the features
 void tree::getTrainData() {
 	cout << "Training..." << endl;
-	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\trainTree.txt");
-	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtrain.txt");
+	ifstream in("data/trainTree.txt");
+	ifstream inData("data/cpbtrain.txt");
 	Data d;
 #ifdef OUTFEATURE
-	ofstream outFeature("demoFeature.txt"); //for the multi-classifier
-	ofstream outFeature2("demoFeature2.txt"); //for the binary classifier
+	FILE* outFeature = fopen("trainMulti.txt", "w"); //for the multi-classifier
+	FILE* outFeature2 = fopen("trainBinary.txt", "w"); //for the binary classifier
+	ofstream Feature("Feature.txt"); //for the multi-classifier
+	ofstream Feature2("Feature2.txt"); //for the binary classifier
 #endif // OUTFEATURE
 	double index;
 	int i, len, process = 0, counter;
@@ -497,7 +389,7 @@ void tree::getTrainData() {
 					getRelMid(step);
 
 					vector<string> ppath, rpath;
-					//vector<string> fusion1, fusion2;
+					//vector<string> fusion1;
 					vector<string> firstw, lastw;
 					Pair p;
 					PNODE a, b, c;
@@ -527,65 +419,92 @@ void tree::getTrainData() {
 						hasIt[c] = 1;
 						reachRoot(c, pathC);
 						getPath(pathC, ppath, rpath);
-						//multi
-						//fusion1 = d.v() + d.w(iHW);
-						//fusion2 = d.v() + c->attr;
 #ifdef OUTFEATURE
 						str.clear();
 						divideWord(str, d.v());
 						index = coderWord.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//predicate
-						outFeature2 << setprecision(9) << index << " ";	//predicate
+						fprintf(outFeature, "%.15f ", index);	//predicate
+						fprintf(outFeature2, "%.15f ", index);	//predicate
+						showStr(Feature, str);
+						showStr(Feature2, str);
 
-						outFeature << lsb << " ";	//voice
-						outFeature2 << lsb << " ";	//voice
+						fprintf(outFeature, "%d ", lsb);	//voice
+						fprintf(outFeature2, "%d ", lsb);	//voice
 
-						outFeature << getPosition(c, step) << " ";	//position
-						outFeature2 << getPosition(c, step) << " ";	//position
+						fprintf(outFeature, "%d ", getPosition(c, step));	//position
+						fprintf(outFeature2, "%d ", getPosition(c, step));	//position
 
 						str.clear();
 						divideWord(str, d.w(iHW));
 						index = coderWord.getIndex(str);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, str);
+						showStr(Feature2, str);
 
 						str.clear();
 						str.push_back(d.a(iHW));
 						index = coderPos.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//head word & POS of head word
-						outFeature2 << setprecision(9) << index << " ";	//head word & POS of head word
+						fprintf(outFeature, "%.15f ", index);	//head word & POS of head word
+						fprintf(outFeature2, "%.15f ", index);	//head word & POS of head word
+						showStr(Feature, str);
+						showStr(Feature2, str);
 
 						str.clear();
 						str.push_back(c->attr);
 						index = coderType.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//phrase type
-						outFeature2 << setprecision(9) << index << " ";	//phrase type
+						fprintf(outFeature, "%.15f ", index);	//phrase type
+						fprintf(outFeature2, "%.15f ", index);	//phrase type
+						showStr(Feature, str);
+						showStr(Feature2, str);
 
 						index = coderType.getIndex(ppath);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, ppath);
+						showStr(Feature2, ppath);
 
 						str.clear();
 						str.push_back(step->attr);
 						index = coderPos.getIndex(str);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, str);
+						showStr(Feature2, str);
 
 						index = coderType.getIndex(rpath);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, rpath);
+						showStr(Feature2, rpath);
 
 						index = coderType.getIndex(verbf);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
-						//outFeature <<setprecision(9)<< fusionf_int[fusion1] << " ";
-						//outFeature <<setprecision(9)<< fusions_int[fusion2] << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, verbf);
+						showStr(Feature2, verbf);
+
+						//word = d.v() + d.w(iHW);
+						//divideWord(fusion1, word);
+						//index = coderWord.getIndex(fusion1);
+						//fprintf(outFeature, "%.15f ", index);
+						//fprintf(outFeature2, "%.15f ", index);
+						//showStr(Feature, fusion1);
+						//showStr(Feature2, fusion1);
+
 						index = coderWord.getIndex(firstw);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, firstw);
+						showStr(Feature2, firstw);
+
 						index = coderWord.getIndex(lastw);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+						showStr(Feature, lastw);
+						showStr(Feature2, lastw);
+						Feature << '\n';
+						Feature2 << '\n';
 #endif // OUTFEATURE
 						word = d.tags[x].substr(2, d.tags[x].size() - 2);
 						if (str_int.find(word) == str_int.end()) {
@@ -595,10 +514,10 @@ void tree::getTrainData() {
 						}
 #ifdef OUTFEATURE
 						//multi
-						outFeature << setprecision(9) << str_int[word] << endl;
+						fprintf(outFeature, "%d\n", str_int[word]);
 
 						//binary: tag 1, which means the current node is a candidate
-						outFeature2 << setprecision(9) << 1 << endl;
+						fprintf(outFeature2, "%d\n", 1);
 #endif // OUTFEATURE
 					}
 
@@ -610,40 +529,55 @@ void tree::getTrainData() {
 							HWPair headWord = getHeadWord(c, d.headWords, firstw, lastw);
 							reachRoot(c, pathC);
 							getPath(pathC, ppath, rpath);
-
-							//fusion1 = d.v() + headWord.first;
-							//fusion2 = d.v() + c->attr;
 #ifdef OUTFEATURE
 							str.clear();
 							divideWord(str, d.v());
-							outFeature2 << setprecision(9) << coderWord.getIndex(str) << " ";	//predicate
+							fprintf(outFeature2, "%.15f ", coderWord.getIndex(str));	//predicate
+							showStr(Feature2, str);
 
-							outFeature2 << lsb << " ";	//voice
-							outFeature2 << getPosition(c, step) << " ";	//position
+							fprintf(outFeature2, "%d ", lsb);	//voice
+							fprintf(outFeature2, "%d ", getPosition(c, step));	//position
 
 							str.clear();
 							divideWord(str, headWord.first);
-							outFeature2 << setprecision(9) << coderWord.getIndex(str) << " ";
+							fprintf(outFeature2, "%.15f ", coderWord.getIndex(str));
+							showStr(Feature2, str);
 
 							str.clear();
 							str.push_back(headWord.second);
-							outFeature2 << setprecision(9) << coderPos.getIndex(str) << " ";	//head word & POS of head word
+							fprintf(outFeature2, "%.15f ", coderPos.getIndex(str));	//head word & POS of head word
+							showStr(Feature2, str);
 
 							str.clear();
 							str.push_back(c->attr);
-							outFeature2 << setprecision(9) << coderType.getIndex(str) << " ";	//phrase type
+							fprintf(outFeature2, "%.15f ", coderType.getIndex(str));	//phrase type
+							showStr(Feature2, str);
 
-							outFeature2 << setprecision(9) << coderType.getIndex(ppath) << " ";
+							fprintf(outFeature2, "%.15f ", coderType.getIndex(ppath));
+							showStr(Feature2, ppath);
 
 							str.clear();
 							str.push_back(step->attr);
-							outFeature2 << setprecision(9) << coderPos.getIndex(str) << " ";
+							fprintf(outFeature2, "%.15f ", coderPos.getIndex(str));
+							showStr(Feature2, str);
 
-							outFeature2 << setprecision(9) << coderType.getIndex(rpath) << " ";
-							outFeature2 << setprecision(9) << coderType.getIndex(verbf) << " ";
-							outFeature2 << setprecision(9) << coderWord.getIndex(firstw) << " ";
-							outFeature2 << setprecision(9) << coderWord.getIndex(lastw) << " 0" << endl;
+							fprintf(outFeature2, "%.15f ", coderType.getIndex(rpath));
+							showStr(Feature2, rpath);
+							fprintf(outFeature2, "%.15f ", coderType.getIndex(verbf));
+							showStr(Feature2, verbf);
 
+				/*			word = d.v() + headWord.first;
+							divideWord(fusion1, word);
+							index = coderWord.getIndex(fusion1);
+							fprintf(outFeature2, "%.15f ", index);
+							showStr(Feature2, str);*/
+
+							fprintf(outFeature2, "%.15f ", coderWord.getIndex(firstw));
+							showStr(Feature2, firstw);
+
+							fprintf(outFeature2, "%.15f 0\n", coderWord.getIndex(lastw));
+							showStr(Feature2, lastw);
+							Feature2 << '\n';
 #endif // OUTFEATURE
 						}
 					}
@@ -665,8 +599,10 @@ void tree::getTrainData() {
 	}
 	cout << "Done training!" << endl;
 #ifdef OUTFEATURE
-	outFeature2.close();
-	outFeature.close();
+	Feature2.close();
+	Feature.close();
+	fclose(outFeature2);
+	fclose(outFeature);
 #endif // OUTFEATURE
 	inData.close();
 	in.close();
@@ -701,6 +637,7 @@ void tree::getRelMid(PNODE step) {
 }
 
 int tree::getPosition(PNODE a, PNODE v) {
+	while (!isLeaf(a)) a = a->childs[0];
 	int i = leaves.size() - 1, ans = 1;
 	for (; i >= 0; i--) {
 		if (leaves[i] == a) {
@@ -815,26 +752,33 @@ void tree::freeNode(PNODE r) {
 
 // do main job: labeling
 void tree::secondTry(string labelFile, string outFile) {
+#ifndef OUTFEATURE
 	cout << "Labeling..." << endl;
-#ifndef DEV
-	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testTree.txt");
-	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt");
+#endif
+#ifdef DEV
+	ifstream in("data/devTree.txt");
+	ifstream inData("data/cpbdev.txt");
 #else
-	ifstream in("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\devTree.txt");
-	ifstream inData("C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt");
+	ifstream in("data/testTree.txt");
+	ifstream inData("data/cpbtest.txt");
 #endif // !DEV
+
+#ifdef OUTFEATURE
+#ifdef DEV
+	FILE* outFeature = fopen("devFeatureM.txt", "w");
+	FILE* outFeature2 = fopen("devFeatureB.txt", "w");
+#else
+	FILE* outFeature = fopen("testFeatureM.txt", "w");
+	FILE* outFeature2 = fopen("testFeatureB.txt", "w");
+#endif // !DEV
+#else
+	ofstream out2(outFile);
+#endif // OUTFEATURE
+
 	ifstream inLabel(labelFile);
 	Data d;
-#ifndef DEV
-	ofstream outFeature("demoFeatureTest.txt");
-#else
-#ifdef OUTFEATURE
-	ofstream outFeature("demoFeatureDev.txt");
-	ofstream outFeature2("demoFeatureDev2.txt");
-#endif // OUTFEATURE
-	//ofstream out2("label\\demoFeatureDevLabelSentence.txt");
-	ofstream out2(outFile);
-#endif // !DEV
+
+
 	double index;
 	int i, len, process = 0, counter, label;
 	string part, attr, word;
@@ -884,7 +828,7 @@ void tree::secondTry(string labelFile, string outFile) {
 					getCandidates(step);
 
 					vector<string> ppath, rpath;
-					//vector<string> fusion1, fusion2;
+					//vector<string> fusion1;
 					vector<string> firstw, lastw;
 					PNODE c;
 					vector<PNODE> pathC;
@@ -899,70 +843,73 @@ void tree::secondTry(string labelFile, string outFile) {
 						}
 						reachRoot(c, pathC);
 						getPath(pathC, ppath, rpath);
-
-
-						//fusion1 = d.v() + headWord.first;
-						//fusion2 = d.v() + c->attr;
 #ifdef OUTFEATURE
 						str.clear();
 						divideWord(str, d.v());
 						index = coderWord.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//predicate
-						outFeature2 << setprecision(9) << index << " ";	//predicate
+						fprintf(outFeature, "%.15f ", index);	//predicate
+						fprintf(outFeature2, "%.15f ", index);	//predicate
 
-						outFeature << lsb << " ";	//voice
-						outFeature2 << lsb << " ";	//voice
-						outFeature << getPosition(c, step) << " ";	//position
-						outFeature2 << getPosition(c, step) << " ";	//position
+						fprintf(outFeature, "%d ", lsb);	//voice
+						fprintf(outFeature2, "%d ", lsb);	//voice
+						fprintf(outFeature, "%d ", getPosition(c, step));	//position
+						fprintf(outFeature2, "%d ", getPosition(c, step));	//position
 
 						str.clear();
 						divideWord(str, headWord.first);
 						index = coderWord.getIndex(str);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
 
 						str.clear();
 						str.push_back(headWord.second);
 						index = coderPos.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//head word & POS of head word
-						outFeature2 << setprecision(9) << index << " ";	//head word & POS of head word
+						fprintf(outFeature, "%.15f ", index);	//head word & POS of head word
+						fprintf(outFeature2, "%.15f ", index);	//head word & POS of head word
 
 						str.clear();
 						str.push_back(c->attr);
 						index = coderType.getIndex(str);
-						outFeature << setprecision(9) << index << " ";	//phrase type
-						outFeature2 << setprecision(9) << index << " ";	//phrase type
+						fprintf(outFeature, "%.15f ", index);	//phrase type
+						fprintf(outFeature2, "%.15f ", index);	//phrase type
 
 						index = coderType.getIndex(ppath);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
 
 						str.clear();
 						str.push_back(step->attr);
 						index = coderPos.getIndex(str);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
 
 						index = coderType.getIndex(rpath);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
 
 						index = coderType.getIndex(verbf);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
-						//outFeature <<setprecision(9)<< fusionf_int[fusion1] << " ";
-						//outFeature <<setprecision(9)<< fusions_int[fusion2] << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+
+						//word = d.v() + headWord.first;
+						//divideWord(fusion1, word);
+						//index = coderWord.getIndex(fusion1);
+						//fprintf(outFeature, "%.15f ", index);
+						//fprintf(outFeature2, "%.15f ", index);
+
 						index = coderWord.getIndex(firstw);
-						outFeature << setprecision(9) << index << " ";
-						outFeature2 << setprecision(9) << index << " ";
+						fprintf(outFeature, "%.15f ", index);
+						fprintf(outFeature2, "%.15f ", index);
+
 						index = coderWord.getIndex(lastw);
-						outFeature << setprecision(9) << index << endl;
-						outFeature2 << setprecision(9) << index << endl;
+						fprintf(outFeature, "%.15f\n", index);
+						fprintf(outFeature2, "%.15f\n", index);
 #endif // OUTFEATURE
 					}
+#ifndef OUTFEATURE
 					labelSentence(out2, root);
 					out2 << endl;
-					//cout << endl;
+#endif
 				}
 				else
 					cout << "Cannot read data!!!!" << endl;
@@ -978,31 +925,18 @@ void tree::secondTry(string labelFile, string outFile) {
 		}
 		part = "";
 	}
-	out2.close();
 #ifdef OUTFEATURE
-	outFeature.close();
-	outFeature2.close();
+	fclose(outFeature);
+	fclose(outFeature2);
+#else
+	out2.close();
 #endif // OUTFEATURE
 	inData.close();
 	inLabel.close();
 	in.close();
+#ifndef OUTFEATURE
 	cout << "Finish the labeling!" << endl;
-}
-
-// pruing
-void tree::pruing(vector<PNODE>& leaves) {
-	/*
-	Pruing hexuritic
-	*/
-	int i, len = leaves.size();
-	for (i = 0; i < len; i++) {
-		if (leaves[i]->attr == "PU") {
-			delNode(leaves[i]);
-			leaves.erase(leaves.begin() + i);
-			i--;
-			len--;
-		}
-	}
+#endif
 }
 
 void tree::getCandidates(PNODE r) {

@@ -1,6 +1,6 @@
 #include "feature.h"
 
-coder::coder() { size = 1; }
+coder::coder() { size = 2; }
 
 coder::~coder() { container.clear(); }
 
@@ -29,13 +29,13 @@ double coder::getIndex2(vector<string>& str) {
 		ans *= basis;
 	}
 	out.close();
-	return ans;
+	return log(ans);
 }
 
 double coder::getIndex(vector<string>& str) {
 	double ans = 0;
-	int i = str.size() - 1;
-	for (; i >= 0; i--) {
+	int i = 0, len = str.size();
+	for (; i < len; i++) {
 		if (container.find(str[i]) == container.end()) {
 			cout << "Something is Wrong!" << endl;
 		}

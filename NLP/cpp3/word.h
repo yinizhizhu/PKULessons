@@ -18,7 +18,7 @@ private:
 public:
 	word();
 	~word();
-	void setWordTrain(string& str);
+	void setWordTrain(string str);
 	void setWordTest(string& str);
 	char *getWord();
 	char *getAttr();

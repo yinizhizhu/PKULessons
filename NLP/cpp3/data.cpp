@@ -50,7 +50,7 @@ bool Data::getNextLine(ifstream& in) {
 bool Data::getNextLine2(ifstream& in) {
 	step = 0;
 	clear();
-	int pre, cur, len, tag = 1;
+	int pre, cur, len;
 	string line = "", w;
 	word tmp;
 	if (getline(in, line) && line.size()) {
@@ -94,7 +94,8 @@ Pair Data::getNext() {
 void Data::push(word& w) {
 	words.push_back(w.getWord());
 	attrs.push_back(w.getAttr());
-	tags.push_back(w.getTag());
+	if (w.getTag())
+        tags.push_back(w.getTag());
 }
 
 void Data::clear() {
@@ -111,7 +112,7 @@ void Data::show() {
 }
 
 void Data::demo() {
-	char filename[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpblee.txt";
+	char filename[100] = "/home/lee/Desktop/NLP/data/cpblee.txt";
 	ifstream in(filename);
 	for (; getNextLine(in);) {
 		Pair p;

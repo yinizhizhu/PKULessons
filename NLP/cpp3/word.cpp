@@ -18,7 +18,7 @@ word::~word() {
 }
 
 //set the store, attr, tag with str which is not splited by '/'
-void word::setWordTrain(string& str) {
+void word::setWordTrain(string str) {
 	if (store) {
 		delete[]store;
 		store = NULL;

@@ -6,12 +6,12 @@
 #include <iostream>
 #include <stack>
 #include <unordered_map>
+#include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <iomanip>
 #include "data.h"
 #include "feature.h"
-
-#define	FN 100
 
 using namespace std;
 
@@ -38,16 +38,6 @@ private:
 	PNODE	root;
 	//PRED	predicates; //store all the arguments
 	bool	lsb; // false for active, true for passive
-
-	vector<string>	bnf;
-	vector<string>	dir;
-	vector<string>	dis;
-	vector<string>	ext;
-	vector<string>	frq;
-	vector<string>	loc;
-	vector<string>	mnr;
-	vector<string>	prp;
-	vector<string>	tmp;
 
 	vector<string>	headWords;
 
@@ -88,22 +78,15 @@ public:
 	void	delNode(PNODE r);
 	void	freeNode(PNODE r);
 
-	void	outputFeatureW(vector<string>& con, char *filename);
-	void	featureW(vector<string>& con, char *filename, char *outName);
-	void	addFeatureW(void);
-	bool	inFeatureW(vector<string>& con, string str);
-
-	bool	noVV(PNODE r);
 	string	getLeafW(PNODE r);
 	string	getLeafA(PNODE r);
-	void	getVerbs(void);
 	PNODE	getVNode(PNODE r, string& verb, vector<string>& verbf);
 
 	void	secondTry(string labelFile, string outFile);
-	void	pruing(vector<PNODE>& leaves);
 
+	void	showStr(ofstream& out, vector<string>& str);
 	bool	check(char c);
-	void	divideWord(vector<string>& word, string& words);
+	void	divideWord(vector<string>& word, string words);
 	void	getCoder();
 	void	getTrainData();
 

@@ -3,6 +3,13 @@
 #include <Python.h>
 #include "tree.h"
 
+/*
+    DEV - label the cpbdev.txt
+*/
+//#define DEV
+//#define OUTFEATURE
+
+
 using namespace std;
 
 void seperateData(char *filename, char *outname, char *outAttr) {
@@ -161,31 +168,69 @@ void cleanData(char *filename, char *outname, char *outAttr, int tag) {
 }
 
 void clean() {
-	char train[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtrain.txt";
-	char outTrain[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\train.txt";
-	char outTrainAttr[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\trainAttr.txt";
+	char train[100] = "data/cpbtrain.txt";
+	char outTrain[100] = "data/train.txt";
+	char outTrainAttr[100] = "data/trainAttr.txt";
 	seperateData(train, outTrain, outTrainAttr);
 
-	char dev[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbdev.txt";
-	char outDev[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\dev.txt";
-	char outDevAttr[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\devAttr.txt";
+	char dev[100] = "data/cpbdev.txt";
+	char outDev[100] = "data/dev.txt";
+	char outDevAttr[100] = "data/devAttr.txt";
 	seperateData(dev, outDev, outDevAttr);
 
-	char test[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\cpbtest.txt";
-	char outTest[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\test.txt";
-	char outTestAttr[100] = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\data\\testAttr.txt";
+	char test[100] = "data/cpbtest.txt";
+	char outTest[100] = "data/test.txt";
+	char outTestAttr[100] = "data/testAttr.txt";
 	seperateData(test, outTest, outTestAttr);
 }
 
 #define NUMBER_CLASSIFIER 11
 
+void getBest() {
+	double tmp, res = 0;
+	vector<string> tmpv, resv;
+	string str;
+#ifdef DEV
+	ifstream resIn("devLabel/result.txt");
+#else
+	ifstream resIn("final/result.txt");
+#endif
+	while (resIn >> str) {
+		tmpv.push_back(str);
+		for (int i = 0; i < 8; i++) {
+			resIn >> str;
+			tmpv.push_back(str);
+		}
+		resIn >> tmp;
+		if (tmp > res) {
+			res = tmp;
+			resv.clear();
+			for (int i = 0; i < 9; i++)
+				resv.push_back(tmpv[i]);
+		}
+		tmpv.clear();
+	}
+	for (int i = 0; i < 9; i++)
+		cout << resv[i] << " ";
+	cout << res << endl;
+	resIn.close();
+}
+
 int main() {
 	int savetime = 0;
 
 	if (savetime == 0) {
-		int select = 0;
+#ifdef OUTFEATURE
+		int select = 10;
+#else
+        int select = 0;
+#endif // OUTFEATURE
 		if (select < 10)
-			system("python SGD.py 0");
+#ifdef DEV
+			system("python SGD.py 0 1");
+#else
+			system("python SGD.py 0 0");
+#endif // DEV
 
 		tree t;
 		//t.firstTry();
@@ -194,9 +239,15 @@ int main() {
 		string classifierName[NUMBER_CLASSIFIER] = { "SGDBinary", "decisionTree", "knn", "gaussianNB", "svm_",
 			"bagging_", "randomforest", "svc", "adaboost_", "centroid", "maxEntropy" };
 		string indexTag[NUMBER_CLASSIFIER] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-		string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\new\\cpp\\label\\demoFeatureDevLabel";
-		string outFile = "label\\demoFeatureDevLabelSentence";
-		string check = "python calc_f1.py";
+#ifdef DEV
+		string labelFile = "devLabel/demoFeatureDevLabel";
+		string outFile = "devLabel/demoFeatureDevLabelSentence";
+		string check = "python calc_f1.py 1 ";
+#else
+		string labelFile = "final/testLabel";
+		string outFile = "final/testLabelSentence";
+		string check = "python calc_f1.py 0 ";
+#endif // DEV
 
 		for (int i = select; i < NUMBER_CLASSIFIER; i++) {
 			if (i != 7)
@@ -206,19 +257,31 @@ int main() {
 						string tmpOut = outFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
 						string tmpCheck = check + " " + indexTag[i] + " " + indexTag[j]
 							+ " " + classifierName[i] + " " + classifierName[j] + " " + indexTag[j];
+#ifndef OUTFEATURE
 						cout << classifierName[i] << " * " << classifierName[j] << ": ";
 						cout << tmpLabel << " " << tmpOut << " " << tmpCheck << endl;
-						strcpy(cmd, tmpCheck.c_str());
+#endif //OUTFEATURE
 						t.secondTry(tmpLabel, tmpOut);
+#ifndef OUTFEATURE
+						strcpy(cmd, tmpCheck.c_str());
 						system(cmd);
+#endif // OUTFEATURE
 					}
 				}
 		}
 	}
 	else if (savetime == 1) {
-		int select = 0;
+#ifdef OUTFEATURE
+		int select = 4;
+#else
+        int select = 0;
+#endif // OUTFEATURE
 		if (select < 4)
-			system("python SGD.py 1");
+#ifdef DEV
+			system("python SGD.py 1 1");
+#else
+			system("python SGD.py 1 0");
+#endif // DEV
 
 		tree t;
 		//t.firstTry();
@@ -227,9 +290,15 @@ int main() {
 		string classifierName[NUMBER_CLASSIFIER] = { "decisionTree", "knn", "svm_",
 			 "randomforest", "adaboost_", "svc" };
 		string indexTag[NUMBER_CLASSIFIER] = { "0", "1", "2", "3", "4", "5" };
-		string labelFile = "C:\\Users\\codinglee\\Desktop\\NLP\\Project_coding\\new\\cpp\\label\\demoFeatureDevLabel";
-		string outFile = "label\\demoFeatureDevLabelSentence";
-		string check = "python calc_f1.py";
+#ifdef DEV
+		string labelFile = "devLabel/demoFeatureDevLabel";
+		string outFile = "devLabel/demoFeatureDevLabelSentence";
+		string check = "python calc_f1.py 1 ";
+#else
+		string labelFile = "final/testLabel";
+		string outFile = "final/testLabelSentence";
+		string check = "python calc_f1.py 0 ";
+#endif // DEV
 
 		for (int i = select; i < 5; i++) {
 			for (int j = select; j < 5; j++) {
@@ -237,18 +306,21 @@ int main() {
 				string tmpOut = outFile + "_" + indexTag[i] + "_" + indexTag[j] + ".txt";
 				string tmpCheck = check + " " + indexTag[i] + " " + indexTag[j]
 					+ " " + classifierName[i] + " " + classifierName[j] + " " + indexTag[j];
+#ifndef OUTFEATURE
 				cout << classifierName[i] << " * " << classifierName[j] << ": ";
 				cout << tmpLabel << " " << tmpOut << " " << tmpCheck << endl;
+#endif
 				strcpy(cmd, tmpCheck.c_str());
 				t.secondTry(tmpLabel, tmpOut);
-				system(cmd);
+#ifndef OUTFEATURE
+                system(cmd);
+#endif // OUTFEATURE
 			}
 			cout << endl;
 		}
 	}
-	else {
-		tree t;
-		t.getCoder();
-	}
+#ifndef OUTFEATURE
+	getBest();
+#endif // OUTFEATURE
     return 0;
 }
