@@ -1,0 +1,5 @@
+8 f a c d g i m p
+7 a b c f l m o
+5 b f h j o
+5 b c k s p
+8 a f c e l p m n
