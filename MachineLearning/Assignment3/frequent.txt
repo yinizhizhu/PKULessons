@@ -1,6 +1,7 @@
 p
 p c 
 m
+m a 
 m f 
 m c 
 m a f 
@@ -9,5 +10,9 @@ m f c
 m a f c 
 b
 a
+a f 
+a c 
+a f c 
 f
+f c 
 c

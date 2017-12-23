@@ -199,7 +199,7 @@ void FPTree::travel(PNODE r) {
 }
 
 void FPTree::miningFre() {
-	int i = header.size() - 1, j, k = 0, n;
+	int i = header.size() - 1, j, n;
 	
 	cout << "The frequent sub-tree: " << endl;
 	string item;
@@ -226,8 +226,8 @@ void FPTree::miningFre() {
 
 		n = container.size();
 		out << item << endl;
-		for (; k < n; k++)
-			out << item << container[k] << endl;
+		for (j = 0; j < n; j++)
+			out << item << container[j] << endl;
 
 		container.clear();
 		str.clear();
