@@ -53,7 +53,6 @@ private:
 	item_int		dict;
 	int				threshold;
 	vector<vector<ITEM>>	frequent;
-
 public:
 	FPTree();
 	~FPTree();
@@ -71,7 +70,10 @@ public:
 	string	getCItem(PNODE r, int i);
 	int		getCCounter(PNODE r, int i);
 	void	insert(vector<ITEM>& items);
-	void	permutateComtinate(vector<string>& conSubTree, vector<vector<string>>& container);
+	void	miningFre();
+	void	miningSubFre(vector<string>& str, PNODE step);
+	void	showFreStr(vector<string>& str);
+	void	combinate(vector<int>& visit, vector<string>& str, vector<string>& container, int h, int n);
 	void	delNode(PNODE r);
 };
 

@@ -198,6 +198,86 @@ void FPTree::travel(PNODE r) {
 	}
 }
 
-void FPTree::permutateComtinate(vector<string>& conSubTree, vector<vector<string>>& container) {
+void FPTree::miningFre() {
+	int i = header.size() - 1, j, k = 0, n;
+	
+	cout << "The frequent sub-tree: " << endl;
+	string item;
+	vector<int> visit;
+	vector<string> str, container;
+	ofstream out("frequent.txt");
+	for (; i >= 0; i--) {
+		/*
+			get all the path from bottom to top
+			then, I get all the combination
+		*/
+		miningSubFre(str, header[i]->next);
 
+		item = header[i]->item.item;
+		cout << " " << item << ": ";
+		showFreStr(str);
+
+		n = str.size();
+		visit.resize(n);
+		for (j = 0; j < n; j++)
+			visit[j] = 1;
+		for (j = 1; j <= n; j++)
+			combinate(visit, str, container, 0, j);
+
+		n = container.size();
+		out << item << endl;
+		for (; k < n; k++)
+			out << item << container[k] << endl;
+
+		container.clear();
+		str.clear();
+	}
+	out.close();
+}
+
+void FPTree::miningSubFre(vector<string>& str, PNODE step) {
+	int			n;
+	string		item;
+	item_int	store;
+	for (; step; step = step->next) {
+		n = step->item.counter;
+		for (PNODE bottom = step->pre; bottom != root; bottom = bottom->pre) {
+			item = bottom->item.item;
+			ITER iter = store.find(item);
+			if (iter == store.end())
+				store[item] = n;
+			else
+				iter->second += n;
+		}
+	}
+	for (ITER iter = store.begin(); iter != store.end(); iter++) {
+		if (iter->second >= threshold)
+			str.push_back(iter->first);
+	}
+}
+
+void FPTree::showFreStr(vector<string>& str) {
+	for (int i = str.size() - 1; i >= 0; i--)
+		cout << str[i] << " ";
+	cout << endl;
+}
+
+void FPTree::combinate(vector<int>& visit, vector<string>& str, vector<string>& container, int h, int n) {
+	int len = str.size();
+	if (n <= 0) {
+		string tmp = " ";
+		for (int i = 0; i < len; i++)
+			if (visit[i] == 0)
+				tmp += str[i] + " ";
+		cout << tmp << endl;
+		container.push_back(tmp);
+		return;
+	}
+	for (; h < len; h++) {
+		if (visit[h]) {
+			visit[h] = 0;
+			combinate(visit, str, container, h, n - 1);
+			visit[h] = 1;
+		}
+	}
 }
