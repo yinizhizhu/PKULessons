@@ -55,13 +55,13 @@ void FPTree::addData() {
 
 		sort(fre.begin(), fre.end(), cmpItem);
 		frequent.push_back(fre);
-		showFre(fre); //show the current transaction's frequent items
+		//showFre(fre); //show the current transaction's frequent items
 
 		insert(fre);
 
 		fre.clear();
 	}
-	firstS(); //show the FPTree
+	//firstS(); //show the FPTree
 	in.close();
 }
 
@@ -81,9 +81,9 @@ void FPTree::addHeader() {
 			header.push_back(tmp);
 		}
 	}
-	showHeader(); //show thee header
+	//showHeader(); //show thee header
 	sort(header.begin(), header.end(), cmpNode);
-	showHeader(); //show the header
+	//showHeader(); //show the header
 }
 
 void FPTree::showFre(vector<ITEM>& fre) {
@@ -119,7 +119,7 @@ void FPTree::addLink() {
 		target = header[i];
 		addHeaderLink(root);
 		//cout << ". Out addLink!" << endl; //show the process
-		showLink(header[i]); //show current node link
+		//showLink(header[i]); //show current node link
 	}
 }
 
@@ -199,60 +199,69 @@ void FPTree::travel(PNODE r) {
 }
 
 void FPTree::miningFre() {
-	int i = header.size() - 1, j, n;
+	int i = header.size() - 1;
 	
-	cout << "The frequent sub-tree: " << endl;
-	string item;
-	vector<int> visit;
-	vector<string> str, container;
-	ofstream out("frequent.txt");
+	//cout << "The frequent sub-tree: " << endl;//test
+	string		item;
+	item_int	container;
+	ofstream	out("frequent.txt");
 	for (; i >= 0; i--) {
 		/*
 			get all the path from bottom to top
 			then, I get all the combination
 		*/
-		miningSubFre(str, header[i]->next);
+		miningSubFre(container, header[i]->next);
 
 		item = header[i]->item.item;
-		cout << " " << item << ": ";
-		showFreStr(str);
+		out << item << endl;
+		for (ITER iter = container.begin(); iter != container.end(); iter++)
+			out << item << iter->first << endl;
 
-		n = str.size();
+		container.clear();
+	}
+	out.close();
+}
+
+void FPTree::miningSubFre(item_int& container, PNODE step) {
+	//cout << "In subFre..." << endl;//test
+	int			n;
+	string		item;
+	vector<string>	str;
+	vector<PNODE>	backup;
+	for (; step; step = step->next) {
+		n = step->item.counter;
+		if (n >= threshold) {
+			//cout << n << endl;//test
+			for (PNODE bottom = step->pre; bottom != root; bottom = bottom->pre)
+				str.push_back(bottom->item.item);
+			miningStep(str, container);
+		}
+		else
+			backup.push_back(step);
+	}
+	int j;
+	vector<int>	visit;
+	n = backup.size();
+	visit.resize(n);
+	//cout << "Backup size: " << n << endl; //test
+	for (j = 0; j < n; j++)
+		visit[j] = 1;
+	for (j = 2; j <= n; j++)
+		combinatePath(visit, backup, container, 0, j);
+	//cout << "Out subFre!" << endl;//test
+}
+
+void FPTree::miningStep(vector<string>& str, item_int& container) {
+	int j, n = str.size();
+	if (n) {
+		//showFreStr(str);
+		vector<int>	visit;
 		visit.resize(n);
 		for (j = 0; j < n; j++)
 			visit[j] = 1;
 		for (j = 1; j <= n; j++)
 			combinate(visit, str, container, 0, j);
-
-		n = container.size();
-		out << item << endl;
-		for (j = 0; j < n; j++)
-			out << item << container[j] << endl;
-
-		container.clear();
 		str.clear();
-	}
-	out.close();
-}
-
-void FPTree::miningSubFre(vector<string>& str, PNODE step) {
-	int			n;
-	string		item;
-	item_int	store;
-	for (; step; step = step->next) {
-		n = step->item.counter;
-		for (PNODE bottom = step->pre; bottom != root; bottom = bottom->pre) {
-			item = bottom->item.item;
-			ITER iter = store.find(item);
-			if (iter == store.end())
-				store[item] = n;
-			else
-				iter->second += n;
-		}
-	}
-	for (ITER iter = store.begin(); iter != store.end(); iter++) {
-		if (iter->second >= threshold)
-			str.push_back(iter->first);
 	}
 }
 
@@ -262,17 +271,65 @@ void FPTree::showFreStr(vector<string>& str) {
 	cout << endl;
 }
 
-void FPTree::combinate(vector<int>& visit, vector<string>& str, vector<string>& container, int h, int n) {
+void FPTree::combinatePath(vector<int>& visit, vector<PNODE>& backup, item_int& container, int h, int n) {
+	int len = backup.size();
+	if (n <= 0) {
+		string		item;
+		item_int	store;
+		vector<int>	index;
+		vector<string>	str;
+		int	counter = 0, i, j;
+		for (i = 0; i < len; i++)
+			if (visit[i] == 0) {
+				counter += backup[i]->item.counter;
+				index.push_back(i);
+			}
+		if (counter >= threshold) {
+			len = index.size();
+			for (i = 0; i < len; i++) {
+				j = index[i];
+				counter = backup[i]->item.counter;
+				for (PNODE bottom = backup[j]->pre; bottom != root; bottom = bottom->pre) {
+					item = bottom->item.item;
+					ITER iter = store.find(item);
+					if (iter == store.end())
+						store[item] = counter;
+					else
+						iter->second += counter;
+				}
+			}
+			for (ITER iter = store.begin(); iter != store.end(); iter++)
+				if (iter->second >= threshold)
+					str.push_back(iter->first);
+			miningStep(str, container);
+		}
+		return;
+	}
+	if (len - h < n) return;
+	for (; h < len; h++) {
+		if (visit[h]) {
+			visit[h] = 0;
+			combinatePath(visit, backup, container, h, n - 1);
+			visit[h] = 1;
+		}
+	}
+}
+
+void FPTree::combinate(vector<int>& visit, vector<string>& str, item_int& container, int h, int n) {
 	int len = str.size();
 	if (n <= 0) {
 		string tmp = " ";
 		for (int i = 0; i < len; i++)
 			if (visit[i] == 0)
 				tmp += str[i] + " ";
-		cout << tmp << endl;
-		container.push_back(tmp);
+		//cout << tmp; //test
+		tmp.erase(tmp.end() - 1);
+		//cout << tmp << "!" << endl;//test
+		if (container.find(tmp) == container.end())
+			container[tmp] = 1;
 		return;
 	}
+	if (len - h < n) return;
 	for (; h < len; h++) {
 		if (visit[h]) {
 			visit[h] = 0;

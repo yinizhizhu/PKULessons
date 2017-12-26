@@ -38,6 +38,13 @@ typedef struct node {
 	node(ITEM& i) : item(i), pre(NULL), next(NULL) {}
 } NODE, *PNODE;
 
+typedef struct article {
+	vector<string> authors;
+	string	conference;
+	string	title;
+	int		year;
+}ARTICLE;
+
 class FPTree {
 private:
 	/*
@@ -71,9 +78,11 @@ public:
 	int		getCCounter(PNODE r, int i);
 	void	insert(vector<ITEM>& items);
 	void	miningFre();
-	void	miningSubFre(vector<string>& str, PNODE step);
+	void	miningSubFre(item_int& container, PNODE step);
+	void	miningStep(vector<string>& str, item_int& container);
 	void	showFreStr(vector<string>& str);
-	void	combinate(vector<int>& visit, vector<string>& str, vector<string>& container, int h, int n);
+	void	combinatePath(vector<int>& visit, vector<PNODE>& backup, item_int& container, int h, int n);
+	void	combinate(vector<int>& visit, vector<string>& str, item_int& container, int h, int n);
 	void	delNode(PNODE r);
 };
 
