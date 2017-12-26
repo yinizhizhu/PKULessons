@@ -1,9 +1,10 @@
 #include "tree.h"
 
 void show(vector<string>& line) {
-	for (int i = 0; i < line.size(); i++)
+	int i, len = line.size() - 1;
+	for (i = 0; i < len; i++)
 		cout << line[i] << " ";
-	cout << endl;
+	cout << line[i] << endl;
 }
 
 int visit[4];
@@ -36,6 +37,7 @@ void demoCombinate() {
 
 int main() {
 	FPTree tree;
+	tree.task1();
 	tree.task2();
     return 0;
 }

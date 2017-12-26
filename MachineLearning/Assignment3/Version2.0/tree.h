@@ -86,7 +86,7 @@ public:
 	int		getCCounter(PNODE r, int i);
 	void	insert(vector<ITEM>& items, string& con, string& title, string& year);
 	void	miningFre();
-	void	outT_Y(vector<PNODE>& part, ofstream& out);
+	void	outT_Y(string& item, vector<PNODE>& part, ofstream& out, ofstream& out2);
 	void	deepT_Y(PNODE r, vector<PAIR>& t_y);
 	void	miningSubFre(T_Y& container, PNODE step);
 	void	miningStep(vector<string>& str, vector<PNODE>& part, T_Y& container);

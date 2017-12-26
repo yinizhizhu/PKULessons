@@ -17,15 +17,13 @@ bool cmpStr(string& a, string& b) {
 }
 
 bool cmpContent(CONTENT& a, CONTENT& b) {
-	if (a.year.size() == b.year.size()) {
-		int i, len = a.year.size();
-		for (i = 0; i < len; i++) {
-			if (a.year[i] == b.year[i])
-				continue;
-			return a.year[i] > b.year[i];
-		}
+	int i, lena = a.year.size(), lenb = b.year.size();
+	for (i = 0; i < lena && i < lenb; i++) {
+		if (a.year[i] == b.year[i])
+			continue;
+		return a.year[i] > b.year[i];
 	}
-	return a.year.size() > b.year.size();
+	return lena > lenb;
 }
 
 bool cmpPair(PAIR& a, PAIR& b) {
@@ -100,7 +98,7 @@ void FPTree::task1() {
 		task[conf] = mid;
 	}
 
-	ofstream out("task1.txt");
+	ofstream out("task1_1.txt");
 	for (TASK_ITER titer = task.begin(); titer != task.end(); titer++) {
 		len = titer->second.size();
 		out << titer->first << ": \n";
@@ -300,9 +298,11 @@ void FPTree::miningFre() {
 	int i = header.size() - 1;
 	
 	//cout << "The frequent sub-tree: " << endl;//test
-	string		item;
+	string		item, str;
 	T_Y			container;
-	ofstream	out("frequent.txt");
+	//ofstream	out("frequent.txt");
+	ofstream	out("task2.txt");
+	ofstream	out2("task1_2.txt");
 	for (; i >= 0; i--) {
 		/*
 			get all the path from bottom to top
@@ -312,21 +312,27 @@ void FPTree::miningFre() {
 
 		item = header[i]->item.item;
 		for (T_Y_ITER iter = container.begin(); iter != container.end(); iter++) {
-			out << item << iter->first << ":\n";
-			outT_Y(iter->second, out);
+			str = item + iter->first;
+			outT_Y(str, iter->second, out, out2);
 		}
 		container.clear();
 	}
+	out2.close();
 	out.close();
 }
 
-void FPTree::outT_Y(vector<PNODE>& part, ofstream& out) {
+void FPTree::outT_Y(string& item, vector<PNODE>& part, ofstream& out, ofstream& out2) {
 	vector<PAIR> t_y;
-	int i, n = part.size();
+	int i, n = part.size(), counter;
 	for (i = 0; i < n; i++)
 		deepT_Y(part[i], t_y);
 	sort(t_y.begin(), t_y.end(), cmpPair);
 	n = t_y.size();
+	for (i = item.size() - 1, counter = 1; i >= 0; i--)
+		if (item[i] == ',')
+			counter++;
+	out2 << counter << " - " << item << "\n";
+	out << n << " - " << counter << ", " << item << ":\n";
 	for (i = 0; i < n; i++)
 		out << "	" << t_y[i][0] << ", " << t_y[i][2] << ", " << t_y[i][1] << endl;
 }
@@ -380,7 +386,7 @@ void FPTree::miningSubFre(T_Y& container, PNODE step) {
 
 void FPTree::miningStep(vector<string>& str, vector<PNODE>& part, T_Y& container) {
 	int j, n = str.size();
-	if (n >= 2) {
+	if (n >= 3) {
 		//showFreStr(str);
 		string tmp = "";
 		for (j = 0; j < n; j++)

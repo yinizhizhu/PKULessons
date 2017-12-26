@@ -1,0 +1,778 @@
+4 - Ziqiong Liu, Shengjin Wang, Liang Zheng, Qi Tian
+5 - Zhiping Gu, Liang Hu, Jian Cao, Guandong Xu, Longbing Cao
+4 - Zhecan Wang, Jianshu Li, Jiashi Feng, Shuicheng Yan
+4 - Zhandong Liu, Genevera I. Allen, Eunho Yang, Pradeep Ravikumar
+5 - Zehan Wang, Jose Caballero, Wenzhe Shi, Johannes Totz, Andrew P. Aitken
+4 - Yunhe Wang, Chao Xu 0006, Chang Xu, Dacheng Tao
+4 - Yun Zhu, Albert J. Sinusas, Xenophon Papademetris, James S. Duncan
+4 - Yonglong Tian, Ping Luo, Xiaogang Wang, Xiaoou Tang
+4 - Yongli Hu, Yanfeng Sun, Baocai Yin, Junbin Gao
+4 - Yinpeng Dong, Hang Su, Bo Zhang, Jun Zhu
+4 - Yinliang Yue, Hailun Lin, Weiping Wang, Yong Liu
+4 - Yingming Li, Zhongfei (Mark) Zhang, Zenglin Xu, Ming Yang
+4 - Yiming Ma, Liang Zhang, Bee-Chung Chen, Deepak Agarwal
+4 - Xiuzi Ye, Mingyu Fan, Di Wang, Xiaoqin Zhang
+4 - Xinchu Shi, Junliang Xing, Weiming Hu, Haibin Ling
+4 - William E. Walsh, Tuomas Sandholm, David C. Parkes, Craig Boutilier
+5 - Wiktor Mateusz Piotrowski, Fabio Mercorio, Daniele Magazzeni, Maria Fox, Derek Long
+4 - Wenxiu Sun, Jimmy S. J. Ren, Qiong Yan, Li Xu 0001
+4 - Ting Hua, Feng Chen 0001, Chang-Tien Lu, Naren Ramakrishnan
+4 - Tim Hanratty, Quan Yuan, Chao Zhang, Jiawei Han 0001
+4 - T. Hoang Ngan Le, Khoa Luu, Chenchen Zhu, Marios Savvides
+5 - Subhashini Venugopalan, Lisa Anne Hendricks, Trevor Darrell, Kate Saenko, Marcus Rohrbach
+5 - Stefan Gumhold, Frank Michel, Eric Brachmann, Alexander Krull, Carsten Rother
+4 - Shuzi Niu, Yanyan Lan, Jiafeng Guo, Xueqi Cheng
+4 - Shi Feng, Kaisong Song, Daling Wang, Wei Gao
+4 - Sheikh Motahar Naim, Md. Abdul Kader, M. Shahriar Hossain, Arnold P. Boedihardjo
+4 - Santosh K. Suram, Ronan Le Bras, Carla P. Gomes, John M. Gregoire
+4 - Salvatore Trani, Claudio Lucchese, Franco Maria Nardini, Raffaele Perego
+5 - Sai Wu, Pai Peng, Ke Chen 0005, Lidan Shou, Gang Chen 0001
+4 - Robert Walecki, Vladimir Pavlovic, Ognjen Rudovic, Maja Pantic
+4 - Qiang Hao, Lei Zhang 0001, Yanwei Pang, Rui Cai
+4 - Philip Habel, Anjie Fang, Iadh Ounis, Craig Macdonald
+4 - Paul Duckworth, Muhannad Al-Omari, David C. Hogg, Anthony G. Cohn
+4 - Panagiotis Koutsourakis, Olivier Teboul, Nikos Paragios, Loïc Simon
+4 - Pai Peng, Ke Chen 0005, Lidan Shou, Gang Chen 0001
+4 - Omer Tsimhoni, Claudia V. Goldman, Amos Azaria, Sarit Kraus
+4 - Nikolaus Mayer, Alexey Dosovitskiy, Eddy Ilg, Thomas Brox
+4 - Nihit Desai, Marina Danilevsky, Jiawei Han 0001, Chi Wang 0001
+4 - Nadia Magnenat-Thalmann, Quan Yuan, Gao Cong, Aixin Sun
+4 - Moritz Helmstaedter, Kevin L. Briggman, Winfried Denk, H. Sebastian Seung
+4 - Michael K. Schwartz, Kevin S. McKelvey, Claire A. Montgomery, Carla P. Gomes
+5 - Miaomiao Li, Jianping Yin, En Zhu, Yong Dou, Xinwang Liu
+4 - Mark Hollenbeck, Elliot Meyerson, Alexander Braylan, Risto Miikkulainen
+5 - Long Xia, Yanyan Lan, Jun Xu, Jiafeng Guo, Xueqi Cheng
+4 - Lisa Anne Hendricks, Trevor Darrell, Kate Saenko, Marcus Rohrbach
+4 - Liqun Chen, Yunchen Pu, Chunyuan Li, Lawrence Carin
+4 - Kyle R. Ulrich, David E. Carlson, Kafui Dzirasa, Lawrence Carin
+4 - Keren Fu, Chen Gong, Jie Yang 0002, Dacheng Tao
+4 - Kentaro Torisawa, Julien Kloetzer, Jong-Hoon Oh, Chikara Hashimoto
+5 - Kenichiro Tanaka, Hiroyuki Kubo, Yasuhiro Mukaigawa, Yasushi Yagi, Yasuyuki Matsushita
+6 - Keith Henderson, Lei Li, Hanghang Tong, Tina Eliassi-Rad, Leman Akoglu, Christos Faloutsos
+4 - Kei Kobayashi, Kazuo Hara, Ikumi Suzuki, Kenji Fukumizu
+4 - Jose Caballero, Wenzhe Shi, Johannes Totz, Andrew P. Aitken
+4 - Jin Kyu Kim, Seunghak Lee, Qirong Ho, Eric P. Xing
+5 - Jaime Arredondo, Sathappan Muthiah, Graham Katz, David Mares, Naren Ramakrishnan
+4 - Igor Yanovsky, Stanley Osher, Alex D. Leow, Paul M. Thompson
+4 - Honghui Shi, Ding Liu, Thomas S. Huang, Zhangyang Wang
+4 - Hiroyuki Kubo, Yasuhiro Mukaigawa, Yasushi Yagi, Yasuyuki Matsushita
+4 - Guoxian Dai, Jin Xie, Fan Zhu, Yi Fang
+4 - Graham Katz, David Mares, Sathappan Muthiah, Naren Ramakrishnan
+6 - Gabriel Takacs, Sam S. Tsai, Radek Grzeszczuk, David M. Chen, Bernd Girod, Vijay Chandrasekhar
+4 - Florian Strub, Harm de Vries, Olivier Pietquin, Aaron C. Courville
+4 - Fabio Mercorio, Daniele Magazzeni, Maria Fox, Derek Long
+4 - Eleanor G. Rieffel, Davide Venturelli, Jeremy Frank, Minh Do
+4 - Eldar Insafutdinov, Siyu Tang, Bernt Schiele, Bjoern Andres
+4 - Dong Gong, Qinfeng Shi, Yanning Zhang, Anton van den Hengel
+4 - Cong Liu 0001, Hanjiang Lai, Yan Pan, Shuicheng Yan
+4 - Chun-Hao Huang, Slobodan Ilic, Nassir Navab, Edmond Boyer
+4 - Bojan Pepik, Michael Stark 0003, Peter V. Gehler, Bernt Schiele
+4 - Bin Xu 0005, Chun Chen, Jiajun Bu, Deng Cai
+4 - Alkhazur Manakov, Hans-Peter Seidel, Ilya Reshetouski, Ivo Ihrke
+4 - Alina Bialkowski, Peter Carr 0001, Patrick Lucey, Iain A. Matthews
+7 - Adam Fleisher, Teresa Wu, Shuai Huang, Kewei Chen, Jing Li, Eric Reiman, Jieping Ye
+4 - Zhenxing Niu, Xinbo Gao, Gang Hua, Qi Tian
+4 - Zhengxiang Pan, Cyril Leung, Han Yu, Chunyan Miao
+4 - Zhen Zuo, Bing Shuai, Bing Wang 0003, Gang Wang 0012
+4 - Yun-En Liu, Travis Mandel, Zoran Popovic, Emma Brunskill
+4 - Yun Zeng, Chaohui Wang, Xianfeng Gu, Dimitris Samaras
+4 - Yoshihide Sekimoto, Quanshi Zhang, Xuan Song, Ryosuke Shibasaki
+4 - Yexi Jiang, Wubai Zhou, Chunqiu Zeng, Tao Li 0001
+4 - Yexi Jiang, Chunqiu Zeng, Lei Li 0001, Tao Li 0001
+5 - Yexi Jiang, Wubai Zhou, Chunqiu Zeng, Tao Li 0001, Lei Li 0001
+5 - Yan Duan, Rein Houthooft, Pieter Abbeel, John Schulman, Xi Chen
+5 - Yan Duan, Pieter Abbeel, Rein Houthooft, John Schulman, Xi Chen
+5 - Xiaowei Shao, Huijing Zhao, Quanshi Zhang, Xuan Song, Ryosuke Shibasaki
+4 - Xiangfeng Wang, Shuai Xiao, Hongyuan Zha, Junchi Yan
+5 - Xiangfeng Wang, Shuai Xiao, Changsheng Li, Hongyuan Zha, Junchi Yan
+4 - Wen Sun, Martial Hebert, Arun Venkatraman, Byron Boots
+5 - Wei Wei 0008, Zhen Zhang, Julian J. McAuley, Qinfeng Shi, Yanning Zhang
+4 - Wei Di, Anurag Bhardwaj, Robinson Piramuthu, Neel Sundaresan
+4 - Taragay Oskiper, Zhiwei Zhu, Supun Samarasekera, Rakesh Kumar 0001
+4 - Song Bai, Xiang Bai, Longin Jan Latecki, Qi Tian
+4 - Shan You, Chang Xu, Chao Xu 0006, Dacheng Tao
+4 - Seyed Hamid Rezatofighi, Anton Milan, Anthony R. Dick, Ian D. Reid 0001
+4 - Sebastian Schuon, James E. Davis, Sebastian Thrun, Christian Theobalt
+4 - Sashank J. Reddi, Suvrit Sra, Alexander J. Smola, Barnabás Póczos
+5 - Sam S. Tsai, Radek Grzeszczuk, David M. Chen, Bernd Girod, Vijay Chandrasekhar
+4 - Salman Hameed Khan, Roberto Togneri, Ferdous Ahmed Sohel, Mohammed Bennamoun
+5 - Rupinder Paul Khandpur, Nathan Self, Liang Zhao, Naren Ramakrishnan, Chang-Tien Lu
+4 - Rupinder Paul Khandpur, Liang Zhao, Chang-Tien Lu, Naren Ramakrishnan
+4 - Rein Houthooft, John Schulman, Pieter Abbeel, Xi Chen
+4 - Radek Grzeszczuk, David M. Chen, Bernd Girod, Vijay Chandrasekhar
+4 - Qi Wu, Anton van den Hengel, Chunhua Shen, Anthony R. Dick
+5 - Paul Stursberg, Nicholas Mattei, Serge Gaspers, Haris Aziz 0001, Toby Walsh
+4 - Patrick Peursum, Senjian An, Wanquan Liu, Svetha Venkatesh
+5 - Ori Stitelman, Troy Raeder, Brian Dalessandro, Claudia Perlich, Foster J. Provost
+4 - Norihito Yasuda, Masaaki Nishino, Shin-ichi Minato, Masaaki Nagata
+4 - Nathan Self, Naren Ramakrishnan, Parang Saraf, Patrick Butler
+4 - Narayan Bhamidipati, Nemanja Djuric, Vladan Radosavljevic, Mihajlo Grbovic
+4 - Minnan Luo, Qinghua Zheng, Xiaojun Chang, Feiping Nie
+4 - Mingli Song, Xiao Liu, Chun Chen, Jiajun Bu
+5 - Mingli Song, Xiao Liu, Chun Chen, Jiajun Bu, Dacheng Tao
+4 - Mayu Iwata, Takehiro Yamamoto, Makoto P. Kato, Tetsuya Sakai
+6 - Liang Pang, Shengxian Wan, Jun Xu, Yanyan Lan, Jiafeng Guo, Xueqi Cheng
+4 - Liang Hu, Jian Cao, Guandong Xu, Longbing Cao
+4 - Julian Straub, Trevor Campbell, Jonathan P. How, John W. Fisher III
+5 - Jing-Cheng Shi, Chao Qian, Ke Tang, Yang Yu 0001, Zhi-Hua Zhou
+4 - Jie Qin, Ling Shao, Yunhong Wang, Li Liu
+4 - Jiashen Sun, Yiqun Liu, Min Zhang 0006, Shaoping Ma
+4 - Jianshu Li, Jiashi Feng, Jian Zhao, Shuicheng Yan
+4 - Jianshu Li, Jiashi Feng, Yunpeng Chen, Shuicheng Yan
+5 - Jianshu Li, Jiashi Feng, Jian Zhao, Shuicheng Yan, Yunpeng Chen
+4 - Huijing Zhao, Quanshi Zhang, Xuan Song, Ryosuke Shibasaki
+5 - Hanmo Wang, Peng Zhou, Liang Du, Lei Shi, Yi-Dong Shen
+4 - Frank Michel, Eric Brachmann, Alexander Krull, Carsten Rother
+4 - Filippo Bergamasco, Andrea Albarelli, Emanuele Rodolà, Andrea Torsello
+4 - Fenglong Ma, Qi Li, Lu Su, Jing Gao
+5 - En Zhu, Jianping Yin, Yong Dou, Xinwang Liu, Lei Wang 0001
+4 - Dylan Hadfield-Menell, Anca D. Dragan, Stuart J. Russell, Pieter Abbeel
+4 - David S. Bolme, Yui Man Lui, Bruce A. Draper, J. Ross Beveridge
+4 - Aswin Raghavan, Alan Fern, Roni Khardon, Prasad Tadepalli
+4 - Arun Venkatraman, J. Andrew Bagnell, Martial Hebert, Byron Boots
+4 - Zongyang Ma, Quan Yuan, Gao Cong, Aixin Sun
+4 - Ziqiang Cao, Furu Wei, Wenjie Li, Sujian Li
+4 - Ziqiang Cao, Wenjie Li, Furu Wei, Sujian Li
+4 - ZhongYang Huang, Zheng Song, Qiang Chen, Shuicheng Yan
+4 - ZhongYang Huang, Qiang Chen, Shuicheng Yan, Zheng Song
+4 - Zhen Zhang, Yanning Zhang, Qinfeng Shi, Julian J. McAuley
+4 - Zhen Zhang, Julian J. McAuley, Qinfeng Shi, Yanning Zhang
+5 - Zhen Zhang, Anton van den Hengel, Yanning Zhang, Qinfeng Shi, Julian J. McAuley
+4 - Zequn Jie, Jiashi Feng, Xiaojie Jin, Shuicheng Yan
+4 - Yukun Zhu, Sanja Fidler, Ruslan Salakhutdinov, Raquel Urtasun
+4 - Yukun Zhu, Sanja Fidler, Raquel Urtasun, Ruslan Salakhutdinov
+5 - Yilin Wang, Suhang Wang, Baoxin Li, Jiliang Tang, Huan Liu
+4 - Yeqing Li, Junzhou Huang, Wei Liu, Chen Chen 0003
+4 - Xun Zheng, Seunghak Lee, Qirong Ho, Eric P. Xing
+4 - Won Hwa Kim, Moo K. Chung, Sterling C. Johnson, Vikas Singh
+4 - Wen-bing Huang, Fuchun Sun, Huaping Liu, Deli Zhao
+4 - Troy Raeder, Brian Dalessandro, Claudia Perlich, Foster J. Provost
+5 - Teresa Wu, Kewei Chen, Jing Li, Eric Reiman, Jieping Ye
+6 - Teresa Wu, Shuai Huang, Kewei Chen, Jing Li, Eric Reiman, Jieping Ye
+5 - Teresa Wu, Kewei Chen, Eric Reiman, Jing Li, Jieping Ye
+6 - Teresa Wu, Kewei Chen, Eric Reiman, Jing Li, Jieping Ye, Shuai Huang
+7 - Teresa Wu, Kewei Chen, Eric Reiman, Jing Li, Jun Liu 0003, Liang Sun 0001, Jieping Ye
+7 - Teresa Wu, Kewei Chen, Jing Li, Eric Reiman, Liang Sun 0001, Jieping Ye, Jun Liu 0003
+4 - Stefan Hinterstoisser, Vincent Lepetit, Nassir Navab, Pascal Fua
+4 - Songfang Huang, Zhiwu Lu, Xin Gao, Ji-Rong Wen
+5 - Simon Mackenzie, Serge Gaspers, Nicholas Mattei, Haris Aziz 0001, Toby Walsh
+4 - Shuai Xiao, Hongyuan Zha, Junchi Yan, Xiaokang Yang
+4 - Shuai Xiao, Hongyuan Zha, Stephen M. Chu, Junchi Yan
+5 - Shuai Xiao, Hongyuan Zha, Stephen M. Chu, Junchi Yan, Xiaokang Yang
+5 - Shuai Huang, Kewei Chen, Jing Li, Eric Reiman, Jieping Ye
+5 - Shuai Huang, Jieping Ye, Kewei Chen, Eric Reiman, Jing Li
+5 - Shengxian Wan, Jun Xu, Yanyan Lan, Jiafeng Guo, Xueqi Cheng
+4 - Shant Karakashian, Robert J. Woodward, Berthe Y. Choueiry, Christian Bessiere
+5 - Qin Lv, Li Shang, Stephen M. Chu, Dongsheng Li, Chao Chen
+4 - Qin Lv, Li Shang, Dongsheng Li, Chao Chen
+5 - Qi Meng, Zhiming Ma, Taifeng Wang, Wei Chen, Tie-Yan Liu
+4 - Peng Zhou, Liang Du, Lei Shi, Yi-Dong Shen
+4 - Peng Ye, Le Kang, David S. Doermann, Jayant Kumar
+4 - Luchen Tan, Adam Roegiest, Charles L. A. Clarke, Jimmy J. Lin
+5 - Liz Sonenberg, Paolo Felli, Tim Miller, Adrian R. Pearce, Christian J. Muise
+4 - Li Zheng, Tao Li 0001, Chao Shen, Liang Tang
+4 - Li Zheng, Chao Shen, Liang Tang, Tao Li 0001
+5 - Li Zheng, Tao Li 0001, Chunqiu Zeng, Chao Shen, Lei Li 0001
+6 - Li Zheng, Chao Shen, Liang Tang, Tao Li 0001, Chunqiu Zeng, Lei Li 0001
+4 - Li Wang, Bing Wang 0003, Kap Luk Chan, Gang Wang 0012
+4 - Li Shang, Stephen M. Chu, Dongsheng Li, Chao Chen
+5 - Kunpeng Zhang, Yusheng Xie, Ankit Agrawal, Yu Cheng, Alok N. Choudhary
+4 - Kewei Chen, Jing Li, Eric Reiman, Jieping Ye
+4 - Kai Zhong, Inderjit S. Dhillon, Ian En-Hsu Yen, Pradeep Ravikumar
+4 - Huan Wang, Thomas S. Huang, Xiaoou Tang, Shuicheng Yan
+4 - Hongke Zhao, Qi Liu, Enhong Chen, Yong Ge
+5 - Haoxiang Li, Jonathan Brandt, Zhe Lin 0001, Xiaohui Shen, Gang Hua
+4 - Giovanni Zappella, Fabio Vitale, Claudio Gentile, Nicolò Cesa-Bianchi
+4 - Fei Tian, Tao Qin, Tie-Yan Liu, Enhong Chen
+4 - Eugene Kharitonov, Pavel Serdyukov, Iadh Ounis, Craig Macdonald
+5 - Dan Xu, Elisa Ricci, Nicu Sebe, Wanli Ouyang, Xiaogang Wang
+4 - Baharan Mirzasoleiman, Ashwinkumar Badanidiyuru, Amin Karbasi, Andreas Krause 0001
+4 - Arkadii Slinko, Piotr Faliszewski, Nimrod Talmon, Piotr Skowron
+4 - Anna Khoreva, Rodrigo Benenson, Matthias Hein 0001, Bernt Schiele
+4 - Alexander Shleyfman, Michael Katz 0001, Martin Wehrle, Malte Helmert
+4 - Zhixun Su, Zhouchen Lin, Jin-shan Pan, Ming-Hsuan Yang 0001
+4 - Zhixun Su, Jin-shan Pan, Ming-Hsuan Yang 0001, Zhouchen Lin
+4 - Zhiwu Huang, Ruiping Wang 0001, Xilin Chen, Shiguang Shan
+4 - Yunchao Wei, Xiaodan Liang, Jiashi Feng, Shuicheng Yan
+4 - Yunchao Wei, Jiashi Feng, Shuicheng Yan, Xiaodan Liang
+4 - Yu Su, Wen Gao 0001, Xilin Chen, Shiguang Shan
+4 - Xiaoxiao Guo, Richard L. Lewis, Satinder P. Singh, Honglak Lee
+4 - Xiao Cai, Chris H. Q. Ding, Heng Huang, Feiping Nie
+4 - Wenyuan Dai, Gui-Rong Xue, Yong Yu, Qiang Yang 0001
+4 - Siyu Tang, Bjoern Andres, Mykhaylo Andriluka, Bernt Schiele
+4 - Siyu Tang, Bernt Schiele, Bjoern Andres, Mykhaylo Andriluka
+5 - Siyu Tang, Bernt Schiele, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka
+4 - Salvatore Orlando 0001, Franco Maria Nardini, Claudio Lucchese, Raffaele Perego
+5 - Salvatore Orlando 0001, Nicola Tonellotto, Franco Maria Nardini, Claudio Lucchese, Raffaele Perego
+4 - Mingyu Fan, Xiaojun Chang, Di Wang, Xiaoqin Zhang
+4 - Mingyu Fan, Di Wang, Liang Du, Xiaoqin Zhang
+5 - Mingdong Ou, Wenwu Zhu 0001, Peng Cui, Jun Wang, Fei Wang 0001
+4 - Mingdong Ou, Wenwu Zhu 0001, Peng Cui, Fei Wang 0001
+5 - Mingdong Ou, Wenwu Zhu 0001, Shiqiang Yang, Peng Cui, Fei Wang 0001
+4 - Maria Luisa Bonet, Jordi Levy, Felip Manyà, Carlos Ansótegui
+4 - Ling-Yu Duan, Wen Gao 0001, Tiejun Huang, Zhe Wang
+4 - Ling-Yu Duan, Wen Gao 0001, Tiejun Huang, Rongrong Ji
+4 - Li Dong, Ke Xu 0001, Ming Zhou 0001, Furu Wei
+4 - Krishna V. Shenoy, Byron M. Yu, John P. Cunningham, Maneesh Sahani
+4 - Julian J. McAuley, Qinfeng Shi, Yanning Zhang, Anton van den Hengel
+4 - Jan Heller, Zuzana Kukelova, Andrew W. Fitzgibbon, Tomás Pajdla
+4 - Ian Endres, David A. Forsyth, Ali Farhadi, Derek Hoiem
+4 - Fuzhen Zhuang, Zhongzhi Shi, Qing He, Ping Luo
+4 - Franco Maria Nardini, Claudio Lucchese, Raffaele Perego, Nicola Tonellotto
+4 - Fang Chen, Yang Wang, Yi Wang, Bin Li
+4 - Elena Botoeva, Vladislav Ryzhikov, Michael Zakharyaschev, Frank Wolter
+5 - Elena Botoeva, Diego Calvanese, Vladislav Ryzhikov, Michael Zakharyaschev, Frank Wolter
+5 - Ding Liu, Thomas S. Huang, Zhangyang Wang, Yingzhen Yang, Shiyu Chang
+5 - Chunqiu Zeng, Chao Shen, Liang Tang, Lei Li 0001, Tao Li 0001
+5 - Chong-Wah Ngo, Yingwei Pan, Tao Mei, Houqiang Li, Ting Yao
+4 - Chenguang Wang, Yangqiu Song, Ming Zhang 0004, Jiawei Han 0001
+4 - Chao Shen, Tao Li 0001, Lei Li 0001, Liang Tang
+4 - Chao Shen, Lei Li 0001, Tao Li 0001, Liang Tang
+4 - Changsheng Li, Hongyuan Zha, Junchi Yan, Qingshan Liu
+4 - Brian Gallagher, Hanghang Tong, Tina Eliassi-Rad, Christos Faloutsos
+4 - Bo Xin, Wen Gao 0001, Yizhou Wang 0001, David P. Wipf
+4 - Arjun Jain, Bernt Schiele, Leonid Pishchulin, Mykhaylo Andriluka
+5 - Arjun Jain, Christoph Bregler, Bernt Schiele, Leonid Pishchulin, Mykhaylo Andriluka
+4 - Zhiqi Shen, Cyril Leung, Han Yu, Chunyan Miao
+4 - Yusheng Xie, Zhengzhang Chen, Ankit Agrawal, Alok N. Choudhary
+5 - Yusheng Xie, Ankit Agrawal, Yu Cheng, Alok N. Choudhary, Zhengzhang Chen
+4 - Yusheng Xie, Ankit Agrawal, Yu Cheng, Alok N. Choudhary
+5 - Yusheng Xie, Zhengzhang Chen, Ankit Agrawal, Alok N. Choudhary, Yu Cheng
+5 - Yusheng Xie, Zhengzhang Chen, Ankit Agrawal, Yu Cheng, Alok N. Choudhary
+4 - Yusheng Xie, Ankit Agrawal, Alok N. Choudhary, Yu Cheng
+4 - Yunpeng Chen, Xiaojie Jin, Jiashi Feng, Shuicheng Yan
+5 - Yunchen Pu, Zhe Gan, Ricardo Henao, Chunyuan Li, Lawrence Carin
+4 - Yunchen Pu, Chunyuan Li, Zhe Gan, Lawrence Carin
+4 - Yun Chi, Shenghuo Zhu, Belle L. Tseng, Yihong Gong
+4 - Yizhe Zhang, Chunyuan Li, Lawrence Carin, Ricardo Henao
+4 - Yang Yang 0002, Zi Huang, Heng Tao Shen, Fumin Shen
+4 - Xinggang Wang, Wenyu Liu, Xiang Bai, Longin Jan Latecki
+4 - Xiao Liu, Chun Chen, Jiajun Bu, Dacheng Tao
+5 - Xiao Liu, Luming Zhang, Chun Chen, Zicheng Liu, Jiajun Bu
+4 - Xiang Wang 0001, Fei Wang 0001, Buyue Qian, Ian Davidson
+4 - Wei Han, Thomas S. Huang, Zhangyang Wang, Shiyu Chang
+4 - Toby Sharp, Andrew W. Fitzgibbon, Jamie Shotton, Carsten Rother
+4 - Toby Sharp, Carsten Rother, Jamie Shotton, Andrew W. Fitzgibbon
+4 - Silvio Lattanzi, Flavio Chierichetti, Vahab S. Mirrokni, Ravi Kumar 0001
+4 - Shuo Yang, Chen Change Loy, Ping Luo, Xiaoou Tang
+4 - Shuo Yang, Xiaoou Tang, Chen Change Loy, Ping Luo
+5 - Shuo Yang, Chen Change Loy, Ping Luo, Xiaoou Tang, Xiaogang Wang
+5 - Shuo Yang, Xiaoou Tang, Chen Change Loy, Ping Luo, Xiaogang Wang
+4 - Shuhang Gu, Wangmeng Zuo, Liang Lin, Lei Zhang
+4 - Shuhang Gu, Lei Zhang 0006, Wangmeng Zuo, Liang Lin
+4 - Shuhang Gu, Lei Zhang, Wangmeng Zuo, Liang Lin
+4 - Shuhang Gu, Lei Zhang 0006, Wangmeng Zuo, Lei Zhang
+4 - Scott E. Reed, Zeynep Akata, Honglak Lee, Bernt Schiele
+4 - Qiang Liu 0006, Shu Wu, Liang Wang 0001, Tieniu Tan
+4 - Neel Joshi, David J. Kriegman, Richard Szeliski, C. Lawrence Zitnick
+5 - Ming-Wei Chang, Hongning Wang, Ryen W. White, Yang Song, Xiaodong He
+5 - Ming-Wei Chang, Ryen W. White, Yang Song, Xiaodong He, Hongning Wang
+4 - Mihalis A. Nicolaou, Irene Kotsia, Guoying Zhao, Stefanos Zafeiriou
+4 - Maria Silvia Pini, Francesca Rossi, Kristen Brent Venable, Toby Walsh
+4 - Liang Zhao, Chang-Tien Lu, Feng Chen 0001, Naren Ramakrishnan
+4 - Liang Zhao, Naren Ramakrishnan, Feng Chen 0001, Chang-Tien Lu
+4 - Leonid Pishchulin, Peter V. Gehler, Mykhaylo Andriluka, Bernt Schiele
+5 - Leonid Pishchulin, Peter V. Gehler, Mykhaylo Andriluka, Bernt Schiele, Bjoern Andres
+4 - Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, Bernt Schiele
+4 - Jianping Yin, Yong Dou, Xinwang Liu, Lei Wang 0001
+4 - Jean-François Baget, Michaël Thomazo, Marie-Laure Mugnier, Meghyn Bienvenu
+4 - Hsiang-Fu Yu, Chih-Jen Lin, Cho-Jui Hsieh, Inderjit S. Dhillon
+4 - Emmanuel Hebrard, George Katsirelos, Christian Bessiere, Toby Walsh
+5 - Domenico Lembo, Maurizio Lenzerini, Riccardo Rosati, Diego Calvanese, Giuseppe De Giacomo
+4 - Chaohui Wang, Nikos Paragios, Dacheng Tao, Dimitris Samaras
+4 - Chao Qian, Ke Tang, Yang Yu 0001, Zhi-Hua Zhou
+4 - Brian Curless, Steven M. Seitz, Yasutaka Furukawa, Sameer Agarwal
+4 - Arthur Guez, Peter Dayan, David Silver, Nicolas Heess
+4 - Alessandro Artale, Roman Kontchakov, Michael Zakharyaschev, Vladislav Ryzhikov
+4 - Alessandro Artale, Vladislav Ryzhikov, Roman Kontchakov, Michael Zakharyaschev
+4 - Alessandro Artale, Frank Wolter, Roman Kontchakov, Michael Zakharyaschev
+5 - Alessandro Artale, Vladislav Ryzhikov, Frank Wolter, Roman Kontchakov, Michael Zakharyaschev
+4 - Akihiko Torii, Josef Sivic, Tomás Pajdla, Masatoshi Okutomi
+4 - Zhiqiang Zhuang, Guilin Qi, Kewen Wang, Zhe Wang
+4 - Zhengzhang Chen, Alok N. Choudhary, Kai Zhang 0001, Ankit Agrawal
+4 - Zhaohui Zheng, Olivier Chapelle, Hongyuan Zha, Bo Long
+5 - Zhaohui Zheng, Olivier Chapelle, Hongyuan Zha, Bo Long, Yi Chang
+4 - Zhaohui Zheng, Olivier Chapelle, Hongyuan Zha, Yi Chang
+5 - Zhaohui Zheng, Hongyuan Zha, Bo Long, Olivier Chapelle, Yi Chang
+4 - Yongfeng Zhang, Min Zhang 0006, Shaoping Ma, Yiqun Liu
+5 - Yanghua Xiao, Wei Wang 0009, Seung-won Hwang, Haixun Wang, Yi Zhang
+4 - Yanghua Xiao, Yi Zhang, Haixun Wang, Wei Wang 0009
+4 - Yanghua Xiao, Wei Wang 0009, Seung-won Hwang, Haixun Wang
+4 - Ya'akov Gal, Claudia V. Goldman, Amos Azaria, Sarit Kraus
+4 - Vladan Radosavljevic, Zoran Obradovic, Mihajlo Grbovic, Nemanja Djuric
+4 - Vladan Radosavljevic, Mihajlo Grbovic, Nemanja Djuric, Fabrizio Silvestri
+5 - Vladan Radosavljevic, Mihajlo Grbovic, Nemanja Djuric, Slobodan Vucetic, Zoran Obradovic
+4 - Vladan Radosavljevic, Mihajlo Grbovic, Nemanja Djuric, Slobodan Vucetic
+5 - Vladan Radosavljevic, Mihajlo Grbovic, Nemanja Djuric, Slobodan Vucetic, Fabrizio Silvestri
+5 - Vladan Radosavljevic, Zoran Obradovic, Mihajlo Grbovic, Nemanja Djuric, Fabrizio Silvestri
+6 - Vladan Radosavljevic, Mihajlo Grbovic, Nemanja Djuric, Slobodan Vucetic, Zoran Obradovic, Fabrizio Silvestri
+4 - Tushar Khot, Sriraam Natarajan, Jude W. Shavlik, Kristian Kersting
+4 - Tushar Khot, Sriraam Natarajan, Oren Etzioni, Ashish Sabharwal
+5 - Tushar Khot, Sriraam Natarajan, Oren Etzioni, Kristian Kersting, Ashish Sabharwal
+4 - Tushar Khot, Jude W. Shavlik, Sriraam Natarajan, Kristian Kersting
+5 - Tushar Khot, Jude W. Shavlik, Sriraam Natarajan, Oren Etzioni, Ashish Sabharwal
+5 - Tina Eliassi-Rad, Leman Akoglu, Lei Li, Hanghang Tong, Christos Faloutsos
+4 - Suhang Wang, Jiliang Tang, Baoxin Li, Huan Liu
+4 - Suhang Wang, Baoxin Li, Jiliang Tang, Huan Liu
+4 - Suhang Wang, Xia Hu, Jiliang Tang, Huan Liu
+5 - Suhang Wang, Xia Hu, Baoxin Li, Jiliang Tang, Huan Liu
+4 - Somdeb Sarkhel, Parag Singla, Deepak Venugopal, Vibhav Gogate
+4 - Somdeb Sarkhel, Vibhav Gogate, Parag Singla, Deepak Venugopal
+4 - Roozbeh Mottaghi, Sanja Fidler, Raquel Urtasun, Alan L. Yuille
+4 - Roozbeh Mottaghi, Raquel Urtasun, Alan L. Yuille, Sanja Fidler
+4 - R. Bharat Rao, Glenn Fung, Rómer Rosales, Jinbo Bi
+4 - Jun Xiao 0001, Xi Li 0001, Fei Wu 0001, Yueting Zhuang
+4 - Jinfeng Yi, Rong Jin, Lijun Zhang 0005, Tianbao Yang
+4 - Jaesik Park, Sudipta N. Sinha, In-So Kweon, Yu-Wing Tai
+5 - Hong-Jiang Zhang, Guo-Jun Qi, Yong Rui, Jinhui Tang, Xian-Sheng Hua
+4 - Hong-Jiang Zhang, Changhu Wang, Yong Rui, Lei Zhang 0001
+5 - Hong-Jiang Zhang, Jinhui Tang, Guo-Jun Qi, Yong Rui, Xian-Sheng Hua
+5 - Hong-Jiang Zhang, Yong Rui, Jinhui Tang, Guo-Jun Qi, Xian-Sheng Hua
+7 - Hong-Jiang Zhang, Guo-Jun Qi, Changhu Wang, Yong Rui, Lei Zhang 0001, Jinhui Tang, Xian-Sheng Hua
+6 - Hong-Jiang Zhang, Guo-Jun Qi, Yong Rui, Lei Zhang 0001, Jinhui Tang, Xian-Sheng Hua
+6 - Hong-Jiang Zhang, Jinhui Tang, Guo-Jun Qi, Lei Zhang 0001, Yong Rui, Xian-Sheng Hua
+4 - Hong Chang, Wen Gao 0001, Xilin Chen, Shiguang Shan
+4 - Gang Zeng, Hongbin Zha, Shipeng Li, Jingdong Wang
+4 - Elisa Ricci, Nicu Sebe, Wanli Ouyang, Xiaogang Wang
+4 - Bo Jiang, Jin Tang, Bin Luo, Chris H. Q. Ding
+4 - Bharath Hariharan, Piotr Dollár, Jitendra Malik, Ross B. Girshick
+4 - Anton Milan, Anthony R. Dick, Konrad Schindler, Ian D. Reid 0001
+4 - Andrei Z. Broder, Vanja Josifovski, Evgeniy Gabrilovich, Tong Zhang 0001
+4 - Ziyu Guan, Chun Chen, Jiajun Bu, Can Wang
+4 - Ziyu Guan, Can Wang, Jiajun Bu, Chun Chen
+4 - Ziyu Guan, Chun Chen, Jiajun Bu, Deng Cai
+4 - Ziyu Guan, Jiajun Bu, Can Wang, Chun Chen
+5 - Ziyu Guan, Jiajun Bu, Deng Cai, Can Wang, Chun Chen
+5 - Ziyu Guan, Chun Chen, Jiajun Bu, Deng Cai, Can Wang
+4 - Zhiwei Li, Rui Cai, Lei Zhang 0001, Yong Rui
+5 - Zhiwei Li, Rui Cai, Lei Zhang 0001, Yong Rui, Feng Wu
+4 - Zhiwei Li, Rui Cai, Lei Zhang 0001, Feng Wu
+4 - Zhiming Ma, Taifeng Wang, Wei Chen, Tie-Yan Liu
+4 - Zheng-Jun Zha, Meng Wang 0001, Xian-Sheng Hua, Tat-Seng Chua
+4 - Yuchen Zhang, Michael I. Jordan, John C. Duchi, Martin J. Wainwright
+5 - Yingwei Pan, Houqiang Li, Ting Yao, Yong Rui, Tao Mei
+4 - Yingwei Pan, Houqiang Li, Ting Yao, Tao Mei
+4 - Yingce Xia, Nenghai Yu, Tao Qin, Tie-Yan Liu
+4 - Valentin Robu, Nicholas R. Jennings, Enrico H. Gerding, Sebastian Stein 0001
+4 - Valentin Robu, Enrico H. Gerding, Sebastian Stein 0001, Nicholas R. Jennings
+5 - Valentin Robu, David C. Parkes, Enrico H. Gerding, Sebastian Stein 0001, Nicholas R. Jennings
+4 - Valentin Robu, David C. Parkes, Enrico H. Gerding, Nicholas R. Jennings
+4 - Tianzhu Zhang, Changsheng Xu, Narendra Ahuja, Bernard Ghanem
+4 - Tianzhu Zhang, Changsheng Xu, Bernard Ghanem, Narendra Ahuja
+4 - Tianzhu Zhang, Ming-Hsuan Yang 0001, Changsheng Xu, Bernard Ghanem
+4 - Tianzhu Zhang, Bernard Ghanem, Narendra Ahuja, Changsheng Xu
+4 - Tianzhu Zhang, Bernard Ghanem, Changsheng Xu, Narendra Ahuja
+4 - Tianzhu Zhang, Ming-Hsuan Yang 0001, Changsheng Xu, Narendra Ahuja
+5 - Tianzhu Zhang, Ming-Hsuan Yang 0001, Changsheng Xu, Bernard Ghanem, Narendra Ahuja
+4 - Thanh Hong Nguyen, Bo An, Milind Tambe, Fei Fang
+4 - Thanh Hong Nguyen, Milind Tambe, Bo An, Fei Fang
+4 - Thanh Hong Nguyen, Milind Tambe, Arunesh Sinha, Fei Fang
+5 - Thanh Hong Nguyen, Arunesh Sinha, Bo An, Milind Tambe, Fei Fang
+5 - Thanh Hong Nguyen, Bo An, Milind Tambe, Arunesh Sinha, Fei Fang
+4 - Shipeng Li, Xian-Sheng Hua, Tao Mei, Jingdong Wang
+4 - Shangsong Liang, Zhaochun Ren, Emine Yilmaz, Maarten de Rijke
+4 - Praneeth Netrapalli, Sujay Sanghavi, Prateek Jain 0002, Sham M. Kakade
+4 - Piotr Skowron, Martin Lackner, Edith Elkind, Piotr Faliszewski
+4 - Paolo Felli, Tim Miller, Adrian R. Pearce, Christian J. Muise
+4 - Mingkui Tan, Anton van den Hengel, Junbin Gao, Qinfeng Shi
+4 - Mingkui Tan, Qinfeng Shi, Ivor W. Tsang, Yan Yan
+4 - Mingkui Tan, Qinfeng Shi, Anton van den Hengel, Junbin Gao
+4 - Mingkui Tan, Yan Yan, Ivor W. Tsang, Anton van den Hengel
+4 - Mingkui Tan, Qinfeng Shi, Ivor W. Tsang, Anton van den Hengel
+4 - Mingkui Tan, Ivor W. Tsang, Yan Yan, Anton van den Hengel
+4 - Mingkui Tan, Qinfeng Shi, Junbin Gao, Anton van den Hengel
+4 - Mingkui Tan, Qinfeng Shi, Anton van den Hengel, Dong Xu
+5 - Mingkui Tan, Qinfeng Shi, Anton van den Hengel, Junbin Gao, Dong Xu
+5 - Mingkui Tan, Ivor W. Tsang, Yan Yan, Qinfeng Shi, Anton van den Hengel
+5 - Mingkui Tan, Qinfeng Shi, Junbin Gao, Anton van den Hengel, Dong Xu
+5 - Mingkui Tan, Qinfeng Shi, Yan Yan, Ivor W. Tsang, Anton van den Hengel
+4 - Mehrdad Farajtabar, Manuel Gomez-Rodriguez, Hongyuan Zha, Le Song
+5 - Mehrdad Farajtabar, Hongyuan Zha, Manuel Gomez-Rodriguez, Nan Du, Le Song
+4 - Mehrdad Farajtabar, Hongyuan Zha, Manuel Gomez-Rodriguez, Le Song
+4 - Mehrdad Farajtabar, Manuel Gomez-Rodriguez, Nan Du, Le Song
+4 - Mehrdad Farajtabar, Hongyuan Zha, Nan Du, Le Song
+4 - Jonathan Taylor, Andrew W. Fitzgibbon, Shahram Izadi, Jamie Shotton
+4 - Jonathan Taylor, Shahram Izadi, Jamie Shotton, Andrew W. Fitzgibbon
+4 - Jingen Liu, Hui Cheng, Harpreet S. Sawhney, Mubarak Shah
+4 - Ian En-Hsu Yen, Pradeep Ravikumar, Inderjit S. Dhillon, Shou-De Lin
+4 - Ian En-Hsu Yen, Shou-De Lin, Pradeep Ravikumar, Inderjit S. Dhillon
+4 - Hanwang Zhang, Tat-Seng Chua, Xiangnan He 0001, Wei Liu
+4 - Hanwang Zhang, Xiangnan He 0001, Tat-Seng Chua, Wei Liu
+4 - Hanwang Zhang, Xiangnan He 0001, Wei Liu, Tat-Seng Chua
+4 - Haipeng Luo, Alekh Agarwal, Akshay Krishnamurthy, Robert E. Schapire
+4 - Dong Yi, Junjie Yan, Zhen Lei, Stan Z. Li
+4 - Deli Zhao, Edward Y. Chang, Zhouchen Lin, Xiaoou Tang
+4 - Changyou Chen, Ricardo Henao, Chunyuan Li, Lawrence Carin
+4 - Can Wang, Lijun Zhang 0005, Chun Chen, Jiajun Bu
+4 - Basura Fernando, Stephen Gould, Efstratios Gavves, Tinne Tuytelaars
+4 - Basura Fernando, Efstratios Gavves, Stephen Gould, Tinne Tuytelaars
+4 - Zhongfei Zhang, Fei Wu 0001, Yueting Zhuang, Xi Li 0001
+4 - Yingzhen Yang, Zhangyang Wang, Shiyu Chang, Thomas S. Huang
+4 - Vladislav Ryzhikov, Roman Kontchakov, Michael Zakharyaschev, Frank Wolter
+4 - Richard D. Lawrence, Dan Zhang 0007, Yan Liu, Claudia Perlich
+4 - Maria Polukarov, Svetlana Obraztsova, Zinovi Rabinovich, Nicholas R. Jennings
+4 - Maria Polukarov, Svetlana Obraztsova, Zinovi Rabinovich, Edith Elkind
+4 - Maria Polukarov, Zinovi Rabinovich, Nicholas R. Jennings, Svetlana Obraztsova
+4 - Maria Polukarov, Nicholas R. Jennings, Jeffrey S. Rosenschein, Svetlana Obraztsova
+4 - Manuel Gomez-Rodriguez, Nan Du, Le Song, Hongyuan Zha
+5 - Luming Zhang, Chun Chen, Zicheng Liu, Jiajun Bu, Dacheng Tao
+4 - Luming Zhang, Chun Chen, Zicheng Liu, Jiajun Bu
+5 - Luming Zhang, Liqiang Nie, Chun Chen, Zicheng Liu, Jiajun Bu
+6 - Luming Zhang, Chun Chen, Zicheng Liu, Jiajun Bu, Dacheng Tao, Liqiang Nie
+5 - Luming Zhang, Chun Chen, Zicheng Liu, Jiajun Bu, Liqiang Nie
+4 - Lars Buesing, Jakob H. Macke, Maneesh Sahani, John P. Cunningham
+4 - Lars Buesing, Maneesh Sahani, John P. Cunningham, Jakob H. Macke
+4 - Houqiang Li, Ting Yao, Yong Rui, Tao Mei
+4 - Hongbo Deng, Jiawei Han 0001, Yi Chang, Hongyuan Zha
+4 - Deqing Sun, Hanspeter Pfister, Erik B. Sudderth, Michael J. Black
+4 - Claudia V. Goldman, Zinovi Rabinovich, Amos Azaria, Sarit Kraus
+5 - Claude-Guy Quimper, George Katsirelos, Christian Bessiere, Nina Narodytska, Toby Walsh
+4 - Changsheng Xu, Hanqing Lu, Shuicheng Yan, Narendra Ahuja
+4 - Bo Zhao 0001, Qi Li, Jing Gao, Jiawei Han 0001
+4 - Bo Zhao 0001, Jing Gao, Jiawei Han 0001, Qi Li
+4 - Bo Zhao 0001, Qi Li, Jiawei Han 0001, Jing Gao
+4 - Anthony R. Dick, Chunhua Shen, Anton van den Hengel, Xi Li 0001
+4 - Anthony R. Dick, Xi Li 0001, Anton van den Hengel, Chunhua Shen
+4 - Anthony R. Dick, Ian D. Reid 0001, Chunhua Shen, Anton van den Hengel
+5 - Anthony R. Dick, Xi Li 0001, Ian D. Reid 0001, Chunhua Shen, Anton van den Hengel
+4 - Anthony R. Dick, Xi Li 0001, Chunhua Shen, Anton van den Hengel
+4 - Akshay Krishnamurthy, Alekh Agarwal, John Langford, Robert E. Schapire
+4 - Zhe Gan, Ricardo Henao, Chunyuan Li, Lawrence Carin
+5 - Zhe Gan, Chunyuan Li, Lawrence Carin, Jianfeng Gao, Xiaodong He
+4 - Zhe Gan, Lawrence Carin, Xiaodong He, Jianfeng Gao
+4 - Zhe Gan, Chunyuan Li, Lawrence Carin, Ricardo Henao
+4 - Zhe Gan, Jianfeng Gao, Lawrence Carin, Xiaodong He
+4 - Zhe Gan, Lawrence Carin, Jianfeng Gao, Xiaodong He
+5 - Zhe Gan, Lawrence Carin, Jianfeng Gao, Ricardo Henao, Xiaodong He
+5 - Zhe Gan, Jianfeng Gao, Ricardo Henao, Lawrence Carin, Xiaodong He
+4 - Yue Gao, Jungong Han, Yuchen Guo, Guiguang Ding
+4 - Xiangnan He 0001, Liqiang Nie, Wei Liu, Tat-Seng Chua
+4 - Sujian Li, Furu Wei, Wenjie Li, Ming Zhou 0001
+4 - Stephen M. Chu, Junchi Yan, Hongyuan Zha, Wei Liu
+4 - Stephen M. Chu, Junchi Yan, Hongyuan Zha, Chao Chen
+4 - Stephen M. Chu, Junchi Yan, Xiaokang Yang, Hongyuan Zha
+6 - Stephen M. Chu, Chao Zhang, Junchi Yan, Wei Liu, Xiaokang Yang, Hongyuan Zha
+5 - Stephen M. Chu, Junchi Yan, Wei Liu, Xiaokang Yang, Hongyuan Zha
+5 - Stephen M. Chu, Chao Zhang, Junchi Yan, Xiaokang Yang, Hongyuan Zha
+4 - Stephen M. Chu, Junchi Yan, Chao Chen, Hongyuan Zha
+4 - Stephen M. Chu, Junchi Yan, Hongyuan Zha, Xiaokang Yang
+4 - Stephen M. Chu, Xiaokang Yang, Hongyuan Zha, Junchi Yan
+4 - Stephen M. Chu, Chao Chen, Hongyuan Zha, Junchi Yan
+5 - Stephen M. Chu, Wei Liu, Chao Chen, Hongyuan Zha, Junchi Yan
+5 - Stephen M. Chu, Junchi Yan, Chao Chen, Xiaokang Yang, Hongyuan Zha
+5 - Stephen M. Chu, Xiaokang Yang, Chao Chen, Hongyuan Zha, Junchi Yan
+4 - Peter Bailey, Paul Thomas, Alistair Moffat, Falk Scholer
+4 - Marco Montali, Giuseppe De Giacomo, Fabio Patrizi, Diego Calvanese
+4 - Marco Montali, Diego Calvanese, Giuseppe De Giacomo, Fabio Patrizi
+4 - Long Tran-Thanh, Alex Rogers, Sarvapali D. Ramchurn, Nicholas R. Jennings
+4 - Long Tran-Thanh, Alex Rogers, Nicholas R. Jennings, Bo An
+4 - Leman Akoglu, Lei Li, Hanghang Tong, Christos Faloutsos
+4 - Jiang Wang, Yi Yang, Yuanqing Lin, Wei Xu
+4 - Jiang Wang, Ying Wu, Yi Yang, Wei Xu
+4 - Jiang Wang, Yi Yang, Ying Wu, Wei Xu
+4 - Guni Sharon, Roni Stern, Ariel Felner, Nathan R. Sturtevant
+4 - Guni Sharon, Ariel Felner, Nathan R. Sturtevant, Roni Stern
+4 - Georgios Theocharous, Philip S. Thomas, Shie Mannor, Mohammad Ghavamzadeh
+4 - George Katsirelos, Christian Bessiere, Nina Narodytska, Toby Walsh
+5 - Dan Zhang 0007, Luo Si, Fei Wang 0001, Yan Liu, Jingrui He
+4 - Dan Zhang 0007, Luo Si, Yan Liu, Jingrui He
+4 - Dan Zhang 0007, Yan Liu, Luo Si, Jingrui He
+4 - Dan Zhang 0007, Luo Si, Fei Wang 0001, Yan Liu
+4 - Dan Zhang 0007, Luo Si, Fei Wang 0001, Jingrui He
+5 - Dan Zhang 0007, Luo Si, Fei Wang 0001, Jingrui He, Yan Liu
+4 - Dan Zhang 0007, Luo Si, Jingrui He, Yan Liu
+4 - Bharath K. Sriperumbudur, Bernhard Schölkopf, Kenji Fukumizu, Arthur Gretton
+4 - Bharath K. Sriperumbudur, Arthur Gretton, Bernhard Schölkopf, Kenji Fukumizu
+5 - Bharath K. Sriperumbudur, Gert R. G. Lanckriet, Bernhard Schölkopf, Kenji Fukumizu, Arthur Gretton
+4 - Zhou Zhao, Yueting Zhuang, Xiaofei He, Deng Cai
+4 - Zhou Zhao, Hanqing Lu, Xiaofei He, Yueting Zhuang
+4 - Wenwu Zhu 0001, Peng Cui, Jun Wang, Fei Wang 0001
+4 - Wenwu Zhu 0001, Shiqiang Yang, Peng Cui, Jian Pei
+4 - Wenwu Zhu 0001, Peng Cui, Fei Wang 0001, Shiqiang Yang
+5 - Wenwu Zhu 0001, Peng Cui, Jun Wang, Fei Wang 0001, Shiqiang Yang
+4 - Wenwu Zhu 0001, Shiqiang Yang, Peng Cui, Fei Wang 0001
+4 - Wenwu Zhu 0001, Shiqiang Yang, Christos Faloutsos, Peng Cui
+5 - Wenwu Zhu 0001, Peng Cui, Jian Pei, Fei Wang 0001, Shiqiang Yang
+6 - Wenwu Zhu 0001, Peng Cui, Jun Wang, Jian Pei, Fei Wang 0001, Shiqiang Yang
+6 - Wenwu Zhu 0001, Christos Faloutsos, Peng Cui, Jun Wang, Fei Wang 0001, Shiqiang Yang
+5 - Wenwu Zhu 0001, Christos Faloutsos, Peng Cui, Fei Wang 0001, Shiqiang Yang
+4 - Wenwu Zhu 0001, Christos Faloutsos, Peng Cui, Shiqiang Yang
+5 - Wenwu Zhu 0001, Shiqiang Yang, Peng Cui, Jian Pei, Fei Wang 0001
+5 - Wenwu Zhu 0001, Shiqiang Yang, Christos Faloutsos, Peng Cui, Fei Wang 0001
+5 - Wenwu Zhu 0001, Shiqiang Yang, Christos Faloutsos, Peng Cui, Jian Pei
+4 - Wenwu Zhu 0001, Peng Cui, Jian Pei, Shiqiang Yang
+4 - Maurizio Lenzerini, Riccardo Rosati, Diego Calvanese, Giuseppe De Giacomo
+4 - Jonathan Brandt, Zhe Lin 0001, Xiaohui Shen, Gang Hua
+4 - Jonathan Brandt, Jianchao Yang, Xiaohui Shen, Zhe Lin 0001
+4 - Ilya Sutskever, Oriol Vinyals, Xi Chen, Geoffrey E. Hinton
+4 - Christoph Rhemann, Shahram Izadi, Pushmeet Kohli, Carsten Rother
+4 - Yexiang Xue, Bart Selman, Stefano Ermon, Carla P. Gomes
+4 - Xi Li 0001, Fei Wu 0001, Yueting Zhuang, Weiming Hu
+4 - Xi Li 0001, Yueting Zhuang, Fei Wu 0001, Weiming Hu
+4 - Svetlana Obraztsova, Zinovi Rabinovich, Nicholas R. Jennings, Edith Elkind
+4 - Jun Xu, Yanyan Lan, Jiafeng Guo, Xueqi Cheng
+4 - Yanning Zhang, Chunhua Shen, Qinfeng Shi, Anton van den Hengel
+4 - Xiaodan Liang, Xiaohui Shen, Shuicheng Yan, Liang Lin
+5 - Xiaodan Liang, Xiaohui Shen, Shuicheng Yan, Liang Lin, Jiashi Feng
+4 - Xiaodan Liang, Eric P. Xing, Xiaohui Shen, Liang Lin
+5 - Xiaodan Liang, Eric P. Xing, Xiaohui Shen, Shuicheng Yan, Liang Lin
+4 - Tomasz P. Michalak, Michael Wooldridge, Nicholas R. Jennings, Talal Rahwan
+4 - Tomasz P. Michalak, Talal Rahwan, Michael Wooldridge, Nicholas R. Jennings
+4 - Tamir Hazan, Alexander G. Schwing, Marc Pollefeys, Raquel Urtasun
+4 - Shahram Izadi, Jamie Shotton, Pushmeet Kohli, Andrew W. Fitzgibbon
+4 - Shahram Izadi, Antonio Criminisi, Jamie Shotton, Andrew W. Fitzgibbon
+4 - Shahram Izadi, Pushmeet Kohli, Jamie Shotton, Andrew W. Fitzgibbon
+5 - Shahram Izadi, Antonio Criminisi, Jamie Shotton, Pushmeet Kohli, Andrew W. Fitzgibbon
+4 - Serge Gaspers, Nicholas Mattei, Haris Aziz 0001, Toby Walsh
+5 - Serge Gaspers, Haris Aziz 0001, Nina Narodytska, Toby Walsh, Nicholas Mattei
+4 - Serge Gaspers, Haris Aziz 0001, Nina Narodytska, Toby Walsh
+4 - Lingqiao Liu, Chunhua Shen, Lei Wang 0001, Anton van den Hengel
+4 - Ke Zhou, Min Zhang 0006, Shaoping Ma, Yiqun Liu
+4 - Ke Zhou, Yiqun Liu, Min Zhang 0006, Shaoping Ma
+6 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Min Zhang 0006, Shaoping Ma, Jian-Yun Nie
+4 - Ke Zhou, Meng Wang 0001, Shaoping Ma, Yiqun Liu
+4 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Joemon M. Jose
+4 - Ke Zhou, Shaoping Ma, Yiqun Liu, Jian-Yun Nie
+4 - Ke Zhou, Shaoping Ma, Yiqun Liu, Meng Wang 0001
+5 - Ke Zhou, Shaoping Ma, Yiqun Liu, Meng Wang 0001, Min Zhang 0006
+5 - Ke Zhou, Yiqun Liu, Meng Wang 0001, Min Zhang 0006, Shaoping Ma
+4 - Ke Zhou, Yiqun Liu, Jian-Yun Nie, Shaoping Ma
+4 - Ke Zhou, Yiqun Liu, Meng Wang 0001, Shaoping Ma
+6 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Meng Wang 0001, Jian-Yun Nie
+4 - Ke Zhou, Shaoping Ma, Yiqun Liu, Min Zhang 0006
+5 - Ke Zhou, Min Zhang 0006, Shaoping Ma, Yiqun Liu, Jian-Yun Nie
+4 - Ke Zhou, Jian-Yun Nie, Shaoping Ma, Yiqun Liu
+4 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma
+5 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Min Zhang 0006
+6 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Min Zhang 0006, Jian-Yun Nie
+5 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Jian-Yun Nie
+5 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Meng Wang 0001
+5 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Min Zhang 0006, Shaoping Ma
+5 - Ke Zhou, Meng Wang 0001, Shaoping Ma, Yiqun Liu, Joemon M. Jose
+5 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Meng Wang 0001, Shaoping Ma
+6 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Meng Wang 0001, Shaoping Ma, Jian-Yun Nie
+6 - Ke Zhou, Shaoping Ma, Yiqun Liu, Meng Wang 0001, Min Zhang 0006, Jian-Yun Nie
+6 - Ke Zhou, Yiqun Liu, Meng Wang 0001, Min Zhang 0006, Shaoping Ma, Jian-Yun Nie
+5 - Ke Zhou, Yiqun Liu, Min Zhang 0006, Shaoping Ma, Joemon M. Jose
+5 - Ke Zhou, Yiqun Liu, Meng Wang 0001, Shaoping Ma, Joemon M. Jose
+4 - Ke Zhou, Yiqun Liu, Shaoping Ma, Joemon M. Jose
+6 - Ke Zhou, Shaoping Ma, Yiqun Liu, Meng Wang 0001, Min Zhang 0006, Joemon M. Jose
+6 - Ke Zhou, Yiqun Liu, Meng Wang 0001, Min Zhang 0006, Shaoping Ma, Joemon M. Jose
+5 - Ke Zhou, Yiqun Liu, Jian-Yun Nie, Shaoping Ma, Joemon M. Jose
+4 - Ke Zhou, Shaoping Ma, Yiqun Liu, Joemon M. Jose
+5 - Ke Zhou, Shaoping Ma, Yiqun Liu, Min Zhang 0006, Joemon M. Jose
+5 - Ke Zhou, Shaoping Ma, Yiqun Liu, Meng Wang 0001, Joemon M. Jose
+5 - Ke Zhou, Shaoping Ma, Yiqun Liu, Jian-Yun Nie, Joemon M. Jose
+5 - Ke Zhou, Min Zhang 0006, Shaoping Ma, Yiqun Liu, Joemon M. Jose
+6 - Ke Zhou, Min Zhang 0006, Shaoping Ma, Yiqun Liu, Jian-Yun Nie, Joemon M. Jose
+5 - Ke Zhou, Jian-Yun Nie, Shaoping Ma, Yiqun Liu, Joemon M. Jose
+6 - Ke Zhou, Yiqun Liu, Hongyuan Zha, Shaoping Ma, Min Zhang 0006, Joemon M. Jose
+5 - Hengshu Zhu, Qi Liu, Enhong Chen, Hui Xiong, Yong Ge
+4 - Hengshu Zhu, Enhong Chen, Hui Xiong, Yong Ge
+4 - Hengshu Zhu, Hui Xiong, Enhong Chen, Qi Liu
+4 - Hengshu Zhu, Hui Xiong, Qi Liu, Enhong Chen
+4 - Hengshu Zhu, Qi Liu, Enhong Chen, Hui Xiong
+5 - Hengshu Zhu, Hui Xiong, Yong Ge, Qi Liu, Enhong Chen
+5 - Hengshu Zhu, Hui Xiong, Yong Ge, Enhong Chen, Qi Liu
+4 - Hengshu Zhu, Hui Xiong, Yong Ge, Enhong Chen
+4 - Hengshu Zhu, Qi Liu, Enhong Chen, Yong Ge
+4 - Yan Yan, Nicu Sebe, Ivor W. Tsang, Yi Yang
+4 - Yan Yan, Ivor W. Tsang, Nicu Sebe, Yi Yang
+4 - Xinbo Gao, Cheng Deng, Dacheng Tao, Heng Huang
+4 - Xinbo Gao, Cheng Deng, Xuelong Li, Dacheng Tao
+5 - Xinbo Gao, Cheng Deng, Hua Wang, Heng Huang, Dacheng Tao
+4 - Xinbo Gao, Cheng Deng, Heng Huang, Hua Wang
+4 - Xinbo Gao, Cheng Deng, Hua Wang, Heng Huang
+4 - Xinbo Gao, Dacheng Tao, Cheng Deng, Wei Liu
+4 - Xinbo Gao, Cheng Deng, Heng Huang, Dacheng Tao
+4 - Xinbo Gao, Cheng Deng, Wei Liu, Dacheng Tao
+4 - Xinbo Gao, Cheng Deng, Heng Huang, Wei Liu
+4 - Xinbo Gao, Dacheng Tao, Cheng Deng, Heng Huang
+5 - Xinbo Gao, Cheng Deng, Heng Huang, Xuelong Li, Dacheng Tao
+4 - Xiaojun Chang, Alexander G. Hauptmann, Yi Yang, Feiping Nie
+4 - Xiaojun Chang, Yi Yang, Feiping Nie, Alexander G. Hauptmann
+4 - Xiaojun Chang, Yaoliang Yu, Eric P. Xing, Yi Yang
+4 - Xiaojun Chang, Feiping Nie, Alexander G. Hauptmann, Yi Yang
+4 - Xiaojun Chang, Eric P. Xing, Yi Yang, Yaoliang Yu
+5 - Xiaojun Chang, Alexander G. Hauptmann, Eric P. Xing, Yi Yang, Yaoliang Yu
+4 - Xiaojun Chang, Yi Yang, Yaoliang Yu, Alexander G. Hauptmann
+4 - Xiaojun Chang, Alexander G. Hauptmann, Yi Yang, Yaoliang Yu
+4 - Xiaojun Chang, Yaoliang Yu, Alexander G. Hauptmann, Yi Yang
+5 - Xiaojun Chang, Yaoliang Yu, Eric P. Xing, Yi Yang, Alexander G. Hauptmann
+5 - Xiaojun Chang, Eric P. Xing, Yi Yang, Feiping Nie, Yaoliang Yu
+4 - Xiaojun Chang, Yi Yang, Feiping Nie, Yaoliang Yu
+6 - Xiaojun Chang, Eric P. Xing, Yi Yang, Feiping Nie, Alexander G. Hauptmann, Yaoliang Yu
+5 - Xiaojun Chang, Yi Yang, Feiping Nie, Alexander G. Hauptmann, Yaoliang Yu
+5 - Xiaojun Chang, Eric P. Xing, Yi Yang, Yaoliang Yu, Alexander G. Hauptmann
+6 - Xiaojun Chang, Eric P. Xing, Yi Yang, Feiping Nie, Yaoliang Yu, Alexander G. Hauptmann
+6 - Xiaojun Chang, Feiping Nie, Alexander G. Hauptmann, Eric P. Xing, Yi Yang, Yaoliang Yu
+4 - Xiaojun Chang, Feiping Nie, Yi Yang, Yaoliang Yu
+5 - Xiaojun Chang, Feiping Nie, Alexander G. Hauptmann, Yi Yang, Yaoliang Yu
+5 - Xiaojun Chang, Feiping Nie, Eric P. Xing, Yi Yang, Yaoliang Yu
+4 - Xiaojun Chang, Feiping Nie, Yi Yang, Alexander G. Hauptmann
+5 - Xiaojun Chang, Alexander G. Hauptmann, Yi Yang, Feiping Nie, Yaoliang Yu
+5 - Xiaojun Chang, Alexander G. Hauptmann, Yaoliang Yu, Eric P. Xing, Yi Yang
+4 - Xiaojun Chang, Yi Yang, Alexander G. Hauptmann, Yaoliang Yu
+4 - Xiaojun Chang, Alexander G. Hauptmann, Yaoliang Yu, Yi Yang
+5 - Xiaojun Chang, Feiping Nie, Yi Yang, Yaoliang Yu, Alexander G. Hauptmann
+4 - Xiaojun Chang, Yaoliang Yu, Yi Yang, Alexander G. Hauptmann
+5 - Xiaojun Chang, Yi Yang, Feiping Nie, Yaoliang Yu, Alexander G. Hauptmann
+6 - Xiaojun Chang, Alexander G. Hauptmann, Eric P. Xing, Yi Yang, Feiping Nie, Yaoliang Yu
+5 - Xiaojun Chang, Eric P. Xing, Yi Yang, Alexander G. Hauptmann, Yaoliang Yu
+6 - Xiaojun Chang, Feiping Nie, Eric P. Xing, Yi Yang, Yaoliang Yu, Alexander G. Hauptmann
+5 - Xiaojun Chang, Feiping Nie, Yi Yang, Alexander G. Hauptmann, Yaoliang Yu
+4 - Shiyu Chang, Thomas S. Huang, Charu C. Aggarwal, Guo-Jun Qi
+4 - Shiyu Chang, Charu C. Aggarwal, Thomas S. Huang, Guo-Jun Qi
+5 - Shiyu Chang, Charu C. Aggarwal, Thomas S. Huang, Jiliang Tang, Guo-Jun Qi
+5 - Shiyu Chang, Thomas S. Huang, Jiliang Tang, Charu C. Aggarwal, Guo-Jun Qi
+5 - Shiyu Chang, Charu C. Aggarwal, Jiliang Tang, Thomas S. Huang, Guo-Jun Qi
+5 - Shiyu Chang, Jiliang Tang, Thomas S. Huang, Charu C. Aggarwal, Guo-Jun Qi
+4 - Shiyu Chang, Charu C. Aggarwal, Guo-Jun Qi, Thomas S. Huang
+5 - Piotr Dollár, Zhuowen Tu, Ross B. Girshick, C. Lawrence Zitnick, Kaiming He
+5 - Piotr Dollár, C. Lawrence Zitnick, Ross B. Girshick, Zhuowen Tu, Kaiming He
+4 - Piotr Dollár, Ross B. Girshick, Zhuowen Tu, Kaiming He
+4 - Piotr Dollár, Zhuowen Tu, Ross B. Girshick, Kaiming He
+4 - Piotr Dollár, Zhuowen Tu, Ross B. Girshick, C. Lawrence Zitnick
+4 - Piotr Dollár, Ross B. Girshick, C. Lawrence Zitnick, Kaiming He
+4 - Piotr Dollár, C. Lawrence Zitnick, Ross B. Girshick, Kaiming He
+4 - Peng Wang, Chunhua Shen, Heng Tao Shen, Anton van den Hengel
+5 - Mingsheng Long, Jianmin Wang 0001, Guiguang Ding, Qiang Yang 0001, Philip S. Yu
+4 - Mantas Simkus, Meghyn Bienvenu, Magdalena Ortiz, Thomas Eiter
+4 - Mantas Simkus, Magdalena Ortiz, Meghyn Bienvenu, Thomas Eiter
+4 - Jinhui Tang, Xian-Sheng Hua, Guo-Jun Qi, Yong Rui
+5 - Jinhui Tang, Shuicheng Yan, Guo-Jun Qi, Yong Rui, Xian-Sheng Hua
+5 - Jinhui Tang, Shuicheng Yan, Xian-Sheng Hua, Guo-Jun Qi, Yong Rui
+4 - Jianke Zhu, Steven C. H. Hoi, Michael R. Lyu, Rong Jin
+4 - Jianke Zhu, Steven C. H. Hoi, Rong Jin, Michael R. Lyu
+4 - Jianke Zhu, Michael R. Lyu, Rong Jin, Steven C. H. Hoi
+4 - Jianke Zhu, Rong Jin, Michael R. Lyu, Steven C. H. Hoi
+4 - Cheng Deng, Heng Huang, Wei Liu, Dacheng Tao
+4 - Cheng Deng, Heng Huang, Wei Liu, Feiping Nie
+4 - Cheng Deng, Heng Huang, Dacheng Tao, Wei Liu
+4 - Cheng Deng, Wei Liu, Heng Huang, Dacheng Tao
+4 - Cheng Deng, Heng Huang, Feiping Nie, Wei Liu
+4 - Cheng Deng, Heng Huang, Dacheng Tao, Wei Liu 0005
+4 - Cheng Deng, Heng Huang, Dacheng Tao, Feiping Nie
+5 - Cheng Deng, Heng Huang, Dacheng Tao, Feiping Nie, Wei Liu
+5 - Cheng Deng, Heng Huang, Wei Liu, Dacheng Tao, Feiping Nie
+4 - Cheng Deng, Dacheng Tao, Wei Liu 0005, Heng Huang
+6 - Cheng Deng, Heng Huang, Wei Liu, Dacheng Tao, Feiping Nie, Wei Liu 0005
+5 - Cheng Deng, Heng Huang, Dacheng Tao, Feiping Nie, Wei Liu 0005
+5 - Cheng Deng, Heng Huang, Wei Liu, Feiping Nie, Wei Liu 0005
+4 - Cheng Deng, Heng Huang, Feiping Nie, Wei Liu 0005
+6 - Cheng Deng, Heng Huang, Dacheng Tao, Feiping Nie, Wei Liu, Wei Liu 0005
+4 - Zenglin Xu, Irwin King, Michael R. Lyu, Rong Jin
+4 - Reshef Meir, Jeffrey S. Rosenschein, Moshe Tennenholtz, Yoram Bachrach
+4 - Reshef Meir, Moshe Tennenholtz, Jeffrey S. Rosenschein, Yoram Bachrach
+4 - Magdalena Ortiz, Diego Calvanese, Meghyn Bienvenu, Thomas Eiter
+4 - Kai Yu 0001, John D. Lafferty, Yihong Gong, Shenghuo Zhu
+4 - Kai Yu 0001, Yihong Gong, Jianchao Yang, Thomas S. Huang
+4 - Kai Yu 0001, Yihong Gong, Shenghuo Zhu, Thomas S. Huang
+4 - Kai Yu 0001, Shenghuo Zhu, Thomas S. Huang, Yihong Gong
+5 - Kai Yu 0001, Yihong Gong, Jianchao Yang, Shenghuo Zhu, Thomas S. Huang
+4 - Kai Yu 0001, Jianchao Yang, Shenghuo Zhu, Thomas S. Huang
+4 - Deyu Meng, Alexander G. Hauptmann, Yi Yang, Junwei Han
+4 - Deyu Meng, Wangmeng Zuo, Alexander G. Hauptmann, Junwei Han
+4 - Deyu Meng, Alexander G. Hauptmann, Wangmeng Zuo, Junwei Han
+4 - Yizhou Sun, Jiawei Han 0001, Jing Gao, Jie Tang
+4 - Yizhou Sun, Jiawei Han 0001, Jing Gao, Wei Fan
+5 - Yizhou Sun, Jing Gao, Jiawei Han 0001, Wei Fan, Jie Tang
+4 - Yizhou Sun, Jing Gao, Jiawei Han 0001, Wei Fan
+5 - Yizhou Sun, Jiawei Han 0001, Jing Gao, Wei Fan, Jie Tang
+4 - Yizhou Sun, Jing Gao, Jiawei Han 0001, Jie Tang
+4 - Meng Wang 0001, Jialie Shen, Shuicheng Yan, Tat-Seng Chua
+5 - Meng Wang 0001, Jialie Shen, Shuicheng Yan, Tat-Seng Chua, Xian-Sheng Hua
+5 - Jimei Yang, Honglak Lee, Ming-Hsuan Yang 0001, Brian L. Price, Scott Cohen
+4 - Jimei Yang, Brian L. Price, Scott Cohen, Ming-Hsuan Yang 0001
+4 - Jimei Yang, Ming-Hsuan Yang 0001, Brian L. Price, Scott Cohen
+4 - Jimei Yang, Scott Cohen, Ming-Hsuan Yang 0001, Brian L. Price
+5 - Jimei Yang, Scott Cohen, Brian L. Price, Honglak Lee, Ming-Hsuan Yang 0001
+4 - Jimei Yang, Scott Cohen, Brian L. Price, Ming-Hsuan Yang 0001
+5 - Jimei Yang, Ming-Hsuan Yang 0001, Brian L. Price, Scott Cohen, Honglak Lee
+5 - Jimei Yang, Brian L. Price, Scott Cohen, Honglak Lee, Ming-Hsuan Yang 0001
+4 - Jimei Yang, Ming-Hsuan Yang 0001, Scott Cohen, Brian L. Price
+4 - Jimei Yang, Brian L. Price, Scott Cohen, Honglak Lee
+5 - Jimei Yang, Ming-Hsuan Yang 0001, Honglak Lee, Brian L. Price, Scott Cohen
+5 - Jimei Yang, Scott Cohen, Honglak Lee, Ming-Hsuan Yang 0001, Brian L. Price
+5 - Jimei Yang, Ming-Hsuan Yang 0001, Scott Cohen, Brian L. Price, Honglak Lee
+5 - Jimei Yang, Ming-Hsuan Yang 0001, Scott Cohen, Honglak Lee, Brian L. Price
+5 - Guo-Jun Qi, Xian-Sheng Hua, Jiliang Tang, Jingdong Wang, Yong Rui
+4 - Guo-Jun Qi, Xian-Sheng Hua, Yong Rui, Jingdong Wang
+4 - Guo-Jun Qi, Yong Rui, Xian-Sheng Hua, Jingdong Wang
+4 - Guo-Jun Qi, Xian-Sheng Hua, Jiliang Tang, Yong Rui
+5 - Guo-Jun Qi, Xian-Sheng Hua, Jiliang Tang, Yong Rui, Jingdong Wang
+4 - Thomas Brox, Daniel Cremers, Bodo Rosenhahn, Hans-Peter Seidel
+4 - Nicu Sebe, Shuicheng Yan, Alexander G. Hauptmann, Yi Yang
+4 - Heng Tao Shen, Yi Yang, Feiping Nie, Wei Liu
+4 - Heng Tao Shen, Yi Yang, Feiping Nie, Chunhua Shen
+4 - Heng Tao Shen, Feiping Nie, Wei Liu, Chunhua Shen
+4 - Heng Tao Shen, Yi Yang, Wei Liu, Chunhua Shen
+4 - Brian L. Price, Alan L. Yuille, Scott Cohen, Xiaohui Shen
+4 - Brian L. Price, Xiaohui Shen, Zhe Lin 0001, Scott Cohen
+4 - Brian L. Price, Scott Cohen, Xiaohui Shen, Zhe Lin 0001
+4 - Brian L. Price, Zhe Lin 0001, Scott Cohen, Ming-Hsuan Yang 0001
+5 - Brian L. Price, Alan L. Yuille, Scott Cohen, Zhe Lin 0001, Xiaohui Shen
+4 - Brian L. Price, Scott Cohen, Zhe Lin 0001, Xiaohui Shen
+5 - Brian L. Price, Alan L. Yuille, Scott Cohen, Xiaohui Shen, Ming-Hsuan Yang 0001
+4 - Brian L. Price, Scott Cohen, Xiaohui Shen, Ming-Hsuan Yang 0001
+5 - Brian L. Price, Scott Cohen, Xiaohui Shen, Zhe Lin 0001, Ming-Hsuan Yang 0001
+5 - Brian L. Price, Xiaohui Shen, Zhe Lin 0001, Scott Cohen, Ming-Hsuan Yang 0001
+4 - Brian L. Price, Scott Cohen, Zhe Lin 0001, Ming-Hsuan Yang 0001
+5 - Brian L. Price, Scott Cohen, Zhe Lin 0001, Xiaohui Shen, Ming-Hsuan Yang 0001
+6 - Brian L. Price, Alan L. Yuille, Scott Cohen, Zhe Lin 0001, Xiaohui Shen, Ming-Hsuan Yang 0001
+4 - Brian L. Price, Scott Cohen, Ming-Hsuan Yang 0001, Xiaohui Shen
+4 - John Langford, Daniel J. Hsu, Tong Zhang 0001, Alekh Agarwal
+4 - Jacob D. Abernethy, Peter L. Bartlett, Alexander Rakhlin, Ambuj Tewari
+4 - Jacob D. Abernethy, Alexander Rakhlin, Peter L. Bartlett, Ambuj Tewari
+4 - Hailin Jin, Jianchao Yang, Jiebo Luo, Zhe Lin 0001
+4 - Fei Wu 0001, Qi Tian, Yueting Zhuang, Yi Yang
+4 - David Poole 0001, Guy Van den Broeck, Sriraam Natarajan, Kristian Kersting
+4 - Zhe Lin 0001, Scott Cohen, Jianchao Yang, Ying Wu
+4 - Zhe Lin 0001, Jianchao Yang, Scott Cohen, Ying Wu
+4 - Zhe Lin 0001, Scott Cohen, Jianchao Yang, Gang Hua
+4 - Zhe Lin 0001, Jianchao Yang, Scott Cohen, Gang Hua
+4 - Zhe Lin 0001, Scott Cohen, Jianchao Yang, Xiaohui Shen
+4 - Zhe Lin 0001, Gang Hua, Jianchao Yang, Scott Cohen
+5 - Zhe Lin 0001, Scott Cohen, Jianchao Yang, Ying Wu, Xiaohui Shen
+4 - Zhe Lin 0001, Jianchao Yang, Ying Wu, Xiaohui Shen
+4 - Zhe Lin 0001, Scott Cohen, Ying Wu, Xiaohui Shen
+4 - Wei Liu 0005, Gang Hua, Shih-Fu Chang, Rongrong Ji
+4 - Wei Liu 0005, Shih-Fu Chang, Rongrong Ji, Gang Hua
+4 - Lijun Zhang 0005, Xiaofei He, Jiajun Bu, Chun Chen
+4 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Zhi-Hua Zhou
+4 - Lijun Zhang 0005, Xiaofei He, Deng Cai, Rong Jin
+4 - Lijun Zhang 0005, Deng Cai, Rong Jin, Xiaofei He
+5 - Lijun Zhang 0005, Jiajun Bu, Xiaofei He, Deng Cai, Chun Chen
+8 - Lijun Zhang 0005, Deng Cai, Tianbao Yang, Rong Jin, Jiajun Bu, Xiaofei He, Zhi-Hua Zhou, Chun Chen
+5 - Lijun Zhang 0005, Rong Jin, Xiaofei He, Jiajun Bu, Chun Chen
+4 - Lijun Zhang 0005, Rong Jin, Jiajun Bu, Chun Chen
+6 - Lijun Zhang 0005, Jiajun Bu, Xiaofei He, Deng Cai, Rong Jin, Chun Chen
+5 - Lijun Zhang 0005, Jiajun Bu, Xiaofei He, Rong Jin, Chun Chen
+5 - Lijun Zhang 0005, Chun Chen, Rong Jin, Xiaofei He, Jiajun Bu
+4 - Lijun Zhang 0005, Chun Chen, Rong Jin, Jiajun Bu
+4 - Lijun Zhang 0005, Chun Chen, Xiaofei He, Jiajun Bu
+6 - Lijun Zhang 0005, Tianbao Yang, Jiajun Bu, Xiaofei He, Rong Jin, Chun Chen
+5 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Xiaofei He, Zhi-Hua Zhou
+6 - Lijun Zhang 0005, Deng Cai, Tianbao Yang, Rong Jin, Xiaofei He, Zhi-Hua Zhou
+7 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Xiaofei He, Jiajun Bu, Zhi-Hua Zhou, Chun Chen
+6 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Jiajun Bu, Zhi-Hua Zhou, Chun Chen
+5 - Lijun Zhang 0005, Tianbao Yang, Jiajun Bu, Zhi-Hua Zhou, Chun Chen
+5 - Lijun Zhang 0005, Rong Jin, Jiajun Bu, Xiaofei He, Chun Chen
+5 - Lijun Zhang 0005, Tianbao Yang, Jiajun Bu, Chun Chen, Rong Jin
+6 - Lijun Zhang 0005, Deng Cai, Rong Jin, Jiajun Bu, Xiaofei He, Chun Chen
+6 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Xiaofei He, Jiajun Bu, Chun Chen
+6 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Jiajun Bu, Xiaofei He, Chun Chen
+5 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Jiajun Bu, Chun Chen
+5 - Lijun Zhang 0005, Deng Cai, Jiajun Bu, Xiaofei He, Chun Chen
+6 - Lijun Zhang 0005, Tianbao Yang, Xiaofei He, Jiajun Bu, Chun Chen, Rong Jin
+4 - Lijun Zhang 0005, Tianbao Yang, Jiajun Bu, Chun Chen
+4 - Lijun Zhang 0005, Tianbao Yang, Rong Jin, Xiaofei He
+4 - Lijun Zhang 0005, Tianbao Yang, Xiaofei He, Rong Jin
+4 - Jianmin Wang 0001, Guiguang Ding, Qiang Yang 0001, Philip S. Yu
+4 - Hua Wang, Chris H. Q. Ding, Heng Huang, Feiping Nie
+4 - Chun Chen, Xiaofei He, Jiajun Bu, Deng Cai
+4 - Xiaohui Shen, Jiashi Feng, Liang Lin, Shuicheng Yan
+4 - Xiaohui Shen, Shuicheng Yan, Liang Lin, Jiashi Feng
+4 - Ashish Sabharwal, Bart Selman, Stefano Ermon, Carla P. Gomes
+4 - Xiang Bai, Longin Jan Latecki, Qi Tian, Zhuowen Tu
+4 - Dong Xu, Stephen Lin, Shuicheng Yan, Shih-Fu Chang
