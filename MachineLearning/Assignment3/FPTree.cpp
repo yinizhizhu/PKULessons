@@ -36,6 +36,6 @@ void demoCombinate() {
 
 int main() {
 	FPTree tree;
-	tree.miningFre();
+	tree.task1();
     return 0;
 }

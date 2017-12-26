@@ -12,19 +12,107 @@ bool cmpNode(PNODE a, PNODE b) {
 	return a->item.counter > b->item.counter;
 }
 
+bool cmpStr(string& a, string& b) {
+	return a > b;
+}
+
+bool cmpContent(CONTENT& a, CONTENT& b) {
+	if (a.year.size() == b.year.size()) {
+		int i, len = a.year.size();
+		for (i = 0; i < len; i++) {
+			if (a.year[i] == b.year[i])
+				continue;
+			return a.year[i] > b.year[i];
+		}
+	}
+	return a.year.size() > b.year.size();
+}
+
 FPTree::FPTree() {
 	root = new NODE();
 	threshold = 3;
-
-	addData();
-	addHeader();
-	addLink();
 }
 
 FPTree::~FPTree() {
 	//cout << "In free..." << endl;
 	delNode(root);
 	//cout << "Out free..." << endl;
+}
+
+void FPTree::task1() {
+	typedef vector<string> YEAR;
+
+	typedef unordered_map<string, YEAR> A1;
+	typedef A1::iterator A1_ITER;
+
+	typedef unordered_map<string, A1> task_a1;
+	typedef task_a1::iterator TASK_A1_ITER;
+
+	YEAR tmp;
+	reader r;
+	int i, j, n, len;
+
+	task_a1	t_a1;
+	A1_ITER inner;
+	TASK_A1_ITER outer;
+	for (; r.readTrans();) {
+		outer = t_a1.find(r.conference);
+		if (outer != t_a1.end()) {
+			len = r.authors.size();
+			for (i = 0; i < len; i++) {
+				inner = outer->second.find(r.authors[i]);
+				if (inner == outer->second.end()) {
+					tmp.clear();
+					tmp.push_back(r.year);
+					outer->second[r.authors[i]] = tmp;
+				}
+				else
+					inner->second.push_back(r.year);
+			}
+		}
+		else {
+			A1 a;
+			tmp.clear();
+			tmp.push_back(r.year);
+			len = r.authors.size();
+			for (i = 0; i < len; i++)
+				a[r.authors[i]] = tmp;
+			t_a1[r.conference] = a;
+		}
+	}
+
+	for (outer = t_a1.begin(); outer != t_a1.end(); outer++) {
+		string conf = outer->first;
+		vector<CONTENT> mid;
+		for (inner = outer->second.begin(); inner != outer->second.end(); inner++) {
+			string author = inner->first;
+			CONTENT c(author, inner->second);
+			sort(c.year.begin(), c.year.end(), cmpStr);
+			mid.push_back(c);
+		}
+		sort(mid.begin(), mid.end(), cmpContent);
+		task[conf] = mid;
+	}
+
+	ofstream out("task1.txt");
+	for (TASK_ITER titer = task.begin(); titer != task.end(); titer++) {
+		len = titer->second.size();
+		out << titer->first << ": \n";
+		for (i = 0; i < len; i++) {
+			n = titer->second[i].year.size() - 1;
+			out << "	" << n + 1 << "-" << titer->second[i].author << ": ";
+			for (j = 0; j < n; j++)
+				out << titer->second[i].year[j] << " ";
+			out << titer->second[i].year[j] << endl;
+		}
+	}
+	out.close();
+}
+
+void FPTree::demo() {
+	addData();
+	addHeader();
+	addLink();
 }
 
 void FPTree::addData() {

@@ -3,15 +3,7 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <functional>
-#include <vector>
-#include <fstream>
-
-using namespace std;
+#include "readText.h"
 
 typedef unordered_map<string, int> item_int;
 typedef item_int::iterator ITER;
@@ -38,6 +30,20 @@ typedef struct node {
 	node(ITEM& i) : item(i), pre(NULL), next(NULL) {}
 } NODE, *PNODE;
 
+typedef struct content {
+	string author;
+	vector<string> year;
+	content(string& au, vector<string>& y) {
+		author = au;
+		int i = y.size() - 1;
+		for (; i >= 0; i--)
+			year.push_back(y[i]);
+	}
+} CONTENT;
+
+typedef unordered_map<string, vector<CONTENT>> TASK;
+typedef TASK::iterator TASK_ITER;
+
 typedef struct article {
 	vector<string> authors;
 	string	conference;
@@ -60,9 +66,13 @@ private:
 	item_int		dict;
 	int				threshold;
 	vector<vector<ITEM>>	frequent;
+
+	TASK	task;
 public:
 	FPTree();
 	~FPTree();
+	void	task1();
+	void	demo();
 	void	addData();
 	void	addStr(string& a);
 	void	addHeader();
