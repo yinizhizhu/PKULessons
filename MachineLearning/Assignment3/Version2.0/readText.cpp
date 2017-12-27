@@ -1,7 +1,8 @@
 #include "readText.h"
 
 reader::reader() {
-	in.open("FilteredDBLP.txt");
+	in.open("FilteredDBLP_noun.txt");
+	//in.open("FilteredDBLP.txt");
 	//in.open("a.txt");
 }
 
