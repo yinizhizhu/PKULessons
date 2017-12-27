@@ -37,12 +37,13 @@ void demoCombinate() {
 }
 
 int main() {
-	system("python extractor.py");
+	//system("python extractor.py");
+	system("python RAKE.py");
 	FPTree tree;
-	cout << "Process of task1..." << endl;
+	cout << "\nProcess of task1..." << endl;
 	tree.task1();
 	cout << "Results of task1 are stored in 'task1_1.txt' and 'task1_2.txt'" << endl;
-	cout << "Process of task2..." << endl;
+	cout << "\nProcess of task2..." << endl;
 	tree.task2();
 	cout << "Results of task2 are stored in 'task2.txt', 'task2_1.txt' and 'task2_2.txt'" << endl;
     return 0;
