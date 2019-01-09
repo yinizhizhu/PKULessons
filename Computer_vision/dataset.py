@@ -1,5 +1,5 @@
 import torch.utils.data as data
-import torch
+import torch, cv2
 from PIL import Image
 from torchvision.transforms import ToTensor
 from global_set import w, h
@@ -63,16 +63,17 @@ class DatasetFromFolder(data.Dataset):
 
         self.img_dir = '../CarData/cars_side_view/'
         for i in xrange(947):
-            img = load_img(self.img_dir+'pos-%d.pgm'%i)
+            img = cv2.imread(self.img_dir+'pos-%d.pgm'%i)
             container = []
+
             img1 = ToTensor()(img)
-            img2 = ToTensor()(img.transpose(Image.FLIP_LEFT_RIGHT))
-            img3 = ToTensor()(img.transpose(Image.FLIP_TOP_BOTTOM))
-            img4 = ToTensor()(img.transpose(Image.ROTATE_180))
-            container.append(img1)
-            container.append(img2)
-            container.append(img3)
-            container.append(img4)
+            img2 = ToTensor()(cv2.flip(img, 1))
+            img3 = ToTensor()(cv2.flip(img, 0))
+            img4 = ToTensor()(cv2.flip(img, -1))
+            container.append(img1[0].view(-1, 40, 100))
+            container.append(img2[0].view(-1, 40, 100))
+            container.append(img3[0].view(-1, 40, 100))
+            container.append(img4[0].view(-1, 40, 100))
 
             if i < 758:
                 for tmpI in container:
@@ -83,17 +84,17 @@ class DatasetFromFolder(data.Dataset):
                 #     self.validates.append([tmpI, torch.LongTensor([0])])
 
         for i in xrange(3120):
-            img = load_img(self.img_dir+'neg-%d.pgm'%i)
+            img = cv2.imread(self.img_dir+'neg-%d.pgm'%i)
             container = []
 
             img1 = ToTensor()(img)
-            img2 = ToTensor()(img.transpose(Image.FLIP_LEFT_RIGHT))
-            img3 = ToTensor()(img.transpose(Image.FLIP_TOP_BOTTOM))
-            img4 = ToTensor()(img.transpose(Image.ROTATE_180))
-            container.append(img1)
-            container.append(img2)
-            container.append(img3)
-            container.append(img4)
+            img2 = ToTensor()(cv2.flip(img, 1))
+            img3 = ToTensor()(cv2.flip(img, 0))
+            img4 = ToTensor()(cv2.flip(img, -1))
+            container.append(img1[0].view(-1, 40, 100))
+            container.append(img2[0].view(-1, 40, 100))
+            container.append(img3[0].view(-1, 40, 100))
+            container.append(img4[0].view(-1, 40, 100))
 
             if i < 2496:
                 for tmpI in container:
@@ -168,11 +169,29 @@ class DatasetFromFolder(data.Dataset):
 
 
 
-img = load_img('../CarData/TrainImages/neg-0.pgm')
-
-# img = load_img('neg-0.pgm')
-img.show()
-img2 = img.crop([0, 10, 100, 40])
-img2.show()
-bbx = img2.resize((w, h), Image.ANTIALIAS)
-bbx.show()
+# img = load_img('../CarData/TrainImages/neg-0.pgm')
+# print type(img)
+# print img.size
+# img1 = ToTensor()(img)
+# print img1.size()
+# print img1[0]
+#
+# import cv2
+# import numpy as np
+#
+# img = cv2.imread('../CarData/cars_side_view/neg-0.pgm')
+# print type(img)
+# print img.shape
+#
+# img = ToTensor()(img)
+# print img.size()
+# print img[0]
+# print img[1]
+# print img[2]
+#
+# img = img[0].view(1, 40, 100)
+# print img.size()
+#
+# ans = img[0]-img1[0]
+#
+# print sum(sum(abs(ans)))
