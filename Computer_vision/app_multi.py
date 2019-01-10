@@ -80,7 +80,7 @@ class GN():
 
     def saveModel(self):
         print 'Saving the Car model...'
-        torch.save(self.Car, 'car_side_view.pth')
+        torch.save(self.Car, 'car_side_view_ReLU.pth')
         print 'Done!'
 
     def evaluation(self, epoch_i):

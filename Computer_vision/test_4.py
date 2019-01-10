@@ -28,15 +28,25 @@ else:
     scale_m = ''
 
 
+if os.path.exists('Cars%s/'%scale_m):
+    deleteDir('Cars%s/'%scale_m)
+os.mkdir('Cars%s/'%scale_m)
+
+if os.path.exists('Results%s/'%scale_m):
+    deleteDir('Results%s/'%scale_m)
+os.mkdir('Results%s/'%scale_m)
+
+if os.path.exists('Resultso%s/'%scale_m):
+    deleteDir('Resultso%s/'%scale_m)
+os.mkdir('Resultso%s/'%scale_m)
+
+
 class GN():
     def __init__(self, cuda=True):
-        '''
-        :param cuda:
-        '''
         self.device = torch.device("cuda" if cuda else "cpu")
 
         print '     Preparing the model...'
-        self.Car = torch.load('car.pth').to(self.device)
+        self.Car = torch.load('car_side_view.pth').to(self.device)
         self.test_set = DatasetFromFolder(scale)
 
     def evaluation(self):

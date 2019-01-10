@@ -18,32 +18,32 @@ class appearance(nn.Module):
 class car(nn.Module):
     def __init__(self):
         super(car, self).__init__()
-        self.features = nn.Sequential(
-            nn.Conv2d(1, 32, 3, 2, 1),
-            nn.BatchNorm2d(32),
-            nn.Conv2d(32, 64, 3, 2, 1),
-            nn.BatchNorm2d(64),
-            nn.Conv2d(64, 128, 3, 2, 1),
-            nn.BatchNorm2d(128),
-            nn.Conv2d(128, v_num, 3, 2, 1),
-            nn.BatchNorm2d(v_num),
-            nn.AdaptiveAvgPool2d(1),
-        )
-
         # self.features = nn.Sequential(
         #     nn.Conv2d(1, 32, 3, 2, 1),
         #     nn.BatchNorm2d(32),
-        #     nn.ReLU(inplace=True),
         #     nn.Conv2d(32, 64, 3, 2, 1),
         #     nn.BatchNorm2d(64),
-        #     nn.ReLU(inplace=True),
         #     nn.Conv2d(64, 128, 3, 2, 1),
         #     nn.BatchNorm2d(128),
-        #     nn.ReLU(inplace=True),
         #     nn.Conv2d(128, v_num, 3, 2, 1),
         #     nn.BatchNorm2d(v_num),
         #     nn.AdaptiveAvgPool2d(1),
         # )
+
+        self.features = nn.Sequential(
+            nn.Conv2d(1, 32, 3, 2, 1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, 64, 3, 2, 1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(64, 128, 3, 2, 1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(128, v_num, 3, 2, 1),
+            nn.BatchNorm2d(v_num),
+            nn.AdaptiveAvgPool2d(1),
+        )
 
         # self.features = nn.Sequential(
         #     nn.Conv2d(1, 32, 3, 2, 1),

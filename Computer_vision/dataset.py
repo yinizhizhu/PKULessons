@@ -77,11 +77,9 @@ class DatasetFromFolder(data.Dataset):
 
             if i < 758:
                 for tmpI in container:
-                    self.candidates.append([tmpI, torch.LongTensor([0])])
+                    self.candidates.append([tmpI, torch.LongTensor([1])])
             else:
-                self.validates.append([container[0], torch.LongTensor([0])])
-                # for tmpI in container:
-                #     self.validates.append([tmpI, torch.LongTensor([0])])
+                self.validates.append([container[0], torch.LongTensor([1])])
 
         for i in xrange(3120):
             img = cv2.imread(self.img_dir+'neg-%d.pgm'%i)
@@ -98,11 +96,9 @@ class DatasetFromFolder(data.Dataset):
 
             if i < 2496:
                 for tmpI in container:
-                    self.candidates.append([tmpI, torch.LongTensor([1])])
+                    self.candidates.append([tmpI, torch.LongTensor([0])])
             else:
-                self.validates.append([container[0], torch.LongTensor([1])])
-                # for tmpI in container:
-                #     self.validates.append([tmpI, torch.LongTensor([1])])
+                self.validates.append([container[0], torch.LongTensor([0])])
 
     def __getitem__(self, index):
         return self.candidates[index]
@@ -178,11 +174,19 @@ class DatasetFromFolder(data.Dataset):
 #
 # import cv2
 # import numpy as np
-#
+
 # img = cv2.imread('../CarData/cars_side_view/neg-0.pgm')
-# print type(img)
-# print img.shape
+# print type(img), img.shape
+
+# tmp = cv2.flip(img, 1)
+# cv2.imshow('tmp', tmp)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 #
+# cv2.imshow('img', img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
 # img = ToTensor()(img)
 # print img.size()
 # print img[0]
