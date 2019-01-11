@@ -120,25 +120,26 @@ class DatasetFromFolder(data.Dataset):
 # img1.show()
 
 # import cv2
-# import matplotlib.pyplot as plt
-# import selectivesearch.selectivesearch as ss
-# import matplotlib.patches as mpatches
-#
-# img = cv2.imread('../CarData/TestImages/test-0.pgm')
-# print img.shape
-# plt.imshow(img)
-# img_lbl, regions = ss.selective_search(img, scale=500, sigma=0.8, min_size=40)
-# print regions[:10]
-# print len(regions)
-#
-# fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6, 6))
-# ax.imshow(img)
-# for reg in regions:
-#     x, y, w, h = reg['rect']
-#     rect = mpatches.Rectangle(
-#     (x, y), w, h, fill=False, edgecolor='red', linewidth=1)
-#     ax.add_patch(rect)
-# plt.show()
+import matplotlib.pyplot as plt
+import selectivesearch.selectivesearch as ss
+import matplotlib.patches as mpatches
+
+img = cv2.imread('../CarData/TestImages/test-0.pgm')
+print img.shape
+plt.imshow(img)
+img_lbl, regions = ss.selective_search(img, scale=500, sigma=0.8, min_size=40)
+print regions[:10]
+print len(regions)
+
+fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6, 6))
+ax.imshow(img)
+rect = mpatches.Rectangle((26, 48), w, h, fill=False, edgecolor='blue', linewidth=1)
+ax.add_patch(rect)
+for reg in regions:
+    x, y, w1, h1 = reg['rect']
+    rect = mpatches.Rectangle((x, y), w1, h1, fill=False, edgecolor='red', linewidth=1)
+    ax.add_patch(rect)
+plt.show()
 
 
 # import numpy as np

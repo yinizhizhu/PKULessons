@@ -19,7 +19,9 @@ def deleteDir(del_dir):
     shutil.rmtree(del_dir)
 
 
-tau_conf_score = 0.96
+# tau_conf_score = 0.96
+# tau_conf_score = 0.9966
+tau_conf_score = 0.9999
 
 scale = 0  # 0 - single, 1 - multi-scale
 if scale:
@@ -46,7 +48,7 @@ class GN():
         self.device = torch.device("cuda" if cuda else "cpu")
 
         print '     Preparing the model...'
-        self.Car = torch.load('car_side_view.pth').to(self.device)
+        self.Car = torch.load('car_side_view_ReLU.pth').to(self.device)
         self.test_set = DatasetFromFolder(scale)
 
     def evaluation(self):
@@ -122,10 +124,12 @@ class GN():
                 imn.save('Results%s/car%d.png'%(scale_m, step))
 
                 drawo = ImageDraw.Draw(img)
-                drawo.line((x, y, x + w, y), fill=255)
-                drawo.line((x, y, x, y + h), fill=255)
-                drawo.line((x + w, y, x + w, y + h), fill=255)
-                drawo.line((x, y + h, x + w, y + h), fill=255)
+
+                if bestScore > tau_conf_score:
+                    drawo.line((x, y, x + w, y), fill=255)
+                    drawo.line((x, y, x, y + h), fill=255)
+                    drawo.line((x + w, y, x + w, y + h), fill=255)
+                    drawo.line((x, y + h, x + w, y + h), fill=255)
                 img.save('Resultso%s/car%d.png'%(scale_m, step))
 
                 # x = 0.0
@@ -135,10 +139,14 @@ class GN():
                 #     x += xs[i]*cs[i]
                 #     y += ys[i]*cs[i]
                 # bestPos = [x/conf_score, y/conf_score]
-
-                print '%d: (%d,%d) %.6f' % (step, bestPos[1], bestPos[0], bestScore)
-                print >> out1, '%d: (%d,%d) %.6f' % (step, bestPos[1], bestPos[0], bestScore)
-                print >> out, '%d: (%d,%d)'%(step, bestPos[1], bestPos[0])
+                if bestScore > tau_conf_score:
+                    print '%d: (%d,%d) %.6f' % (step, bestPos[1], bestPos[0], bestScore)
+                    print >> out1, '%d: (%d,%d) %.6f' % (step, bestPos[1], bestPos[0], bestScore)
+                    print >> out, '%d: (%d,%d)'%(step, bestPos[1], bestPos[0])
+                else:
+                    print '%d: %.6f' % (step, bestScore)
+                    print >> out1, '%d: %.6f' % (step, bestScore)
+                    print >> out, '%d:'%(step)
                 checker.append([step, bestScore])
                 step += 1
             gt.close()
